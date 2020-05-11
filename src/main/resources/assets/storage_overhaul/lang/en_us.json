@@ -1,0 +1,9 @@
+{
+  "block.storage_overhaul.oak_chest": "Oak Chest",
+  "block.storage_overhaul.spruce_chest": "Spruce Chest",
+  "block.storage_overhaul.birch_chest": "Birch Chest",
+  "block.storage_overhaul.acacia_chest": "Acacia Chest",
+  "block.storage_overhaul.jungle_chest": "Jungle Chest",
+  "block.storage_overhaul.dark_oak_chest": "Dark Oak Chest",
+  "container.storage_overhaul.generic_double_chest": "Large %s"
+}
