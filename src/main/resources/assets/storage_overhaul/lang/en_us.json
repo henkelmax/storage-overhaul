@@ -6,6 +6,13 @@
   "block.storage_overhaul.jungle_chest": "Jungle Chest",
   "block.storage_overhaul.dark_oak_chest": "Dark Oak Chest",
 
+  "block.storage_overhaul.oak_barrel": "Oak Barrel",
+  "block.storage_overhaul.spruce_barrel": "Spruce Barrel",
+  "block.storage_overhaul.birch_barrel": "Birch Barrel",
+  "block.storage_overhaul.acacia_barrel": "Acacia Barrel",
+  "block.storage_overhaul.jungle_barrel": "Jungle Barrel",
+  "block.storage_overhaul.dark_oak_barrel": "Dark Oak Barrel",
+
   "container.storage_overhaul.large_oak_chest": "Large Oak Chest",
   "container.storage_overhaul.large_spruce_chest": "Large Spruce Chest",
   "container.storage_overhaul.large_birch_chest": "Large Birch Chest",

@@ -18,6 +18,7 @@ public class StorageOverhaulChestTileEntity extends ChestTileEntity {
         return material;
     }
 
+    @Override
     protected ITextComponent getDefaultName() {
         return getBlockState().getBlock().getNameTextComponent();
     }
