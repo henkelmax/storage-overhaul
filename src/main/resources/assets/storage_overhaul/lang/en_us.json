@@ -5,5 +5,25 @@
   "block.storage_overhaul.acacia_chest": "Acacia Chest",
   "block.storage_overhaul.jungle_chest": "Jungle Chest",
   "block.storage_overhaul.dark_oak_chest": "Dark Oak Chest",
-  "container.storage_overhaul.generic_double_chest": "Large %s"
+
+  "container.storage_overhaul.large_oak_chest": "Large Oak Chest",
+  "container.storage_overhaul.large_spruce_chest": "Large Spruce Chest",
+  "container.storage_overhaul.large_birch_chest": "Large Birch Chest",
+  "container.storage_overhaul.large_acacia_chest": "Large Acacia Chest",
+  "container.storage_overhaul.large_jungle_chest": "Large Jungle Chest",
+  "container.storage_overhaul.large_dark_oak_chest": "Large Dark Oak Chest",
+
+  "entity.storage_overhaul.oak_chest_minecart": "Minecart with Oak Chest",
+  "entity.storage_overhaul.spruce_chest_minecart": "Minecart with Spruce Chest",
+  "entity.storage_overhaul.birch_chest_minecart": "Minecart with Birch Chest",
+  "entity.storage_overhaul.acacia_chest_minecart": "Minecart with Acacia Chest",
+  "entity.storage_overhaul.jungle_chest_minecart": "Minecart with Jungle Chest",
+  "entity.storage_overhaul.dark_oak_chest_minecart": "Minecart with Dark Oak Chest",
+
+  "item.storage_overhaul.oak_chest_minecart": "Minecart with Oak Chest",
+  "item.storage_overhaul.spruce_chest_minecart": "Minecart with Spruce Chest",
+  "item.storage_overhaul.birch_chest_minecart": "Minecart with Birch Chest",
+  "item.storage_overhaul.acacia_chest_minecart": "Minecart with Acacia Chest",
+  "item.storage_overhaul.jungle_chest_minecart": "Minecart with Jungle Chest",
+  "item.storage_overhaul.dark_oak_chest_minecart": "Minecart with Dark Oak Chest"
 }

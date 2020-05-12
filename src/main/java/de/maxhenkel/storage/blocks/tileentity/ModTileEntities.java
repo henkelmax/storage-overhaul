@@ -3,13 +3,17 @@ package de.maxhenkel.storage.blocks.tileentity;
 import de.maxhenkel.storage.Main;
 import de.maxhenkel.storage.blocks.ModBlocks;
 import de.maxhenkel.storage.blocks.tileentity.render.ChestAtlases;
+import de.maxhenkel.storage.blocks.tileentity.render.StorageOverhaulChestRenderer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 import java.util.concurrent.Callable;
 
-public class TileEntities {
+public class ModTileEntities {
 
     public static TileEntityType<StorageOverhaulChestTileEntity> OAK_CHEST;
     public static TileEntityType<StorageOverhaulChestTileEntity> SPRUCE_CHEST;
@@ -49,5 +53,15 @@ public class TileEntities {
         DARK_OAK_CHEST = TileEntityType.Builder.create(() -> new StorageOverhaulChestTileEntity(DARK_OAK_CHEST, ChestAtlases.CHEST_DARK_OAK), ModBlocks.DARK_OAK_CHEST).build(null);
         DARK_OAK_CHEST.setRegistryName(new ResourceLocation(Main.MODID, "dark_oak_chest"));
         event.getRegistry().register(DARK_OAK_CHEST);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void clientSetup() {
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.OAK_CHEST, StorageOverhaulChestRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.SPRUCE_CHEST, StorageOverhaulChestRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.BIRCH_CHEST, StorageOverhaulChestRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.ACACIA_CHEST, StorageOverhaulChestRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.JUNGLE_CHEST, StorageOverhaulChestRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.DARK_OAK_CHEST, StorageOverhaulChestRenderer::new);
     }
 }

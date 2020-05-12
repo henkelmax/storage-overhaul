@@ -1,9 +1,11 @@
 package de.maxhenkel.storage;
 
 import de.maxhenkel.storage.blocks.ModBlocks;
-import de.maxhenkel.storage.blocks.tileentity.TileEntities;
-import de.maxhenkel.storage.blocks.tileentity.render.StorageOverhaulChestRenderer;
+import de.maxhenkel.storage.blocks.tileentity.ModTileEntities;
+import de.maxhenkel.storage.entity.ModEntities;
+import de.maxhenkel.storage.items.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -12,7 +14,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -30,8 +31,10 @@ public class Main {
 
     public Main() {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, event -> ModBlocks.registerItems((RegistryEvent.Register<Item>) event));
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, event -> ModItems.registerItems((RegistryEvent.Register<Item>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, event -> ModBlocks.registerBlocks((RegistryEvent.Register<Block>) event));
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, event -> TileEntities.registerTileEntities((RegistryEvent.Register<TileEntityType<?>>) event));
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, event -> ModTileEntities.registerTileEntities((RegistryEvent.Register<TileEntityType<?>>) event));
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(EntityType.class, event -> ModEntities.registerEntities((RegistryEvent.Register<EntityType<?>>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
@@ -55,12 +58,8 @@ public class Main {
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void clientSetup(FMLClientSetupEvent event) {
-        ClientRegistry.bindTileEntityRenderer(TileEntities.OAK_CHEST, StorageOverhaulChestRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(TileEntities.SPRUCE_CHEST, StorageOverhaulChestRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(TileEntities.BIRCH_CHEST, StorageOverhaulChestRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(TileEntities.ACACIA_CHEST, StorageOverhaulChestRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(TileEntities.JUNGLE_CHEST, StorageOverhaulChestRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(TileEntities.DARK_OAK_CHEST, StorageOverhaulChestRenderer::new);
+        ModTileEntities.clientSetup();
+        ModEntities.clientSetup();
     }
 
 }
