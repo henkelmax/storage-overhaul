@@ -1,6 +1,6 @@
 package de.maxhenkel.storage.blocks.tileentity;
 
-import de.maxhenkel.storage.blocks.StorageOverhaulBarrelBlock;
+import de.maxhenkel.storage.blocks.ModBarrelBlock;
 import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,12 +20,12 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.ITextComponent;
 
-public class StorageOverhaulBarrelTileEntity extends LockableLootTileEntity {
+public class ModBarrelTileEntity extends LockableLootTileEntity {
 
     private NonNullList<ItemStack> barrelContents = NonNullList.withSize(27, ItemStack.EMPTY);
     private int numPlayersUsing;
 
-    public StorageOverhaulBarrelTileEntity(TileEntityType<?> type) {
+    public ModBarrelTileEntity(TileEntityType<?> type) {
         super(type);
     }
 
@@ -100,7 +100,7 @@ public class StorageOverhaulBarrelTileEntity extends LockableLootTileEntity {
             scheduleTick();
         } else {
             BlockState blockstate = getBlockState();
-            if (!(blockstate.getBlock() instanceof StorageOverhaulBarrelBlock)) {
+            if (!(blockstate.getBlock() instanceof ModBarrelBlock)) {
                 remove();
                 return;
             }

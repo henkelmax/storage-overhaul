@@ -5,11 +5,11 @@ import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.ITextComponent;
 
-public class StorageOverhaulChestTileEntity extends ChestTileEntity {
+public class ModChestTileEntity extends ChestTileEntity {
 
     private ChestAtlases.ChestMaterial material;
 
-    public StorageOverhaulChestTileEntity(TileEntityType type, ChestAtlases.ChestMaterial material) {
+    public ModChestTileEntity(TileEntityType type, ChestAtlases.ChestMaterial material) {
         super(type);
         this.material = material;
     }

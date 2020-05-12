@@ -7,12 +7,12 @@ import net.minecraftforge.event.RegistryEvent;
 
 public class ModItems {
 
-    public static StorageOverhaulMinecartItem OAK_MINECART = new StorageOverhaulMinecartItem(() -> ModEntities.OAK_CHEST_MINECART);
-    public static StorageOverhaulMinecartItem SPRUCE_MINECART = new StorageOverhaulMinecartItem(() -> ModEntities.SPRUCE_CHEST_MINECART);
-    public static StorageOverhaulMinecartItem BIRCH_MINECART = new StorageOverhaulMinecartItem(() -> ModEntities.BIRCH_CHEST_MINECART);
-    public static StorageOverhaulMinecartItem ACACIA_MINECART = new StorageOverhaulMinecartItem(() -> ModEntities.ACACIA_CHEST_MINECART);
-    public static StorageOverhaulMinecartItem JUNGLE_MINECART = new StorageOverhaulMinecartItem(() -> ModEntities.JUNGLE_CHEST_MINECART);
-    public static StorageOverhaulMinecartItem DARK_OAK_MINECART = new StorageOverhaulMinecartItem(() -> ModEntities.DARK_OAK_CHEST_MINECART);
+    public static ModMinecartItem OAK_MINECART = new ModMinecartItem(() -> ModEntities.OAK_CHEST_MINECART);
+    public static ModMinecartItem SPRUCE_MINECART = new ModMinecartItem(() -> ModEntities.SPRUCE_CHEST_MINECART);
+    public static ModMinecartItem BIRCH_MINECART = new ModMinecartItem(() -> ModEntities.BIRCH_CHEST_MINECART);
+    public static ModMinecartItem ACACIA_MINECART = new ModMinecartItem(() -> ModEntities.ACACIA_CHEST_MINECART);
+    public static ModMinecartItem JUNGLE_MINECART = new ModMinecartItem(() -> ModEntities.JUNGLE_CHEST_MINECART);
+    public static ModMinecartItem DARK_OAK_MINECART = new ModMinecartItem(() -> ModEntities.DARK_OAK_CHEST_MINECART);
 
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(

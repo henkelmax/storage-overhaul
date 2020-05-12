@@ -33,7 +33,7 @@ import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
-public class StorageOverhaulChestBlock extends ChestBlock implements IItemBlock {
+public class ModChestBlock extends ChestBlock implements IItemBlock {
 
     private Callable<ItemStackTileEntityRenderer> renderer;
 
@@ -72,7 +72,7 @@ public class StorageOverhaulChestBlock extends ChestBlock implements IItemBlock 
         }
     };
 
-    protected StorageOverhaulChestBlock(String name, Supplier<TileEntityType<? extends ChestTileEntity>> tileEntityTypeIn, Callable<ItemStackTileEntityRenderer> renderer) {
+    protected ModChestBlock(String name, Supplier<TileEntityType<? extends ChestTileEntity>> tileEntityTypeIn, Callable<ItemStackTileEntityRenderer> renderer) {
         super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD), tileEntityTypeIn);
         this.renderer = renderer;
         setRegistryName(new ResourceLocation(Main.MODID, name));

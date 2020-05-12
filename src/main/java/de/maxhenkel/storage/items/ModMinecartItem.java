@@ -1,6 +1,6 @@
 package de.maxhenkel.storage.items;
 
-import de.maxhenkel.storage.entity.StorageOverhaulChestMinecartEntity;
+import de.maxhenkel.storage.entity.ModChestMinecartEntity;
 import de.maxhenkel.storage.items.render.ChestMinecartItemRenderer;
 import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.BlockState;
@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 import java.util.function.Supplier;
 
-public class StorageOverhaulMinecartItem extends Item {
+public class ModMinecartItem extends Item {
     private final IDispenseItemBehavior MINECART_DISPENSER_BEHAVIOR = new DefaultDispenseItemBehavior() {
         private final DefaultDispenseItemBehavior behaviourDefaultDispenseItem = new DefaultDispenseItemBehavior();
 
@@ -56,7 +56,7 @@ public class StorageOverhaulMinecartItem extends Item {
                     varY = -0.9D;
                 }
             }
-            StorageOverhaulChestMinecartEntity cart = StorageOverhaulMinecartItem.this.minecart.get().create(world);
+            ModChestMinecartEntity cart = ModMinecartItem.this.minecart.get().create(world);
             cart.setPosition(x, y + varY, z);
             if (stack.hasDisplayName()) {
                 cart.setCustomName(stack.getDisplayName());
@@ -72,9 +72,9 @@ public class StorageOverhaulMinecartItem extends Item {
             source.getWorld().playEvent(1000, source.getBlockPos(), 0);
         }
     };
-    private final Supplier<EntityType<StorageOverhaulChestMinecartEntity>> minecart;
+    private final Supplier<EntityType<ModChestMinecartEntity>> minecart;
 
-    public StorageOverhaulMinecartItem(Supplier<EntityType<StorageOverhaulChestMinecartEntity>> minecart) {
+    public ModMinecartItem(Supplier<EntityType<ModChestMinecartEntity>> minecart) {
         super(new Item.Properties().maxStackSize(1).group(ItemGroup.TRANSPORTATION).setISTER(() -> () -> new ChestMinecartItemRenderer(minecart)));
         this.minecart = minecart;
         DispenserBlock.registerDispenseBehavior(this, MINECART_DISPENSER_BEHAVIOR);
@@ -95,7 +95,7 @@ public class StorageOverhaulMinecartItem extends Item {
                     height = 0.5D;
                 }
 
-                StorageOverhaulChestMinecartEntity cart = StorageOverhaulMinecartItem.this.minecart.get().create(world);
+                ModChestMinecartEntity cart = ModMinecartItem.this.minecart.get().create(world);
                 cart.setPosition((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.0625D + height, (double) blockpos.getZ() + 0.5D);
                 if (itemstack.hasDisplayName()) {
                     cart.setCustomName(itemstack.getDisplayName());

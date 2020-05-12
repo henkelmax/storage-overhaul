@@ -1,7 +1,7 @@
 package de.maxhenkel.storage.blocks;
 
 import de.maxhenkel.storage.Main;
-import de.maxhenkel.storage.blocks.tileentity.StorageOverhaulBarrelTileEntity;
+import de.maxhenkel.storage.blocks.tileentity.ModBarrelTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
@@ -28,13 +28,13 @@ import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class StorageOverhaulBarrelBlock extends ContainerBlock implements IItemBlock {
+public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
     public static final DirectionProperty PROPERTY_FACING = BlockStateProperties.FACING;
     public static final BooleanProperty PROPERTY_OPEN = BlockStateProperties.OPEN;
 
-    private Supplier<TileEntityType<? extends StorageOverhaulBarrelTileEntity>> tileEntityType;
+    private Supplier<TileEntityType<? extends ModBarrelTileEntity>> tileEntityType;
 
-    protected StorageOverhaulBarrelBlock(String name, Supplier<TileEntityType<? extends StorageOverhaulBarrelTileEntity>> tileEntityType) {
+    protected ModBarrelBlock(String name, Supplier<TileEntityType<? extends ModBarrelTileEntity>> tileEntityType) {
         super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
         this.tileEntityType = tileEntityType;
         setRegistryName(new ResourceLocation(Main.MODID, name));
@@ -44,8 +44,8 @@ public class StorageOverhaulBarrelBlock extends ContainerBlock implements IItemB
     @Override
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
-        if (tileentity instanceof StorageOverhaulBarrelTileEntity) {
-            ((StorageOverhaulBarrelTileEntity) tileentity).barrelTick();
+        if (tileentity instanceof ModBarrelTileEntity) {
+            ((ModBarrelTileEntity) tileentity).barrelTick();
         }
     }
 
@@ -61,8 +61,8 @@ public class StorageOverhaulBarrelBlock extends ContainerBlock implements IItemB
             return ActionResultType.SUCCESS;
         } else {
             TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof StorageOverhaulBarrelTileEntity) {
-                player.openContainer((StorageOverhaulBarrelTileEntity) tileentity);
+            if (tileentity instanceof ModBarrelTileEntity) {
+                player.openContainer((ModBarrelTileEntity) tileentity);
                 player.addStat(Stats.OPEN_BARREL);
             }
 
@@ -92,8 +92,8 @@ public class StorageOverhaulBarrelBlock extends ContainerBlock implements IItemB
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (stack.hasDisplayName()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof StorageOverhaulBarrelTileEntity) {
-                ((StorageOverhaulBarrelTileEntity) tileentity).setCustomName(stack.getDisplayName());
+            if (tileentity instanceof ModBarrelTileEntity) {
+                ((ModBarrelTileEntity) tileentity).setCustomName(stack.getDisplayName());
             }
         }
 

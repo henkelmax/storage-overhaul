@@ -1,12 +1,10 @@
 package de.maxhenkel.storage.entity;
 
-import de.maxhenkel.storage.blocks.StorageOverhaulChestBlock;
+import de.maxhenkel.storage.blocks.ModChestBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
-import net.minecraft.entity.item.minecart.ChestMinecartEntity;
 import net.minecraft.entity.item.minecart.ContainerMinecartEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,11 +16,11 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class StorageOverhaulChestMinecartEntity extends ContainerMinecartEntity {
+public class ModChestMinecartEntity extends ContainerMinecartEntity {
 
-    private StorageOverhaulChestBlock chest;
+    private ModChestBlock chest;
 
-    public StorageOverhaulChestMinecartEntity(EntityType<? extends ContainerMinecartEntity> entityType, World world, StorageOverhaulChestBlock chest) {
+    public ModChestMinecartEntity(EntityType<? extends ContainerMinecartEntity> entityType, World world, ModChestBlock chest) {
         super(entityType, world);
         this.chest = chest;
     }

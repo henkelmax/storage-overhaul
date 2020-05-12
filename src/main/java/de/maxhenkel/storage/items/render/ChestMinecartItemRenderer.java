@@ -1,7 +1,7 @@
 package de.maxhenkel.storage.items.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import de.maxhenkel.storage.entity.StorageOverhaulChestMinecartEntity;
+import de.maxhenkel.storage.entity.ModChestMinecartEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.MinecartRenderer;
@@ -15,10 +15,10 @@ public class ChestMinecartItemRenderer extends ItemStackTileEntityRenderer {
 
     private Minecraft minecraft;
     private MinecartRenderer renderer;
-    private Supplier<EntityType<StorageOverhaulChestMinecartEntity>> entitySupplier;
-    private StorageOverhaulChestMinecartEntity entity;
+    private Supplier<EntityType<ModChestMinecartEntity>> entitySupplier;
+    private ModChestMinecartEntity entity;
 
-    public ChestMinecartItemRenderer(Supplier<EntityType<StorageOverhaulChestMinecartEntity>> entity) {
+    public ChestMinecartItemRenderer(Supplier<EntityType<ModChestMinecartEntity>> entity) {
         this.entitySupplier = entity;
         minecraft = Minecraft.getInstance();
         renderer = new MinecartRenderer(minecraft.getRenderManager());

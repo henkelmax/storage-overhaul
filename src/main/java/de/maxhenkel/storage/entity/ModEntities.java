@@ -2,7 +2,7 @@ package de.maxhenkel.storage.entity;
 
 import de.maxhenkel.storage.Main;
 import de.maxhenkel.storage.blocks.ModBlocks;
-import de.maxhenkel.storage.blocks.StorageOverhaulChestBlock;
+import de.maxhenkel.storage.blocks.ModChestBlock;
 import net.minecraft.client.renderer.entity.MinecartRenderer;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -14,12 +14,12 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ModEntities {
 
-    public static EntityType<StorageOverhaulChestMinecartEntity> OAK_CHEST_MINECART;
-    public static EntityType<StorageOverhaulChestMinecartEntity> SPRUCE_CHEST_MINECART;
-    public static EntityType<StorageOverhaulChestMinecartEntity> BIRCH_CHEST_MINECART;
-    public static EntityType<StorageOverhaulChestMinecartEntity> ACACIA_CHEST_MINECART;
-    public static EntityType<StorageOverhaulChestMinecartEntity> JUNGLE_CHEST_MINECART;
-    public static EntityType<StorageOverhaulChestMinecartEntity> DARK_OAK_CHEST_MINECART;
+    public static EntityType<ModChestMinecartEntity> OAK_CHEST_MINECART;
+    public static EntityType<ModChestMinecartEntity> SPRUCE_CHEST_MINECART;
+    public static EntityType<ModChestMinecartEntity> BIRCH_CHEST_MINECART;
+    public static EntityType<ModChestMinecartEntity> ACACIA_CHEST_MINECART;
+    public static EntityType<ModChestMinecartEntity> JUNGLE_CHEST_MINECART;
+    public static EntityType<ModChestMinecartEntity> DARK_OAK_CHEST_MINECART;
 
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
         OAK_CHEST_MINECART = registerMinecart(event, "oak_chest_minecart", ModBlocks.OAK_CHEST);
@@ -40,9 +40,9 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.DARK_OAK_CHEST_MINECART, MinecartRenderer::new);
     }
 
-    private static EntityType<StorageOverhaulChestMinecartEntity> registerMinecart(RegistryEvent.Register<EntityType<?>> event, String name, StorageOverhaulChestBlock block) {
-        EntityType<StorageOverhaulChestMinecartEntity> type = EntityType.Builder.<StorageOverhaulChestMinecartEntity>create(
-                (entityType, world) -> new StorageOverhaulChestMinecartEntity(entityType, world, block), EntityClassification.MISC)
+    private static EntityType<ModChestMinecartEntity> registerMinecart(RegistryEvent.Register<EntityType<?>> event, String name, ModChestBlock block) {
+        EntityType<ModChestMinecartEntity> type = EntityType.Builder.<ModChestMinecartEntity>create(
+                (entityType, world) -> new ModChestMinecartEntity(entityType, world, block), EntityClassification.MISC)
                 .size(0.98F, 0.7F)
                 .build(Main.MODID + ":" + name);
         type.setRegistryName(new ResourceLocation(Main.MODID, name));
