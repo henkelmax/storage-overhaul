@@ -3,9 +3,11 @@ package de.maxhenkel.storage;
 import de.maxhenkel.storage.blocks.ModBlocks;
 import de.maxhenkel.storage.blocks.tileentity.ModTileEntities;
 import de.maxhenkel.storage.entity.ModEntities;
+import de.maxhenkel.storage.gui.Containers;
 import de.maxhenkel.storage.items.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -35,6 +37,7 @@ public class Main {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, event -> ModBlocks.registerBlocks((RegistryEvent.Register<Block>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, event -> ModTileEntities.registerTileEntities((RegistryEvent.Register<TileEntityType<?>>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(EntityType.class, event -> ModEntities.registerEntities((RegistryEvent.Register<EntityType<?>>) event));
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(ContainerType.class, event -> Containers.registerContainers((RegistryEvent.Register<ContainerType<?>>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
@@ -60,6 +63,7 @@ public class Main {
     public void clientSetup(FMLClientSetupEvent event) {
         ModTileEntities.clientSetup();
         ModEntities.clientSetup();
+        Containers.clientSetup();
     }
 
 }

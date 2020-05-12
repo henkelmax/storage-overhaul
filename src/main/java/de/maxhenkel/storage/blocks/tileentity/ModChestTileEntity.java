@@ -1,21 +1,24 @@
 package de.maxhenkel.storage.blocks.tileentity;
 
-import de.maxhenkel.storage.blocks.tileentity.render.ChestAtlases;
+import de.maxhenkel.storage.blocks.ModChestBlock;
+import net.minecraft.block.WoodType;
 import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.ITextComponent;
 
 public class ModChestTileEntity extends ChestTileEntity {
 
-    private ChestAtlases.ChestMaterial material;
+    private WoodType woodType;
 
-    public ModChestTileEntity(TileEntityType type, ChestAtlases.ChestMaterial material) {
-        super(type);
-        this.material = material;
+    public ModChestTileEntity(WoodType woodType) {
+        super(ModTileEntities.CHEST);
+        this.woodType = woodType;
     }
 
-    public ChestAtlases.ChestMaterial getMaterial() {
-        return material;
+    public WoodType getWoodType() {
+        if (woodType == null) {
+            woodType = ((ModChestBlock) getBlockState().getBlock()).getWoodType();
+        }
+        return woodType;
     }
 
     @Override

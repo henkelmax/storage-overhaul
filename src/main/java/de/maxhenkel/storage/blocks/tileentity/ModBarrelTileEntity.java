@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -25,8 +24,8 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
     private NonNullList<ItemStack> barrelContents = NonNullList.withSize(27, ItemStack.EMPTY);
     private int numPlayersUsing;
 
-    public ModBarrelTileEntity(TileEntityType<?> type) {
-        super(type);
+    public ModBarrelTileEntity() {
+        super(ModTileEntities.BARREL);
     }
 
     @Override

@@ -1,12 +1,11 @@
 package de.maxhenkel.storage.blocks;
 
 import de.maxhenkel.storage.Main;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.SoundType;
+import de.maxhenkel.storage.blocks.tileentity.ModChestTileEntity;
+import de.maxhenkel.storage.blocks.tileentity.ModTileEntities;
+import de.maxhenkel.storage.items.render.ChestItemRenderer;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.DoubleSidedInventory;
@@ -20,7 +19,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMerger;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -30,12 +28,8 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
-import java.util.concurrent.Callable;
-import java.util.function.Supplier;
 
 public class ModChestBlock extends ChestBlock implements IItemBlock {
-
-    private Callable<ItemStackTileEntityRenderer> renderer;
 
     private static final TileEntityMerger.ICallback<ChestTileEntity, Optional<INamedContainerProvider>> CALLBACK = new TileEntityMerger.ICallback<ChestTileEntity, Optional<INamedContainerProvider>>() {
         @Override
@@ -57,14 +51,14 @@ public class ModChestBlock extends ChestBlock implements IItemBlock {
                     if (iinventory1.hasCustomName()) {
                         return iinventory1.getDisplayName();
                     } else {
-                        return iinventory2.hasCustomName() ? iinventory2.getDisplayName() : new TranslationTextComponent("container.storage_overhaul.generic_double_chest", iinventory1.getDisplayName());
+                        return iinventory2.hasCustomName() ? iinventory2.getDisplayName() : new TranslationTextComponent("container.storage_overhaul.large_" + ((ModChestTileEntity) iinventory1).getWoodType().getName() + "_chest");
                     }
                 }
             });
         }
 
-        public Optional<INamedContainerProvider> func_225538_a_(ChestTileEntity p_225538_1_) {
-            return Optional.of(p_225538_1_);
+        public Optional<INamedContainerProvider> func_225538_a_(ChestTileEntity tileEntity) {
+            return Optional.of(tileEntity);
         }
 
         public Optional<INamedContainerProvider> func_225537_b_() {
@@ -72,15 +66,21 @@ public class ModChestBlock extends ChestBlock implements IItemBlock {
         }
     };
 
-    protected ModChestBlock(String name, Supplier<TileEntityType<? extends ChestTileEntity>> tileEntityTypeIn, Callable<ItemStackTileEntityRenderer> renderer) {
-        super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD), tileEntityTypeIn);
-        this.renderer = renderer;
+    private WoodType woodType;
+
+    protected ModChestBlock(String name, WoodType woodType) {
+        super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD), () -> ModTileEntities.CHEST);
+        this.woodType = woodType;
         setRegistryName(new ResourceLocation(Main.MODID, name));
+    }
+
+    public WoodType getWoodType() {
+        return woodType;
     }
 
     @Override
     public Item toItem() {
-        return new BlockItem(this, new Item.Properties().group(ItemGroup.DECORATIONS).setISTER(() -> renderer)).setRegistryName(getRegistryName());
+        return new BlockItem(this, new Item.Properties().group(ItemGroup.DECORATIONS).setISTER(() -> () -> new ChestItemRenderer(woodType))).setRegistryName(getRegistryName());
     }
 
     @Override

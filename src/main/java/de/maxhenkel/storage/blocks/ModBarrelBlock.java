@@ -16,7 +16,6 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -26,17 +25,13 @@ import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
 import java.util.Random;
-import java.util.function.Supplier;
 
 public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
     public static final DirectionProperty PROPERTY_FACING = BlockStateProperties.FACING;
     public static final BooleanProperty PROPERTY_OPEN = BlockStateProperties.OPEN;
 
-    private Supplier<TileEntityType<? extends ModBarrelTileEntity>> tileEntityType;
-
-    protected ModBarrelBlock(String name, Supplier<TileEntityType<? extends ModBarrelTileEntity>> tileEntityType) {
+    protected ModBarrelBlock(String name) {
         super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
-        this.tileEntityType = tileEntityType;
         setRegistryName(new ResourceLocation(Main.MODID, name));
         setDefaultState(stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH).with(PROPERTY_OPEN, false));
     }
@@ -132,6 +127,6 @@ public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return tileEntityType.get().create();
+        return new ModBarrelTileEntity();
     }
 }

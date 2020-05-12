@@ -1,0 +1,6 @@
+{
+    "parent": "storage_overhaul:item/shulker_box",
+    "textures": {
+        "particle": "block/light_gray_shulker_box"
+    }
+}

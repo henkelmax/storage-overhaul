@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DSD",
+    "ICI",
+    "DSD"
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:dyes/white"
+    },
+    "S": {
+      "item": "minecraft:shulker_shell"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:white_shulker_box"
+  }
+}
