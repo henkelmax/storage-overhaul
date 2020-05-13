@@ -22,6 +22,13 @@ public class ModBlocks {
     public static final ModBarrelBlock JUNGLE_BARREL = new ModBarrelBlock("jungle_barrel");
     public static final ModBarrelBlock DARK_OAK_BARREL = new ModBarrelBlock("dark_oak_barrel");
 
+    public static final StorageBarrelBlock OAK_STORAGE_BARREL = new StorageBarrelBlock("oak_storage_barrel");
+    public static final StorageBarrelBlock SPRUCE_STORAGE_BARREL = new StorageBarrelBlock("spruce_storage_barrel");
+    public static final StorageBarrelBlock BIRCH_STORAGE_BARREL = new StorageBarrelBlock("birch_storage_barrel");
+    public static final StorageBarrelBlock ACACIA_STORAGE_BARREL = new StorageBarrelBlock("acacia_storage_barrel");
+    public static final StorageBarrelBlock JUNGLE_STORAGE_BARREL = new StorageBarrelBlock("jungle_storage_barrel");
+    public static final StorageBarrelBlock DARK_OAK_STORAGE_BARREL = new StorageBarrelBlock("dark_oak_storage_barrel");
+
     public static final AdvancedShulkerBoxBlock WHITE_SHULKER_BOX = new AdvancedShulkerBoxBlock("white_shulker_box", DyeColor.WHITE);
     public static final AdvancedShulkerBoxBlock ORANGE_SHULKER_BOX = new AdvancedShulkerBoxBlock("orange_shulker_box", DyeColor.ORANGE);
     public static final AdvancedShulkerBoxBlock MAGENTA_SHULKER_BOX = new AdvancedShulkerBoxBlock("magenta_shulker_box", DyeColor.MAGENTA);
@@ -54,6 +61,13 @@ public class ModBlocks {
                 ACACIA_BARREL,
                 JUNGLE_BARREL,
                 DARK_OAK_BARREL,
+
+                OAK_STORAGE_BARREL,
+                SPRUCE_STORAGE_BARREL,
+                BIRCH_STORAGE_BARREL,
+                ACACIA_STORAGE_BARREL,
+                JUNGLE_STORAGE_BARREL,
+                DARK_OAK_STORAGE_BARREL,
 
                 WHITE_SHULKER_BOX,
                 ORANGE_SHULKER_BOX,
@@ -89,6 +103,13 @@ public class ModBlocks {
                 ACACIA_BARREL.toItem(),
                 JUNGLE_BARREL.toItem(),
                 DARK_OAK_BARREL.toItem(),
+
+                OAK_STORAGE_BARREL.toItem(),
+                SPRUCE_STORAGE_BARREL.toItem(),
+                BIRCH_STORAGE_BARREL.toItem(),
+                ACACIA_STORAGE_BARREL.toItem(),
+                JUNGLE_STORAGE_BARREL.toItem(),
+                DARK_OAK_STORAGE_BARREL.toItem(),
 
                 WHITE_SHULKER_BOX.toItem(),
                 ORANGE_SHULKER_BOX.toItem(),

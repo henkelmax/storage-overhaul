@@ -20,6 +20,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public class ModMinecartItem extends Item {
@@ -72,10 +73,23 @@ public class ModMinecartItem extends Item {
             source.getWorld().playEvent(1000, source.getBlockPos(), 0);
         }
     };
-    private final Supplier<EntityType<ModChestMinecartEntity>> minecart;
+
+    private Supplier<EntityType<ModChestMinecartEntity>> minecart;
+
+    private static class CallableProvider {
+        Supplier<EntityType<ModChestMinecartEntity>> minecart;
+
+        public CallableProvider(Supplier<EntityType<ModChestMinecartEntity>> minecart) {
+            this.minecart = minecart;
+        }
+
+        public Callable getCallable() {
+            return () -> new ChestMinecartItemRenderer(minecart);
+        }
+    }
 
     public ModMinecartItem(Supplier<EntityType<ModChestMinecartEntity>> minecart) {
-        super(new Item.Properties().maxStackSize(1).group(ItemGroup.TRANSPORTATION).setISTER(() -> () -> new ChestMinecartItemRenderer(minecart)));
+        super(new Item.Properties().maxStackSize(1).group(ItemGroup.TRANSPORTATION).setISTER(() -> new CallableProvider(minecart).getCallable()));
         this.minecart = minecart;
         DispenserBlock.registerDispenseBehavior(this, MINECART_DISPENSER_BEHAVIOR);
     }

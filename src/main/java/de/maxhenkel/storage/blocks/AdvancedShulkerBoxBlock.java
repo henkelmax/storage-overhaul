@@ -2,7 +2,6 @@ package de.maxhenkel.storage.blocks;
 
 import de.maxhenkel.storage.Main;
 import de.maxhenkel.storage.blocks.tileentity.AdvancedShulkerBoxTileEnitity;
-import de.maxhenkel.storage.blocks.tileentity.ModTileEntities;
 import de.maxhenkel.storage.items.AdvancedShulkerBoxItem;
 import de.maxhenkel.storage.items.render.AdvancedShulkerBoxItemRenderer;
 import net.minecraft.block.*;
@@ -37,13 +36,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class AdvancedShulkerBoxBlock extends ContainerBlock implements IItemBlock {
 
     public static final EnumProperty<Direction> FACING = DirectionalBlock.FACING;
     public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
-    @Nullable
-    private final DyeColor color;
+
+    private DyeColor color;
 
     public AdvancedShulkerBoxBlock(String name, DyeColor color) {
         super(Block.Properties.create(Material.SHULKER, color.getMapColor()).hardnessAndResistance(0F, 2F).variableOpacity().notSolid());
@@ -54,12 +54,14 @@ public class AdvancedShulkerBoxBlock extends ContainerBlock implements IItemBloc
 
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return new AdvancedShulkerBoxTileEnitity(ModTileEntities.SHULKER_BOX, color);
+        return new AdvancedShulkerBoxTileEnitity(color);
     }
+
+    private Callable renderer = () -> new AdvancedShulkerBoxItemRenderer(color);
 
     @Override
     public Item toItem() {
-        return new AdvancedShulkerBoxItem(this, new Item.Properties().maxStackSize(1).group(ItemGroup.DECORATIONS).setISTER(() -> () -> new AdvancedShulkerBoxItemRenderer(new AdvancedShulkerBoxTileEnitity(ModTileEntities.SHULKER_BOX, color)))).setRegistryName(getRegistryName());
+        return new AdvancedShulkerBoxItem(this, new Item.Properties().maxStackSize(1).group(ItemGroup.DECORATIONS).setISTER(() -> renderer)).setRegistryName(getRegistryName());
     }
 
     @Override

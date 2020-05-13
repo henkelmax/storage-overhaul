@@ -13,6 +13,13 @@
   "block.storage_overhaul.jungle_barrel": "Jungle Barrel",
   "block.storage_overhaul.dark_oak_barrel": "Dark Oak Barrel",
 
+  "block.storage_overhaul.oak_storage_barrel": "Oak Storage Barrel",
+  "block.storage_overhaul.spruce_storage_barrel": "Spruce Storage Barrel",
+  "block.storage_overhaul.birch_storage_barrel": "Birch Storage Barrel",
+  "block.storage_overhaul.acacia_storage_barrel": "Acacia Storage Barrel",
+  "block.storage_overhaul.jungle_storage_barrel": "Jungle Storage Barrel",
+  "block.storage_overhaul.dark_oak_storage_barrel": "Dark Oak Storage Barrel",
+
   "block.storage_overhaul.white_shulker_box": "Advanced White Shulkerbox",
   "block.storage_overhaul.orange_shulker_box": "Advanced Orange Shulkerbox",
   "block.storage_overhaul.magenta_shulker_box": "Advanced Magenta Shulkerbox",

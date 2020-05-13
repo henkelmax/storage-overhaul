@@ -10,8 +10,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.*;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -19,10 +22,12 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class ModChestMinecartEntity extends ContainerMinecartEntity {
 
     private ModChestBlock chest;
+    private Item item;
 
-    public ModChestMinecartEntity(EntityType<? extends ContainerMinecartEntity> entityType, World world, ModChestBlock chest) {
+    public ModChestMinecartEntity(EntityType<? extends ContainerMinecartEntity> entityType, World world, ModChestBlock chest, Item item) {
         super(entityType, world);
         this.chest = chest;
+        this.item = item;
     }
 
     @Override
@@ -79,5 +84,10 @@ public class ModChestMinecartEntity extends ContainerMinecartEntity {
     @Override
     public Container createContainer(int id, PlayerInventory playerInventoryIn) {
         return ChestContainer.createGeneric9X3(id, playerInventoryIn, this);
+    }
+
+    @Override
+    public ItemStack getPickedResult(RayTraceResult target) {
+        return new ItemStack(item);
     }
 }

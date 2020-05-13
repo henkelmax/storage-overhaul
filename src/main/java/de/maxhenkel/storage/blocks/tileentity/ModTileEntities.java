@@ -4,6 +4,7 @@ import de.maxhenkel.storage.Main;
 import de.maxhenkel.storage.blocks.ModBlocks;
 import de.maxhenkel.storage.blocks.tileentity.render.AdvancedShulkerBoxRenderer;
 import de.maxhenkel.storage.blocks.tileentity.render.ModChestRenderer;
+import de.maxhenkel.storage.blocks.tileentity.render.StorageBarrelRenderer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,6 +17,8 @@ public class ModTileEntities {
     public static TileEntityType<ModChestTileEntity> CHEST;
 
     public static TileEntityType<ModBarrelTileEntity> BARREL;
+
+    public static TileEntityType<StorageBarrelTileEntity> STORAGE_BARREL;
 
     public static TileEntityType<AdvancedShulkerBoxTileEnitity> SHULKER_BOX;
 
@@ -42,7 +45,18 @@ public class ModTileEntities {
         BARREL.setRegistryName(new ResourceLocation(Main.MODID, "barrel"));
         event.getRegistry().register(BARREL);
 
-        SHULKER_BOX = TileEntityType.Builder.create(() -> new AdvancedShulkerBoxTileEnitity(SHULKER_BOX, null),
+        STORAGE_BARREL = TileEntityType.Builder.create(StorageBarrelTileEntity::new,
+                ModBlocks.OAK_STORAGE_BARREL,
+                ModBlocks.SPRUCE_STORAGE_BARREL,
+                ModBlocks.BIRCH_STORAGE_BARREL,
+                ModBlocks.ACACIA_STORAGE_BARREL,
+                ModBlocks.JUNGLE_STORAGE_BARREL,
+                ModBlocks.DARK_OAK_STORAGE_BARREL
+        ).build(null);
+        STORAGE_BARREL.setRegistryName(new ResourceLocation(Main.MODID, "storage_barrel"));
+        event.getRegistry().register(STORAGE_BARREL);
+
+        SHULKER_BOX = TileEntityType.Builder.create(() -> new AdvancedShulkerBoxTileEnitity(null),
                 ModBlocks.WHITE_SHULKER_BOX,
                 ModBlocks.ORANGE_SHULKER_BOX,
                 ModBlocks.MAGENTA_SHULKER_BOX,
@@ -70,5 +84,7 @@ public class ModTileEntities {
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.CHEST, ModChestRenderer::new);
 
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.SHULKER_BOX, AdvancedShulkerBoxRenderer::new);
+
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.STORAGE_BARREL, StorageBarrelRenderer::new);
     }
 }

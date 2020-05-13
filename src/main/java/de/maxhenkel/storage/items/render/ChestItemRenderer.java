@@ -18,7 +18,7 @@ public class ChestItemRenderer extends ItemStackTileEntityRenderer {
     private ModChestTileEntity tileEntity;
 
     public ChestItemRenderer(WoodType woodType) {
-        this.tileEntity = new ModChestTileEntity(woodType);
+        tileEntity = new ModChestTileEntity(woodType);
         renderer = new ModChestRenderer(TileEntityRendererDispatcher.instance);
     }
 

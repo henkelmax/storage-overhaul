@@ -6,6 +6,7 @@ import de.maxhenkel.storage.blocks.tileentity.render.AdvancedShulkerBoxRenderer;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 
 public class AdvancedShulkerBoxItemRenderer extends ItemStackTileEntityRenderer {
@@ -13,8 +14,9 @@ public class AdvancedShulkerBoxItemRenderer extends ItemStackTileEntityRenderer 
     private AdvancedShulkerBoxRenderer renderer;
     private AdvancedShulkerBoxTileEnitity tileEntity;
 
-    public AdvancedShulkerBoxItemRenderer(AdvancedShulkerBoxTileEnitity tileEntity) {
-        this.tileEntity = tileEntity;
+
+    public AdvancedShulkerBoxItemRenderer(DyeColor color) {
+        tileEntity = new AdvancedShulkerBoxTileEnitity(color);
         renderer = new AdvancedShulkerBoxRenderer(TileEntityRendererDispatcher.instance);
     }
 

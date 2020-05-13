@@ -1,5 +1,6 @@
 package de.maxhenkel.storage.blocks.tileentity;
 
+import de.maxhenkel.storage.Tools;
 import de.maxhenkel.storage.blocks.AdvancedShulkerBoxBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.ShulkerBoxBlock;
@@ -15,7 +16,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.ShulkerBoxTileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
@@ -35,10 +35,12 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
     private ShulkerBoxTileEntity.AnimationStatus animationStatus = ShulkerBoxTileEntity.AnimationStatus.CLOSED;
     private float progress;
     private float progressOld;
+
+    @Nullable
     private DyeColor color;
 
-    public AdvancedShulkerBoxTileEnitity(TileEntityType type, DyeColor colorIn) {
-        super(type);
+    public AdvancedShulkerBoxTileEnitity(DyeColor colorIn) {
+        super(ModTileEntities.SHULKER_BOX);
         this.color = colorIn;
     }
 
@@ -119,7 +121,7 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
             openCount++;
             world.addBlockEvent(pos, getBlockState().getBlock(), 1, openCount);
             if (openCount == 1) {
-                world.playSound(null, pos, getOpenSound(), SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+                world.playSound(null, pos, getOpenSound(), SoundCategory.BLOCKS, 0.5F, Tools.getVariatedPitch(world));
             }
         }
 
@@ -139,7 +141,7 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
             openCount--;
             world.addBlockEvent(pos, getBlockState().getBlock(), 1, openCount);
             if (openCount <= 0) {
-                world.playSound(null, pos, getCloseSound(), SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+                world.playSound(null, pos, getCloseSound(), SoundCategory.BLOCKS, 0.5F, Tools.getVariatedPitch(world));
             }
         }
 

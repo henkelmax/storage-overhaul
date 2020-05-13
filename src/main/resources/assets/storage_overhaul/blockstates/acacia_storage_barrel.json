@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down": { "model": "storage_overhaul:block/acacia_storage_barrel", "x": 180 },
+        "facing=up": { "model": "storage_overhaul:block/acacia_storage_barrel" },
+        "facing=north": { "model": "storage_overhaul:block/acacia_storage_barrel", "x": 90 },
+        "facing=south": { "model": "storage_overhaul:block/acacia_storage_barrel", "x": 90, "y": 180 },
+        "facing=west": { "model": "storage_overhaul:block/acacia_storage_barrel", "x": 90, "y": 270 },
+        "facing=east": { "model": "storage_overhaul:block/acacia_storage_barrel", "x": 90, "y": 90 }
+    }
+}

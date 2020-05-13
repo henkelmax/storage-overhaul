@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
+import java.util.concurrent.Callable;
 
 public class ModChestBlock extends ChestBlock implements IItemBlock {
 
@@ -78,9 +79,11 @@ public class ModChestBlock extends ChestBlock implements IItemBlock {
         return woodType;
     }
 
+    private Callable renderer = () -> new ChestItemRenderer(woodType);
+
     @Override
     public Item toItem() {
-        return new BlockItem(this, new Item.Properties().group(ItemGroup.DECORATIONS).setISTER(() -> () -> new ChestItemRenderer(woodType))).setRegistryName(getRegistryName());
+        return new BlockItem(this, new Item.Properties().group(ItemGroup.DECORATIONS).setISTER(() -> renderer)).setRegistryName(getRegistryName());
     }
 
     @Override

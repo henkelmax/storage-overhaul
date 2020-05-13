@@ -1,0 +1,9 @@
+{
+	"parent": "storage_overhaul:block/storage_barrel",
+	"textures": {
+		"barrel_bottom": "storage_overhaul:block/spruce_barrel_bottom",
+		"barrel_side": "storage_overhaul:block/spruce_barrel_side",
+		"barrel_top": "storage_overhaul:block/spruce_storage_barrel",
+		"particle": "storage_overhaul:block/spruce_barrel_bottom"
+	}
+}

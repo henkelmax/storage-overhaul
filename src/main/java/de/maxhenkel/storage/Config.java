@@ -23,8 +23,10 @@ public class Config {
 
     public static class ServerConfig {
 
-        public ServerConfig(ForgeConfigSpec.Builder builder) {
+        public ForgeConfigSpec.IntValue STORAGE_BARREL_SIZE;
 
+        public ServerConfig(ForgeConfigSpec.Builder builder) {
+            STORAGE_BARREL_SIZE = builder.comment("The amount of items that can be stored in a storage barrel").defineInRange("storage_barrel_size", 64 * 54, 1, Integer.MAX_VALUE);
         }
     }
 

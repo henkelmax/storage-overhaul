@@ -1,5 +1,6 @@
 package de.maxhenkel.storage.blocks.tileentity;
 
+import de.maxhenkel.storage.Tools;
 import de.maxhenkel.storage.blocks.ModBarrelBlock;
 import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.BlockState;
@@ -129,7 +130,7 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
         double d0 = (double) this.pos.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
         double d1 = (double) this.pos.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
         double d2 = (double) this.pos.getZ() + 0.5D + (double) vec3i.getZ() / 2.0D;
-        world.playSound(null, d0, d1, d2, soundEvent, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+        world.playSound(null, d0, d1, d2, soundEvent, SoundCategory.BLOCKS, 0.5F, Tools.getVariatedPitch(world));
     }
 
     @Override
