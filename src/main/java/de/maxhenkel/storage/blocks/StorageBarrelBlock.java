@@ -300,9 +300,10 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
     public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
         if (((BlockRayTraceResult) target).getFace().equals(state.get(PROPERTY_FACING))) {
             StorageBarrelTileEntity barrel = (StorageBarrelTileEntity) world.getTileEntity(pos);
-            ItemStack stack = barrel.getBarrelContent();
+            ItemStack stack = barrel.getBarrelContent().copy();
             if (!stack.isEmpty()) {
-                return new ItemStack(stack.getItem());
+                stack.setCount(1);
+                return stack;
             }
         }
         return super.getPickBlock(state, target, world, pos, player);

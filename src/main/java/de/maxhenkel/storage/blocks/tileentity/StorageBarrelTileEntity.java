@@ -45,11 +45,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
 
-        CompoundNBT item = new CompoundNBT();
-        barrelContent.write(item);
-        item.remove("Count");
-        item.putInt("Count", barrelContent.getCount());
-        compound.put("Item", item);
+        compound.put("Item", Tools.writeOverstackedItem(new CompoundNBT(), barrelContent));
 
         if (this.customName != null) {
             compound.putString("CustomName", ITextComponent.Serializer.toJson(customName));
@@ -62,12 +58,8 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
     public void read(CompoundNBT compound) {
         super.read(compound);
 
-        CompoundNBT item = compound.getCompound("Item");
-        int count = item.getInt("Count");
-        item.remove("Count");
-        item.putByte("Count", (byte) 1);
-        barrelContent = ItemStack.read(item);
-        barrelContent.setCount(count);
+        barrelContent = Tools.readOverstackedItem(compound.getCompound("Item"));
+
 
         if (compound.contains("CustomName")) {
             customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
