@@ -207,16 +207,16 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
 
     private IItemHandlerModifiable createHandler() {
         BlockState state = this.getBlockState();
-        if (!(state.getBlock() instanceof ChestBlock)) {
+        if (!(state.getBlock() instanceof ModChestBlock)) {
             return new InvWrapper(this);
         }
-        ChestType type = state.get(ChestBlock.TYPE);
+        ChestType type = state.get(ModChestBlock.TYPE);
         if (type != ChestType.SINGLE) {
-            BlockPos opos = this.getPos().offset(ChestBlock.getDirectionToAttached(state));
+            BlockPos opos = this.getPos().offset(ModChestBlock.getDirectionToAttached(state));
             BlockState ostate = this.getWorld().getBlockState(opos);
             if (state.getBlock() == ostate.getBlock()) {
-                ChestType otype = ostate.get(ChestBlock.TYPE);
-                if (otype != ChestType.SINGLE && type != otype && state.get(ChestBlock.FACING) == ostate.get(ChestBlock.FACING)) {
+                ChestType otype = ostate.get(ModChestBlock.TYPE);
+                if (otype != ChestType.SINGLE && type != otype && state.get(ModChestBlock.FACING) == ostate.get(ModChestBlock.FACING)) {
                     TileEntity ote = this.getWorld().getTileEntity(opos);
                     if (ote instanceof ChestTileEntity) {
                         IInventory top = type == ChestType.RIGHT ? this : (IInventory) ote;
