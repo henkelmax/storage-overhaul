@@ -58,8 +58,7 @@ public class ModMinecartItem extends Item {
                     varY = -0.9D;
                 }
             }
-            ModChestMinecartEntity cart = ModEntities.CHEST_MINECART.create(world);
-            cart.setBlock(block.get());
+            ModChestMinecartEntity cart = create(world);
             cart.setPosition(x, y + varY, z);
             if (stack.hasDisplayName()) {
                 cart.setCustomName(stack.getDisplayName());
@@ -96,6 +95,12 @@ public class ModMinecartItem extends Item {
         DispenserBlock.registerDispenseBehavior(this, MINECART_DISPENSER_BEHAVIOR);
     }
 
+    public ModChestMinecartEntity create(World world) {
+        ModChestMinecartEntity cart = ModEntities.CHEST_MINECART.create(world);
+        cart.setBlock(block.get());
+        return cart;
+    }
+
     public ActionResultType onItemUse(ItemUseContext context) {
         World world = context.getWorld();
         BlockPos blockpos = context.getPos();
@@ -111,8 +116,7 @@ public class ModMinecartItem extends Item {
                     height = 0.5D;
                 }
 
-                ModChestMinecartEntity cart = ModEntities.CHEST_MINECART.create(world);
-                cart.setBlock(block.get());
+                ModChestMinecartEntity cart = create(world);
                 cart.setPosition((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.0625D + height, (double) blockpos.getZ() + 0.5D);
                 if (itemstack.hasDisplayName()) {
                     cart.setCustomName(itemstack.getDisplayName());

@@ -68,5 +68,26 @@
   "item.storage_overhaul.birch_chest_minecart": "Minecart with Birch Chest",
   "item.storage_overhaul.acacia_chest_minecart": "Minecart with Acacia Chest",
   "item.storage_overhaul.jungle_chest_minecart": "Minecart with Jungle Chest",
-  "item.storage_overhaul.dark_oak_chest_minecart": "Minecart with Dark Oak Chest"
+  "item.storage_overhaul.dark_oak_chest_minecart": "Minecart with Dark Oak Chest",
+
+  "item.storage_overhaul.oak_chest_minecart_tier_1": "Minecart with Oak Chest Tier 1",
+  "item.storage_overhaul.spruce_chest_minecart_tier_1": "Minecart with Spruce Chest Tier 1",
+  "item.storage_overhaul.birch_chest_minecart_tier_1": "Minecart with Birch Chest Tier 1",
+  "item.storage_overhaul.acacia_chest_minecart_tier_1": "Minecart with Acacia Chest Tier 1",
+  "item.storage_overhaul.jungle_chest_minecart_tier_1": "Minecart with Jungle Chest Tier 1",
+  "item.storage_overhaul.dark_oak_chest_minecart_tier_1": "Minecart with Dark Oak Chest Tier 1",
+
+  "item.storage_overhaul.oak_chest_minecart_tier_2": "Minecart with Oak Chest Tier 2",
+  "item.storage_overhaul.spruce_chest_minecart_tier_2": "Minecart with Spruce Chest Tier 2",
+  "item.storage_overhaul.birch_chest_minecart_tier_2": "Minecart with Birch Chest Tier 2",
+  "item.storage_overhaul.acacia_chest_minecart_tier_2": "Minecart with Acacia Chest Tier 2",
+  "item.storage_overhaul.jungle_chest_minecart_tier_2": "Minecart with Jungle Chest Tier 2",
+  "item.storage_overhaul.dark_oak_chest_minecart_tier_2": "Minecart with Dark Oak Chest Tier 2",
+
+  "item.storage_overhaul.oak_chest_minecart_tier_3": "Minecart with Oak Chest Tier 3",
+  "item.storage_overhaul.spruce_chest_minecart_tier_3": "Minecart with Spruce Chest Tier 3",
+  "item.storage_overhaul.birch_chest_minecart_tier_3": "Minecart with Birch Chest Tier 3",
+  "item.storage_overhaul.acacia_chest_minecart_tier_3": "Minecart with Acacia Chest Tier 3",
+  "item.storage_overhaul.jungle_chest_minecart_tier_3": "Minecart with Jungle Chest Tier 3",
+  "item.storage_overhaul.dark_oak_chest_minecart_tier_3": "Minecart with Dark Oak Chest Tier 3"
 }
