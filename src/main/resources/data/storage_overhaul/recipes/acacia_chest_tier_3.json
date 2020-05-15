@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "##D",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:acacia_planks"
+    },
+    "D": {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:acacia_chest_tier_3"
+  }
+}

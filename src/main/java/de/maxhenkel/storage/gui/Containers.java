@@ -8,10 +8,18 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 
+import java.util.function.Supplier;
+
 public class Containers {
 
     public static ContainerType<AdvancedShulkerboxContainer> SHULKERBOX_CONTAINER;
-    public static ContainerType<HugeChestContainer> HUGE_CHEST_CONTAINER;
+    public static ContainerType<HugeChestContainer> GENERIC_18x3;
+    public static ContainerType<HugeChestContainer> GENERIC_18x4;
+    public static ContainerType<HugeChestContainer> GENERIC_18x5;
+    public static ContainerType<HugeChestContainer> GENERIC_18x6;
+    public static ContainerType<HugeChestContainer> GENERIC_18x7;
+    public static ContainerType<HugeChestContainer> GENERIC_18x8;
+    public static ContainerType<HugeChestContainer> GENERIC_18x9;
 
     @OnlyIn(Dist.CLIENT)
     public static void clientSetup() {
@@ -19,7 +27,13 @@ public class Containers {
         ScreenManager.registerFactory(SHULKERBOX_CONTAINER, factory);
 
         ScreenManager.IScreenFactory factory1 = (ScreenManager.IScreenFactory<HugeChestContainer, HugeChestScreen>) (container, playerInventory, name) -> new HugeChestScreen(playerInventory, container, name);
-        ScreenManager.registerFactory(HUGE_CHEST_CONTAINER, factory1);
+        ScreenManager.registerFactory(GENERIC_18x3, factory1);
+        ScreenManager.registerFactory(GENERIC_18x4, factory1);
+        ScreenManager.registerFactory(GENERIC_18x5, factory1);
+        ScreenManager.registerFactory(GENERIC_18x6, factory1);
+        ScreenManager.registerFactory(GENERIC_18x7, factory1);
+        ScreenManager.registerFactory(GENERIC_18x8, factory1);
+        ScreenManager.registerFactory(GENERIC_18x9, factory1);
     }
 
     public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
@@ -27,8 +41,19 @@ public class Containers {
         SHULKERBOX_CONTAINER.setRegistryName(new ResourceLocation(Main.MODID, "shulkerbox"));
         event.getRegistry().register(SHULKERBOX_CONTAINER);
 
-        HUGE_CHEST_CONTAINER = new ContainerType<>((id, inv) -> new HugeChestContainer(id, inv, 9));
-        HUGE_CHEST_CONTAINER.setRegistryName(new ResourceLocation(Main.MODID, "huge_chest"));
-        event.getRegistry().register(HUGE_CHEST_CONTAINER);
+        GENERIC_18x3 = registerGeneric(event, 3, () -> GENERIC_18x3);
+        GENERIC_18x4 = registerGeneric(event, 4, () -> GENERIC_18x4);
+        GENERIC_18x5 = registerGeneric(event, 5, () -> GENERIC_18x5);
+        GENERIC_18x6 = registerGeneric(event, 6, () -> GENERIC_18x6);
+        GENERIC_18x7 = registerGeneric(event, 7, () -> GENERIC_18x7);
+        GENERIC_18x8 = registerGeneric(event, 8, () -> GENERIC_18x8);
+        GENERIC_18x9 = registerGeneric(event, 9, () -> GENERIC_18x9);
+    }
+
+    private static ContainerType<HugeChestContainer> registerGeneric(RegistryEvent.Register<ContainerType<?>> event, int rows, Supplier<ContainerType<?>> te) {
+        ContainerType<HugeChestContainer> type = new ContainerType<>((id, inv) -> new HugeChestContainer(te.get(), id, inv, rows));
+        type.setRegistryName(new ResourceLocation(Main.MODID, "generic_18x" + rows));
+        event.getRegistry().register(type);
+        return type;
     }
 }

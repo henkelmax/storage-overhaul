@@ -161,7 +161,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     @Override
     public ITextComponent getName() {
-        return this.customName != null ? customName : getBlockState().getBlock().getNameTextComponent();
+        return customName != null ? customName : getBlockState().getBlock().getNameTextComponent();
     }
 
     @Override
@@ -176,7 +176,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        this.read(pkt.getNbtCompound());
+        read(pkt.getNbtCompound());
     }
 
     @Override

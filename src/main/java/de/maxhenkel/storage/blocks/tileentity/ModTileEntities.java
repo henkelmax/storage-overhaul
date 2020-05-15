@@ -23,13 +23,31 @@ public class ModTileEntities {
     public static TileEntityType<AdvancedShulkerBoxTileEnitity> SHULKER_BOX;
 
     public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-        CHEST = TileEntityType.Builder.create(() -> new ModChestTileEntity(null),
+        CHEST = TileEntityType.Builder.create(() -> new ModChestTileEntity(null, null),
                 ModBlocks.OAK_CHEST,
                 ModBlocks.SPRUCE_CHEST,
                 ModBlocks.BIRCH_CHEST,
                 ModBlocks.ACACIA_CHEST,
                 ModBlocks.JUNGLE_CHEST,
-                ModBlocks.DARK_OAK_CHEST
+                ModBlocks.DARK_OAK_CHEST,
+                ModBlocks.OAK_CHEST_TIER_1,
+                ModBlocks.SPRUCE_CHEST_TIER_1,
+                ModBlocks.BIRCH_CHEST_TIER_1,
+                ModBlocks.ACACIA_CHEST_TIER_1,
+                ModBlocks.JUNGLE_CHEST_TIER_1,
+                ModBlocks.DARK_OAK_CHEST_TIER_1,
+                ModBlocks.OAK_CHEST_TIER_2,
+                ModBlocks.SPRUCE_CHEST_TIER_2,
+                ModBlocks.BIRCH_CHEST_TIER_2,
+                ModBlocks.ACACIA_CHEST_TIER_2,
+                ModBlocks.JUNGLE_CHEST_TIER_2,
+                ModBlocks.DARK_OAK_CHEST_TIER_2,
+                ModBlocks.OAK_CHEST_TIER_3,
+                ModBlocks.SPRUCE_CHEST_TIER_3,
+                ModBlocks.BIRCH_CHEST_TIER_3,
+                ModBlocks.ACACIA_CHEST_TIER_3,
+                ModBlocks.JUNGLE_CHEST_TIER_3,
+                ModBlocks.DARK_OAK_CHEST_TIER_3
         ).build(null);
         CHEST.setRegistryName(new ResourceLocation(Main.MODID, "chest"));
         event.getRegistry().register(CHEST);

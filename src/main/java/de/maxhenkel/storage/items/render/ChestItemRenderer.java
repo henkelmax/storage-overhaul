@@ -1,6 +1,7 @@
 package de.maxhenkel.storage.items.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import de.maxhenkel.storage.ChestTier;
 import de.maxhenkel.storage.blocks.tileentity.ModChestTileEntity;
 import de.maxhenkel.storage.blocks.tileentity.render.ModChestRenderer;
 import net.minecraft.block.WoodType;
@@ -17,8 +18,8 @@ public class ChestItemRenderer extends ItemStackTileEntityRenderer {
     private ModChestRenderer renderer;
     private ModChestTileEntity tileEntity;
 
-    public ChestItemRenderer(WoodType woodType) {
-        tileEntity = new ModChestTileEntity(woodType);
+    public ChestItemRenderer(WoodType woodType, ChestTier tier) {
+        tileEntity = new ModChestTileEntity(woodType, tier);
         renderer = new ModChestRenderer(TileEntityRendererDispatcher.instance);
     }
 

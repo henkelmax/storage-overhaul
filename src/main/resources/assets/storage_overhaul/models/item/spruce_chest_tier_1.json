@@ -1,0 +1,6 @@
+{
+    "parent": "storage_overhaul:item/chest",
+    "textures": {
+        "particle": "block/spruce_planks"
+    }
+}

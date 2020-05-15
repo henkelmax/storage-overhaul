@@ -1,5 +1,6 @@
 package de.maxhenkel.storage.blocks;
 
+import de.maxhenkel.storage.ChestTier;
 import net.minecraft.block.Block;
 import net.minecraft.block.WoodType;
 import net.minecraft.item.DyeColor;
@@ -8,12 +9,33 @@ import net.minecraftforge.event.RegistryEvent;
 
 public class ModBlocks {
 
-    public static final ModChestBlock OAK_CHEST = new ModChestBlock("oak_chest", WoodType.OAK);
-    public static final ModChestBlock SPRUCE_CHEST = new ModChestBlock("spruce_chest", WoodType.SPRUCE);
-    public static final ModChestBlock BIRCH_CHEST = new ModChestBlock("birch_chest", WoodType.BIRCH);
-    public static final ModChestBlock ACACIA_CHEST = new ModChestBlock("acacia_chest", WoodType.ACACIA);
-    public static final ModChestBlock JUNGLE_CHEST = new ModChestBlock("jungle_chest", WoodType.JUNGLE);
-    public static final ModChestBlock DARK_OAK_CHEST = new ModChestBlock("dark_oak_chest", WoodType.DARK_OAK);
+    public static final ModChestBlock OAK_CHEST = new ModChestBlock("oak_chest", WoodType.OAK, ChestTier.BASE_TIER);
+    public static final ModChestBlock SPRUCE_CHEST = new ModChestBlock("spruce_chest", WoodType.SPRUCE, ChestTier.BASE_TIER);
+    public static final ModChestBlock BIRCH_CHEST = new ModChestBlock("birch_chest", WoodType.BIRCH, ChestTier.BASE_TIER);
+    public static final ModChestBlock ACACIA_CHEST = new ModChestBlock("acacia_chest", WoodType.ACACIA, ChestTier.BASE_TIER);
+    public static final ModChestBlock JUNGLE_CHEST = new ModChestBlock("jungle_chest", WoodType.JUNGLE, ChestTier.BASE_TIER);
+    public static final ModChestBlock DARK_OAK_CHEST = new ModChestBlock("dark_oak_chest", WoodType.DARK_OAK, ChestTier.BASE_TIER);
+
+    public static final ModChestBlock OAK_CHEST_TIER_1 = new ModChestBlock("oak_chest_tier_1", WoodType.OAK, ChestTier.TIER_1);
+    public static final ModChestBlock SPRUCE_CHEST_TIER_1 = new ModChestBlock("spruce_chest_tier_1", WoodType.SPRUCE, ChestTier.TIER_1);
+    public static final ModChestBlock BIRCH_CHEST_TIER_1 = new ModChestBlock("birch_chest_tier_1", WoodType.BIRCH, ChestTier.TIER_1);
+    public static final ModChestBlock ACACIA_CHEST_TIER_1 = new ModChestBlock("acacia_chest_tier_1", WoodType.ACACIA, ChestTier.TIER_1);
+    public static final ModChestBlock JUNGLE_CHEST_TIER_1 = new ModChestBlock("jungle_chest_tier_1", WoodType.JUNGLE, ChestTier.TIER_1);
+    public static final ModChestBlock DARK_OAK_CHEST_TIER_1 = new ModChestBlock("dark_oak_chest_tier_1", WoodType.DARK_OAK, ChestTier.TIER_1);
+
+    public static final ModChestBlock OAK_CHEST_TIER_2 = new ModChestBlock("oak_chest_tier_2", WoodType.OAK, ChestTier.TIER_2);
+    public static final ModChestBlock SPRUCE_CHEST_TIER_2 = new ModChestBlock("spruce_chest_tier_2", WoodType.SPRUCE, ChestTier.TIER_2);
+    public static final ModChestBlock BIRCH_CHEST_TIER_2 = new ModChestBlock("birch_chest_tier_2", WoodType.BIRCH, ChestTier.TIER_2);
+    public static final ModChestBlock ACACIA_CHEST_TIER_2 = new ModChestBlock("acacia_chest_tier_2", WoodType.ACACIA, ChestTier.TIER_2);
+    public static final ModChestBlock JUNGLE_CHEST_TIER_2 = new ModChestBlock("jungle_chest_tier_2", WoodType.JUNGLE, ChestTier.TIER_2);
+    public static final ModChestBlock DARK_OAK_CHEST_TIER_2 = new ModChestBlock("dark_oak_chest_tier_2", WoodType.DARK_OAK, ChestTier.TIER_2);
+
+    public static final ModChestBlock OAK_CHEST_TIER_3 = new ModChestBlock("oak_chest_tier_3", WoodType.OAK, ChestTier.TIER_3);
+    public static final ModChestBlock SPRUCE_CHEST_TIER_3 = new ModChestBlock("spruce_chest_tier_3", WoodType.SPRUCE, ChestTier.TIER_3);
+    public static final ModChestBlock BIRCH_CHEST_TIER_3 = new ModChestBlock("birch_chest_tier_3", WoodType.BIRCH, ChestTier.TIER_3);
+    public static final ModChestBlock ACACIA_CHEST_TIER_3 = new ModChestBlock("acacia_chest_tier_3", WoodType.ACACIA, ChestTier.TIER_3);
+    public static final ModChestBlock JUNGLE_CHEST_TIER_3 = new ModChestBlock("jungle_chest_tier_3", WoodType.JUNGLE, ChestTier.TIER_3);
+    public static final ModChestBlock DARK_OAK_CHEST_TIER_3 = new ModChestBlock("dark_oak_chest_tier_3", WoodType.DARK_OAK, ChestTier.TIER_3);
 
     public static final ModBarrelBlock OAK_BARREL = new ModBarrelBlock("oak_barrel");
     public static final ModBarrelBlock SPRUCE_BARREL = new ModBarrelBlock("spruce_barrel");
@@ -54,6 +76,27 @@ public class ModBlocks {
                 ACACIA_CHEST,
                 JUNGLE_CHEST,
                 DARK_OAK_CHEST,
+
+                OAK_CHEST_TIER_1,
+                SPRUCE_CHEST_TIER_1,
+                BIRCH_CHEST_TIER_1,
+                ACACIA_CHEST_TIER_1,
+                JUNGLE_CHEST_TIER_1,
+                DARK_OAK_CHEST_TIER_1,
+
+                OAK_CHEST_TIER_2,
+                SPRUCE_CHEST_TIER_2,
+                BIRCH_CHEST_TIER_2,
+                ACACIA_CHEST_TIER_2,
+                JUNGLE_CHEST_TIER_2,
+                DARK_OAK_CHEST_TIER_2,
+
+                OAK_CHEST_TIER_3,
+                SPRUCE_CHEST_TIER_3,
+                BIRCH_CHEST_TIER_3,
+                ACACIA_CHEST_TIER_3,
+                JUNGLE_CHEST_TIER_3,
+                DARK_OAK_CHEST_TIER_3,
 
                 OAK_BARREL,
                 SPRUCE_BARREL,
@@ -96,6 +139,27 @@ public class ModBlocks {
                 ACACIA_CHEST.toItem(),
                 JUNGLE_CHEST.toItem(),
                 DARK_OAK_CHEST.toItem(),
+
+                OAK_CHEST_TIER_1.toItem(),
+                SPRUCE_CHEST_TIER_1.toItem(),
+                BIRCH_CHEST_TIER_1.toItem(),
+                ACACIA_CHEST_TIER_1.toItem(),
+                JUNGLE_CHEST_TIER_1.toItem(),
+                DARK_OAK_CHEST_TIER_1.toItem(),
+
+                OAK_CHEST_TIER_2.toItem(),
+                SPRUCE_CHEST_TIER_2.toItem(),
+                BIRCH_CHEST_TIER_2.toItem(),
+                ACACIA_CHEST_TIER_2.toItem(),
+                JUNGLE_CHEST_TIER_2.toItem(),
+                DARK_OAK_CHEST_TIER_2.toItem(),
+
+                OAK_CHEST_TIER_3.toItem(),
+                SPRUCE_CHEST_TIER_3.toItem(),
+                BIRCH_CHEST_TIER_3.toItem(),
+                ACACIA_CHEST_TIER_3.toItem(),
+                JUNGLE_CHEST_TIER_3.toItem(),
+                DARK_OAK_CHEST_TIER_3.toItem(),
 
                 OAK_BARREL.toItem(),
                 SPRUCE_BARREL.toItem(),

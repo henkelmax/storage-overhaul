@@ -19,7 +19,7 @@ public class HugeChestScreen extends ContainerScreen<HugeChestContainer> {
         super(container, playerInventory, name);
         this.playerInventory = playerInventory;
         passEvents = false;
-        xSize = 230;
+        xSize = 338;
 
         inventoryRows = container.getNumRows();
         ySize = 114 + inventoryRows * 18;
@@ -35,7 +35,7 @@ public class HugeChestScreen extends ContainerScreen<HugeChestContainer> {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         font.drawString(title.getFormattedText(), 8F, 6F, FONT_COLOR);
-        font.drawString(playerInventory.getDisplayName().getFormattedText(), 35F, (float) (ySize - 96 + 2), FONT_COLOR);
+        font.drawString(playerInventory.getDisplayName().getFormattedText(), 89F, (float) (ySize - 96 + 2), FONT_COLOR);
     }
 
     @Override

@@ -2,6 +2,7 @@ package de.maxhenkel.storage.blocks.tileentity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import de.maxhenkel.storage.ChestTier;
 import de.maxhenkel.storage.blocks.ModBlocks;
 import de.maxhenkel.storage.blocks.ModChestBlock;
 import de.maxhenkel.storage.blocks.tileentity.ModChestTileEntity;
@@ -27,13 +28,22 @@ public class ModChestRenderer extends ChestTileEntityRenderer<ModChestTileEntity
 
     private final ModelRenderer singleLid;
     private final ModelRenderer singleBottom;
-    private final ModelRenderer singleLatch;
+    private final ModelRenderer singleLatchBase;
+    private final ModelRenderer singleLatchTier1;
+    private final ModelRenderer singleLatchTier2;
+    private final ModelRenderer singleLatchTier3;
     private final ModelRenderer rightLid;
     private final ModelRenderer rightBottom;
-    private final ModelRenderer rightLatch;
+    private final ModelRenderer rightLatchBase;
+    private final ModelRenderer rightLatchTier1;
+    private final ModelRenderer rightLatchTier2;
+    private final ModelRenderer rightLatchTier3;
     private final ModelRenderer leftLid;
     private final ModelRenderer leftBottom;
-    private final ModelRenderer leftLatch;
+    private final ModelRenderer leftLatchBase;
+    private final ModelRenderer leftLatchTier1;
+    private final ModelRenderer leftLatchTier2;
+    private final ModelRenderer leftLatchTier3;
 
     public ModChestRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
@@ -43,27 +53,54 @@ public class ModChestRenderer extends ChestTileEntityRenderer<ModChestTileEntity
         singleLid.addBox(1F, 0F, 0F, 14F, 5F, 14F, 0F);
         singleLid.rotationPointY = 9F;
         singleLid.rotationPointZ = 1F;
-        singleLatch = new ModelRenderer(64, 64, 0, 0);
-        singleLatch.addBox(7F, -1F, 15F, 2F, 4F, 1F, 0F);
-        singleLatch.rotationPointY = 8F;
+        singleLatchBase = new ModelRenderer(64, 64, 0, 0);
+        singleLatchBase.addBox(7F, -1F, 15F, 2F, 4F, 1F, 0F);
+        singleLatchBase.rotationPointY = 8F;
+        singleLatchTier1 = new ModelRenderer(64, 64, 8, 0);
+        singleLatchTier1.addBox(7F, -1F, 15F, 2F, 4F, 1F, 0F);
+        singleLatchTier1.rotationPointY = 8F;
+        singleLatchTier2 = new ModelRenderer(64, 64, 0, 8);
+        singleLatchTier2.addBox(7F, -1F, 15F, 2F, 4F, 1F, 0F);
+        singleLatchTier2.rotationPointY = 8F;
+        singleLatchTier3 = new ModelRenderer(64, 64, 8, 8);
+        singleLatchTier3.addBox(7F, -1F, 15F, 2F, 4F, 1F, 0F);
+        singleLatchTier3.rotationPointY = 8F;
         rightBottom = new ModelRenderer(64, 64, 0, 19);
         rightBottom.addBox(1F, 0F, 1F, 15F, 10F, 14F, 0F);
         rightLid = new ModelRenderer(64, 64, 0, 0);
         rightLid.addBox(1F, 0F, 0F, 15F, 5F, 14F, 0F);
         rightLid.rotationPointY = 9F;
         rightLid.rotationPointZ = 1F;
-        rightLatch = new ModelRenderer(64, 64, 0, 0);
-        rightLatch.addBox(15F, -1F, 15F, 1F, 4F, 1F, 0F);
-        rightLatch.rotationPointY = 8F;
+        rightLatchBase = new ModelRenderer(64, 64, 0, 0);
+        rightLatchBase.addBox(15F, -1F, 15F, 1F, 4F, 1F, 0F);
+        rightLatchBase.rotationPointY = 8F;
+        rightLatchTier1 = new ModelRenderer(64, 64, 8, 0);
+        rightLatchTier1.addBox(15F, -1F, 15F, 1F, 4F, 1F, 0F);
+        rightLatchTier1.rotationPointY = 8F;
+        rightLatchTier2 = new ModelRenderer(64, 64, 0, 8);
+        rightLatchTier2.addBox(15F, -1F, 15F, 1F, 4F, 1F, 0F);
+        rightLatchTier2.rotationPointY = 8F;
+        rightLatchTier3 = new ModelRenderer(64, 64, 8, 8);
+        rightLatchTier3.addBox(15F, -1F, 15F, 1F, 4F, 1F, 0F);
+        rightLatchTier3.rotationPointY = 8F;
         leftBottom = new ModelRenderer(64, 64, 0, 19);
         leftBottom.addBox(0F, 0F, 1F, 15F, 10F, 14F, 0F);
         leftLid = new ModelRenderer(64, 64, 0, 0);
         leftLid.addBox(0F, 0F, 0F, 15F, 5F, 14F, 0F);
         leftLid.rotationPointY = 9F;
         leftLid.rotationPointZ = 1F;
-        leftLatch = new ModelRenderer(64, 64, 0, 0);
-        leftLatch.addBox(0F, -1F, 15F, 1F, 4F, 1F, 0F);
-        leftLatch.rotationPointY = 8F;
+        leftLatchBase = new ModelRenderer(64, 64, 0, 0);
+        leftLatchBase.addBox(0F, -1F, 15F, 1F, 4F, 1F, 0F);
+        leftLatchBase.rotationPointY = 8F;
+        leftLatchTier1 = new ModelRenderer(64, 64, 8, 0);
+        leftLatchTier1.addBox(0F, -1F, 15F, 1F, 4F, 1F, 0F);
+        leftLatchTier1.rotationPointY = 8F;
+        leftLatchTier2 = new ModelRenderer(64, 64, 0, 8);
+        leftLatchTier2.addBox(0F, -1F, 15F, 1F, 4F, 1F, 0F);
+        leftLatchTier2.rotationPointY = 8F;
+        leftLatchTier3 = new ModelRenderer(64, 64, 8, 8);
+        leftLatchTier3.addBox(0F, -1F, 15F, 1F, 4F, 1F, 0F);
+        leftLatchTier3.rotationPointY = 8F;
     }
 
     @Override
@@ -94,14 +131,56 @@ public class ModChestRenderer extends ChestTileEntityRenderer<ModChestTileEntity
         Material material = this.getMaterial(chest, chesttype);
         IVertexBuilder ivertexbuilder = material.getBuffer(bufferIn, RenderType::getEntityCutout);
         if (chesttype == ChestType.LEFT) {
-            renderModels(matrixStackIn, ivertexbuilder, leftLid, leftLatch, leftBottom, lidAngle, i, combinedOverlayIn);
+            renderModels(matrixStackIn, ivertexbuilder, leftLid, getDoubleLatchLeft(chest.getTier()), leftBottom, lidAngle, i, combinedOverlayIn);
         } else if (chesttype == ChestType.RIGHT) {
-            renderModels(matrixStackIn, ivertexbuilder, rightLid, rightLatch, rightBottom, lidAngle, i, combinedOverlayIn);
+            renderModels(matrixStackIn, ivertexbuilder, rightLid, getDoubleLatchRight(chest.getTier()), rightBottom, lidAngle, i, combinedOverlayIn);
         } else {
-            renderModels(matrixStackIn, ivertexbuilder, singleLid, singleLatch, singleBottom, lidAngle, i, combinedOverlayIn);
+            renderModels(matrixStackIn, ivertexbuilder, singleLid, getSingleLatch(chest.getTier()), singleBottom, lidAngle, i, combinedOverlayIn);
         }
 
         matrixStackIn.pop();
+    }
+
+    private ModelRenderer getSingleLatch(ChestTier tier) {
+        switch (tier) {
+            case BASE_TIER:
+                return singleLatchBase;
+            case TIER_1:
+                return singleLatchTier1;
+            case TIER_2:
+                return singleLatchTier2;
+            case TIER_3:
+                return singleLatchTier3;
+        }
+        return singleLatchBase;
+    }
+
+    private ModelRenderer getDoubleLatchRight(ChestTier tier) {
+        switch (tier) {
+            case BASE_TIER:
+                return rightLatchBase;
+            case TIER_1:
+                return rightLatchTier1;
+            case TIER_2:
+                return rightLatchTier2;
+            case TIER_3:
+                return rightLatchTier3;
+        }
+        return rightLatchBase;
+    }
+
+    private ModelRenderer getDoubleLatchLeft(ChestTier tier) {
+        switch (tier) {
+            case BASE_TIER:
+                return leftLatchBase;
+            case TIER_1:
+                return leftLatchTier1;
+            case TIER_2:
+                return leftLatchTier2;
+            case TIER_3:
+                return leftLatchTier3;
+        }
+        return leftLatchBase;
     }
 
     private void renderModels(MatrixStack matrixStackIn, IVertexBuilder bufferIn, ModelRenderer chestLid, ModelRenderer chestLatch, ModelRenderer chestBottom, float lidAngle, int combinedLightIn, int combinedOverlayIn) {

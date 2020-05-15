@@ -1,5 +1,6 @@
 package de.maxhenkel.storage.blocks.tileentity;
 
+import de.maxhenkel.storage.ChestTier;
 import de.maxhenkel.storage.blocks.ModChestBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -9,10 +10,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.state.properties.ChestType;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
@@ -28,20 +30,27 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
+import javax.annotation.Nullable;
+
 @OnlyIn(value = Dist.CLIENT, _interface = IChestLid.class)
 public class ModChestTileEntity extends LockableLootTileEntity implements IChestLid, ITickableTileEntity {
 
+    @Nullable
     protected NonNullList<ItemStack> chestContents;
     protected float lidAngle;
     protected float prevLidAngle;
     protected int numPlayersUsing;
     protected LazyOptional<IItemHandlerModifiable> chestHandler;
-    protected WoodType woodType;
 
-    public ModChestTileEntity(WoodType woodType) {
+    @Nullable
+    protected WoodType woodType;
+    @Nullable
+    protected ChestTier tier;
+
+    public ModChestTileEntity(WoodType woodType, ChestTier tier) {
         super(ModTileEntities.CHEST);
         this.woodType = woodType;
-        chestContents = NonNullList.withSize(27, ItemStack.EMPTY);
+        this.tier = tier;
     }
 
     public WoodType getWoodType() {
@@ -51,9 +60,16 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
         return woodType;
     }
 
+    public ChestTier getTier() {
+        if (tier == null) {
+            tier = ((ModChestBlock) getBlockState().getBlock()).getTier();
+        }
+        return tier;
+    }
+
     @Override
     protected Container createMenu(int id, PlayerInventory player) {
-        return ChestContainer.createGeneric9X3(id, player, this); //TODO
+        return getTier().getContainer(id, player, this);
     }
 
     @Override
@@ -63,27 +79,47 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
 
     @Override
     public int getSizeInventory() {
-        return 27;
-    }//TODO
+        return getTier().numSlots();
+    }
 
     @Override
     public void read(CompoundNBT compound) {
         super.read(compound);
+
+        tier = ChestTier.byTier(compound.getInt("Tier"));
+
         chestContents = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
         if (!checkLootAndRead(compound)) {
             ItemStackHelper.loadAllItems(compound, chestContents);
         }
-
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
+
+        compound.putInt("Tier", getTier().getTier());
+
         if (!checkLootAndWrite(compound)) {
-            ItemStackHelper.saveAllItems(compound, chestContents);
+            ItemStackHelper.saveAllItems(compound, getItems());
         }
 
         return compound;
+    }
+
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        return new SUpdateTileEntityPacket(pos, 1, getUpdateTag());
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        read(pkt.getNbtCompound());
+    }
+
+    @Override
+    public CompoundNBT getUpdateTag() {
+        return write(new CompoundNBT());
     }
 
     @Override
@@ -172,6 +208,9 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
     }
 
     protected NonNullList<ItemStack> getItems() {
+        if (chestContents == null) {
+            chestContents = NonNullList.withSize(getTier().numSlots(), ItemStack.EMPTY);
+        }
         return chestContents;
     }
 

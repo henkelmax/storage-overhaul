@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "##G",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:birch_planks"
+    },
+    "G": {
+      "tag": "forge:ingots/gold"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:birch_chest_tier_2"
+  }
+}

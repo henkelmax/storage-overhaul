@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "##D",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "D": {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:dark_oak_chest_tier_3"
+  }
+}

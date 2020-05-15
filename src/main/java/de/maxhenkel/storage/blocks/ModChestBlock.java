@@ -1,5 +1,6 @@
 package de.maxhenkel.storage.blocks;
 
+import de.maxhenkel.storage.ChestTier;
 import de.maxhenkel.storage.Main;
 import de.maxhenkel.storage.blocks.tileentity.ModChestTileEntity;
 import de.maxhenkel.storage.blocks.tileentity.ModTileEntities;
@@ -16,7 +17,6 @@ import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.DoubleSidedInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.*;
@@ -29,7 +29,10 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.ChestType;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
-import net.minecraft.tileentity.*;
+import net.minecraft.tileentity.ChestTileEntity;
+import net.minecraft.tileentity.IChestLid;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityMerger;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -72,7 +75,7 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
                     if (iinventory1.canOpen(player) && iinventory2.canOpen(player)) {
                         iinventory1.fillWithLoot(playerInventory.player);
                         iinventory2.fillWithLoot(playerInventory.player);
-                        return ChestContainer.createGeneric9X6(id, playerInventory, iinventory);
+                        return iinventory1.getTier().getContainer(id, playerInventory, iinventory);
                     } else {
                         return null;
                     }
@@ -82,7 +85,7 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
                     if (iinventory1.hasCustomName()) {
                         return iinventory1.getDisplayName();
                     } else {
-                        return iinventory2.hasCustomName() ? iinventory2.getDisplayName() : new TranslationTextComponent("container.storage_overhaul.large_" + ((ModChestTileEntity) iinventory1).getWoodType().getName() + "_chest");
+                        return iinventory2.hasCustomName() ? iinventory2.getDisplayName() : new TranslationTextComponent("container.storage_overhaul.generic_large", iinventory1.getDisplayName());
                     }
                 }
             });
@@ -97,36 +100,6 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
         }
     };
 
-    private WoodType woodType;
-
-    protected ModChestBlock(String name, WoodType woodType) {
-        super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
-        this.woodType = woodType;
-        setRegistryName(new ResourceLocation(Main.MODID, name));
-        setDefaultState(stateContainer.getBaseState().with(FACING, Direction.NORTH).with(TYPE, ChestType.SINGLE).with(WATERLOGGED, false));
-    }
-
-    public WoodType getWoodType() {
-        return woodType;
-    }
-
-    private Callable renderer = () -> new ChestItemRenderer(woodType);
-
-    @Override
-    public Item toItem() {
-        return new BlockItem(this, new Item.Properties().group(ItemGroup.DECORATIONS).setISTER(() -> renderer)).setRegistryName(getRegistryName());
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return new ModChestTileEntity(woodType);
-    }
-
-    @Override
-    public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
-        return getMergerCallback(state, worldIn, pos, false).apply(CALLBACK).orElse(null);
-    }
-
     private static final TileEntityMerger.ICallback<ModChestTileEntity, Optional<IInventory>> MERGER = new TileEntityMerger.ICallback<ModChestTileEntity, Optional<IInventory>>() {
         public Optional<IInventory> func_225539_a_(ModChestTileEntity chest1, ModChestTileEntity chest2) {
             return Optional.of(new DoubleSidedInventory(chest1, chest2));
@@ -140,6 +113,42 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
             return Optional.empty();
         }
     };
+
+    private WoodType woodType;
+    private ChestTier tier;
+
+    protected ModChestBlock(String name, WoodType woodType, ChestTier tier) {
+        super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
+        this.woodType = woodType;
+        this.tier = tier;
+        setRegistryName(new ResourceLocation(Main.MODID, name));
+        setDefaultState(stateContainer.getBaseState().with(FACING, Direction.NORTH).with(TYPE, ChestType.SINGLE).with(WATERLOGGED, false));
+    }
+
+    public WoodType getWoodType() {
+        return woodType;
+    }
+
+    public ChestTier getTier() {
+        return tier;
+    }
+
+    private Callable renderer = () -> new ChestItemRenderer(woodType, tier);
+
+    @Override
+    public Item toItem() {
+        return new BlockItem(this, new Item.Properties().group(ItemGroup.DECORATIONS).setISTER(() -> renderer)).setRegistryName(getRegistryName());
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+        return new ModChestTileEntity(woodType, tier);
+    }
+
+    @Override
+    public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
+        return getMergerCallback(state, worldIn, pos, false).apply(CALLBACK).orElse(null);
+    }
 
     public static TileEntityMerger.Type getType(BlockState blockState) {
         ChestType chesttype = blockState.get(TYPE);
@@ -206,7 +215,7 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
         boolean flag = context.func_225518_g_();
         Direction direction1 = context.getFace();
         if (direction1.getAxis().isHorizontal() && flag) {
-            Direction direction2 = this.getDirectionToAttach(context, direction1.getOpposite());
+            Direction direction2 = getDirectionToAttach(context, direction1.getOpposite());
             if (direction2 != null && direction2.getAxis() != direction1.getAxis()) {
                 direction = direction2;
                 chesttype = direction2.rotateYCCW() == direction1.getOpposite() ? ChestType.RIGHT : ChestType.LEFT;
@@ -214,14 +223,14 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
         }
 
         if (chesttype == ChestType.SINGLE && !flag) {
-            if (direction == this.getDirectionToAttach(context, direction.rotateY())) {
+            if (direction == getDirectionToAttach(context, direction.rotateY())) {
                 chesttype = ChestType.LEFT;
-            } else if (direction == this.getDirectionToAttach(context, direction.rotateYCCW())) {
+            } else if (direction == getDirectionToAttach(context, direction.rotateYCCW())) {
                 chesttype = ChestType.RIGHT;
             }
         }
 
-        return this.getDefaultState().with(FACING, direction).with(TYPE, chesttype).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
+        return getDefaultState().with(FACING, direction).with(TYPE, chesttype).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
     }
 
     @Override
@@ -231,8 +240,8 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
 
 
     @Nullable
-    private Direction getDirectionToAttach(BlockItemUseContext p_196312_1_, Direction p_196312_2_) {
-        BlockState blockstate = p_196312_1_.getWorld().getBlockState(p_196312_1_.getPos().offset(p_196312_2_));
+    private Direction getDirectionToAttach(BlockItemUseContext context, Direction direction) {
+        BlockState blockstate = context.getWorld().getBlockState(context.getPos().offset(direction));
         return blockstate.getBlock() == this && blockstate.get(TYPE) == ChestType.SINGLE ? blockstate.get(FACING) : null;
     }
 
@@ -265,18 +274,17 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
         if (worldIn.isRemote) {
             return ActionResultType.SUCCESS;
         }
-        INamedContainerProvider inamedcontainerprovider = this.getContainer(state, worldIn, pos);
+        INamedContainerProvider inamedcontainerprovider = getContainer(state, worldIn, pos);
         if (inamedcontainerprovider != null) {
             player.openContainer(inamedcontainerprovider);
-            player.addStat(this.getOpenStat());
+            player.addStat(getOpenStat());
         }
 
         return ActionResultType.SUCCESS;
-
     }
 
     protected Stat<ResourceLocation> getOpenStat() {
-        return Stats.CUSTOM.get(Stats.OPEN_CHEST);
+        return Stats.CUSTOM.get(Stats.OPEN_CHEST); //TODO
     }
 
     @Nullable
@@ -362,5 +370,4 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
     public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
         return false;
     }
-
 }
