@@ -1,40 +1,66 @@
 package de.maxhenkel.storage.entity;
 
-import de.maxhenkel.storage.blocks.ModChestBlock;
+import de.maxhenkel.storage.ModDataSerializers;
+import de.maxhenkel.storage.blocks.ModBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
 import net.minecraft.entity.item.minecart.ContainerMinecartEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.*;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class ModChestMinecartEntity extends ContainerMinecartEntity {
 
-    private ModChestBlock chest;
-    private Item item;
+    private static final DataParameter<Block> BLOCK = EntityDataManager.createKey(ModChestMinecartEntity.class, ModDataSerializers.BLOCK);
 
-    public ModChestMinecartEntity(EntityType<? extends ContainerMinecartEntity> entityType, World world, ModChestBlock chest, Item item) {
-        super(entityType, world);
-        this.chest = chest;
-        this.item = item;
+    private BlockState cachedBlock;
+
+    public ModChestMinecartEntity(World world) {
+        super(ModEntities.CHEST_MINECART, world);
+    }
+
+    public BlockState getBlock() {
+        if (cachedBlock == null) {
+            cachedBlock = dataManager.get(BLOCK).getDefaultState();
+        }
+
+        return cachedBlock;
+    }
+
+    public void setBlock(Block block) {
+        dataManager.set(BLOCK, block);
+    }
+
+    public ItemStack getItem() {
+        return new ItemStack(getBlock().getBlock());
+    }
+
+    @Override
+    protected void registerData() {
+        super.registerData();
+        dataManager.register(BLOCK, ModBlocks.OAK_CHEST);
     }
 
     @Override
     public void killMinecart(DamageSource source) {
         super.killMinecart(source);
         if (world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-            entityDropItem(chest);
+            entityDropItem(getItem());
         }
     }
 
@@ -46,7 +72,7 @@ public class ModChestMinecartEntity extends ContainerMinecartEntity {
 
     @Override
     public BlockState getDefaultDisplayTile() {
-        return chest.getDefaultState().with(ChestBlock.FACING, Direction.NORTH);
+        return getBlock();
     }
 
     @Override
@@ -88,6 +114,23 @@ public class ModChestMinecartEntity extends ContainerMinecartEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return new ItemStack(item);
+        return getItem().copy();
+    }
+
+    @Override
+    protected void readAdditional(CompoundNBT compound) {
+        super.readAdditional(compound);
+        setBlock(Registry.BLOCK.getOrDefault(new ResourceLocation(compound.getString("Block"))));
+    }
+
+    @Override
+    protected void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        compound.putString("Block", getBlock().getBlock().getRegistryName().toString());
+    }
+
+    @Override
+    protected ITextComponent getProfessionName() {
+        return new TranslationTextComponent("entity.storage_overhaul.chest_minecart_generic", getItem().getDisplayName());
     }
 }

@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DataSerializerEntry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,6 +40,7 @@ public class Main {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, event -> ModTileEntities.registerTileEntities((RegistryEvent.Register<TileEntityType<?>>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(EntityType.class, event -> ModEntities.registerEntities((RegistryEvent.Register<EntityType<?>>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(ContainerType.class, event -> Containers.registerContainers((RegistryEvent.Register<ContainerType<?>>) event));
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(DataSerializerEntry.class, this::registerSerializers);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
@@ -64,6 +67,13 @@ public class Main {
         ModTileEntities.clientSetup();
         ModEntities.clientSetup();
         Containers.clientSetup();
+    }
+
+    @SubscribeEvent
+    public void registerSerializers(RegistryEvent.Register<DataSerializerEntry> event) {
+        DataSerializerEntry entry = new DataSerializerEntry(ModDataSerializers.BLOCK);
+        entry.setRegistryName(new ResourceLocation(MODID, "block"));
+        event.getRegistry().register(entry);
     }
 
 }

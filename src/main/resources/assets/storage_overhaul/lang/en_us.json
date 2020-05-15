@@ -60,12 +60,8 @@
 
   "container.storage_overhaul.generic_large": "Large %s",
 
-  "entity.storage_overhaul.oak_chest_minecart": "Minecart with Oak Chest",
-  "entity.storage_overhaul.spruce_chest_minecart": "Minecart with Spruce Chest",
-  "entity.storage_overhaul.birch_chest_minecart": "Minecart with Birch Chest",
-  "entity.storage_overhaul.acacia_chest_minecart": "Minecart with Acacia Chest",
-  "entity.storage_overhaul.jungle_chest_minecart": "Minecart with Jungle Chest",
-  "entity.storage_overhaul.dark_oak_chest_minecart": "Minecart with Dark Oak Chest",
+  "entity.storage_overhaul.chest_minecart": "Minecart with Chest",
+  "entity.storage_overhaul.chest_minecart_generic": "Minecart with %s",
 
   "item.storage_overhaul.oak_chest_minecart": "Minecart with Oak Chest",
   "item.storage_overhaul.spruce_chest_minecart": "Minecart with Spruce Chest",

@@ -1,18 +1,18 @@
 package de.maxhenkel.storage.items;
 
 import de.maxhenkel.storage.Main;
-import de.maxhenkel.storage.entity.ModEntities;
+import de.maxhenkel.storage.blocks.ModBlocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 
 public class ModItems {
 
-    public static ModMinecartItem OAK_MINECART = new ModMinecartItem(() -> ModEntities.OAK_CHEST_MINECART);
-    public static ModMinecartItem SPRUCE_MINECART = new ModMinecartItem(() -> ModEntities.SPRUCE_CHEST_MINECART);
-    public static ModMinecartItem BIRCH_MINECART = new ModMinecartItem(() -> ModEntities.BIRCH_CHEST_MINECART);
-    public static ModMinecartItem ACACIA_MINECART = new ModMinecartItem(() -> ModEntities.ACACIA_CHEST_MINECART);
-    public static ModMinecartItem JUNGLE_MINECART = new ModMinecartItem(() -> ModEntities.JUNGLE_CHEST_MINECART);
-    public static ModMinecartItem DARK_OAK_MINECART = new ModMinecartItem(() -> ModEntities.DARK_OAK_CHEST_MINECART);
+    public static ModMinecartItem OAK_MINECART = new ModMinecartItem(() -> ModBlocks.OAK_CHEST);
+    public static ModMinecartItem SPRUCE_MINECART = new ModMinecartItem(() -> ModBlocks.SPRUCE_CHEST);
+    public static ModMinecartItem BIRCH_MINECART = new ModMinecartItem(() -> ModBlocks.BIRCH_CHEST);
+    public static ModMinecartItem ACACIA_MINECART = new ModMinecartItem(() -> ModBlocks.ACACIA_CHEST);
+    public static ModMinecartItem JUNGLE_MINECART = new ModMinecartItem(() -> ModBlocks.JUNGLE_CHEST);
+    public static ModMinecartItem DARK_OAK_MINECART = new ModMinecartItem(() -> ModBlocks.DARK_OAK_CHEST);
 
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(

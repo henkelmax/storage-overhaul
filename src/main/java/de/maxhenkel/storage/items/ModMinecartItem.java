@@ -1,14 +1,15 @@
 package de.maxhenkel.storage.items;
 
 import de.maxhenkel.storage.entity.ModChestMinecartEntity;
+import de.maxhenkel.storage.entity.ModEntities;
 import de.maxhenkel.storage.items.render.ChestMinecartItemRenderer;
 import net.minecraft.block.AbstractRailBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IDispenseItemBehavior;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -57,7 +58,8 @@ public class ModMinecartItem extends Item {
                     varY = -0.9D;
                 }
             }
-            ModChestMinecartEntity cart = ModMinecartItem.this.minecart.get().create(world);
+            ModChestMinecartEntity cart = ModEntities.CHEST_MINECART.create(world);
+            cart.setBlock(block.get());
             cart.setPosition(x, y + varY, z);
             if (stack.hasDisplayName()) {
                 cart.setCustomName(stack.getDisplayName());
@@ -74,23 +76,23 @@ public class ModMinecartItem extends Item {
         }
     };
 
-    private Supplier<EntityType<ModChestMinecartEntity>> minecart;
+    private Supplier<Block> block;
 
     private static class CallableProvider {
-        Supplier<EntityType<ModChestMinecartEntity>> minecart;
+        Supplier<Block> block;
 
-        public CallableProvider(Supplier<EntityType<ModChestMinecartEntity>> minecart) {
-            this.minecart = minecart;
+        public CallableProvider(Supplier<Block> block) {
+            this.block = block;
         }
 
         public Callable getCallable() {
-            return () -> new ChestMinecartItemRenderer(minecart);
+            return () -> new ChestMinecartItemRenderer(block);
         }
     }
 
-    public ModMinecartItem(Supplier<EntityType<ModChestMinecartEntity>> minecart) {
-        super(new Item.Properties().maxStackSize(1).group(ItemGroup.TRANSPORTATION).setISTER(() -> new CallableProvider(minecart).getCallable()));
-        this.minecart = minecart;
+    public ModMinecartItem(Supplier<Block> block) {
+        super(new Item.Properties().maxStackSize(1).group(ItemGroup.TRANSPORTATION).setISTER(() -> new CallableProvider(block).getCallable()));
+        this.block = block;
         DispenserBlock.registerDispenseBehavior(this, MINECART_DISPENSER_BEHAVIOR);
     }
 
@@ -109,7 +111,8 @@ public class ModMinecartItem extends Item {
                     height = 0.5D;
                 }
 
-                ModChestMinecartEntity cart = ModMinecartItem.this.minecart.get().create(world);
+                ModChestMinecartEntity cart = ModEntities.CHEST_MINECART.create(world);
+                cart.setBlock(block.get());
                 cart.setPosition((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.0625D + height, (double) blockpos.getZ() + 0.5D);
                 if (itemstack.hasDisplayName()) {
                     cart.setCustomName(itemstack.getDisplayName());
