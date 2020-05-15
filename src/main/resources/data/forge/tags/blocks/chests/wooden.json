@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "storage_overhaul:oak_chest",
+    "storage_overhaul:spruce_chest",
+    "storage_overhaul:birch_chest",
+    "storage_overhaul:acacia_chest",
+    "storage_overhaul:jungle_chest",
+    "storage_overhaul:dark_oak_chest",
+    "storage_overhaul:oak_chest_tier_1",
+    "storage_overhaul:spruce_chest_tier_1",
+    "storage_overhaul:birch_chest_tier_1",
+    "storage_overhaul:acacia_chest_tier_1",
+    "storage_overhaul:jungle_chest_tier_1",
+    "storage_overhaul:dark_oak_chest_tier_1",
+    "storage_overhaul:oak_chest_tier_2",
+    "storage_overhaul:spruce_chest_tier_2",
+    "storage_overhaul:birch_chest_tier_2",
+    "storage_overhaul:acacia_chest_tier_2",
+    "storage_overhaul:jungle_chest_tier_2",
+    "storage_overhaul:dark_oak_chest_tier_2",
+    "storage_overhaul:oak_chest_tier_3",
+    "storage_overhaul:spruce_chest_tier_3",
+    "storage_overhaul:birch_chest_tier_3",
+    "storage_overhaul:acacia_chest_tier_3",
+    "storage_overhaul:jungle_chest_tier_3",
+    "storage_overhaul:dark_oak_chest_tier_3"
+  ]
+}
