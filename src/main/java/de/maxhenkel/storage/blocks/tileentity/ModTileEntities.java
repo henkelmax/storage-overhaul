@@ -30,18 +30,21 @@ public class ModTileEntities {
                 ModBlocks.ACACIA_CHEST,
                 ModBlocks.JUNGLE_CHEST,
                 ModBlocks.DARK_OAK_CHEST,
+
                 ModBlocks.OAK_CHEST_TIER_1,
                 ModBlocks.SPRUCE_CHEST_TIER_1,
                 ModBlocks.BIRCH_CHEST_TIER_1,
                 ModBlocks.ACACIA_CHEST_TIER_1,
                 ModBlocks.JUNGLE_CHEST_TIER_1,
                 ModBlocks.DARK_OAK_CHEST_TIER_1,
+
                 ModBlocks.OAK_CHEST_TIER_2,
                 ModBlocks.SPRUCE_CHEST_TIER_2,
                 ModBlocks.BIRCH_CHEST_TIER_2,
                 ModBlocks.ACACIA_CHEST_TIER_2,
                 ModBlocks.JUNGLE_CHEST_TIER_2,
                 ModBlocks.DARK_OAK_CHEST_TIER_2,
+
                 ModBlocks.OAK_CHEST_TIER_3,
                 ModBlocks.SPRUCE_CHEST_TIER_3,
                 ModBlocks.BIRCH_CHEST_TIER_3,
@@ -52,13 +55,34 @@ public class ModTileEntities {
         CHEST.setRegistryName(new ResourceLocation(Main.MODID, "chest"));
         event.getRegistry().register(CHEST);
 
-        BARREL = TileEntityType.Builder.create(ModBarrelTileEntity::new,
+        BARREL = TileEntityType.Builder.create(() -> new ModBarrelTileEntity(null),
                 ModBlocks.OAK_BARREL,
                 ModBlocks.SPRUCE_BARREL,
                 ModBlocks.BIRCH_BARREL,
                 ModBlocks.ACACIA_BARREL,
                 ModBlocks.JUNGLE_BARREL,
-                ModBlocks.DARK_OAK_BARREL
+                ModBlocks.DARK_OAK_BARREL,
+
+                ModBlocks.OAK_BARREL_TIER_1,
+                ModBlocks.SPRUCE_BARREL_TIER_1,
+                ModBlocks.BIRCH_BARREL_TIER_1,
+                ModBlocks.ACACIA_BARREL_TIER_1,
+                ModBlocks.JUNGLE_BARREL_TIER_1,
+                ModBlocks.DARK_OAK_BARREL_TIER_1,
+
+                ModBlocks.OAK_BARREL_TIER_2,
+                ModBlocks.SPRUCE_BARREL_TIER_2,
+                ModBlocks.BIRCH_BARREL_TIER_2,
+                ModBlocks.ACACIA_BARREL_TIER_2,
+                ModBlocks.JUNGLE_BARREL_TIER_2,
+                ModBlocks.DARK_OAK_BARREL_TIER_2,
+
+                ModBlocks.OAK_BARREL_TIER_3,
+                ModBlocks.SPRUCE_BARREL_TIER_3,
+                ModBlocks.BIRCH_BARREL_TIER_3,
+                ModBlocks.ACACIA_BARREL_TIER_3,
+                ModBlocks.JUNGLE_BARREL_TIER_3,
+                ModBlocks.DARK_OAK_BARREL_TIER_3
         ).build(null);
         BARREL.setRegistryName(new ResourceLocation(Main.MODID, "barrel"));
         event.getRegistry().register(BARREL);

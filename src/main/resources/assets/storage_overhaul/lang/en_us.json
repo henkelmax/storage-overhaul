@@ -34,6 +34,27 @@
   "block.storage_overhaul.jungle_barrel": "Jungle Barrel",
   "block.storage_overhaul.dark_oak_barrel": "Dark Oak Barrel",
 
+  "block.storage_overhaul.oak_barrel_tier_1": "Oak Barrel Tier 1",
+  "block.storage_overhaul.spruce_barrel_tier_1": "Spruce Barrel Tier 1",
+  "block.storage_overhaul.birch_barrel_tier_1": "Birch Barrel Tier 1",
+  "block.storage_overhaul.acacia_barrel_tier_1": "Acacia Barrel Tier 1",
+  "block.storage_overhaul.jungle_barrel_tier_1": "Jungle Barrel Tier 1",
+  "block.storage_overhaul.dark_oak_barrel_tier_1": "Dark Oak Barrel Tier 1",
+
+  "block.storage_overhaul.oak_barrel_tier_2": "Oak Barrel Tier 2",
+  "block.storage_overhaul.spruce_barrel_tier_2": "Spruce Barrel Tier 2",
+  "block.storage_overhaul.birch_barrel_tier_2": "Birch Barrel Tier 2",
+  "block.storage_overhaul.acacia_barrel_tier_2": "Acacia Barrel Tier 2",
+  "block.storage_overhaul.jungle_barrel_tier_2": "Jungle Barrel Tier 2",
+  "block.storage_overhaul.dark_oak_barrel_tier_2": "Dark Oak Barrel Tier 2",
+
+  "block.storage_overhaul.oak_barrel_tier_3": "Oak Barrel Tier 3",
+  "block.storage_overhaul.spruce_barrel_tier_3": "Spruce Barrel Tier 3",
+  "block.storage_overhaul.birch_barrel_tier_3": "Birch Barrel Tier 3",
+  "block.storage_overhaul.acacia_barrel_tier_3": "Acacia Barrel Tier 3",
+  "block.storage_overhaul.jungle_barrel_tier_3": "Jungle Barrel Tier 3",
+  "block.storage_overhaul.dark_oak_barrel_tier_3": "Dark Oak Barrel Tier 3",
+
   "block.storage_overhaul.oak_storage_barrel": "Oak Storage Barrel",
   "block.storage_overhaul.spruce_storage_barrel": "Spruce Storage Barrel",
   "block.storage_overhaul.birch_storage_barrel": "Birch Storage Barrel",

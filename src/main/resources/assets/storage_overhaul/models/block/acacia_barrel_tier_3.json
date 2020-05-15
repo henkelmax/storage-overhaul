@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "top": "storage_overhaul:block/acacia_barrel_tier_3_top",
+        "side": "storage_overhaul:block/acacia_barrel_side",
+        "bottom": "storage_overhaul:block/acacia_barrel_bottom"
+    }
+}

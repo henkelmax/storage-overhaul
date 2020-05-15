@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "top": "storage_overhaul:block/dark_oak_barrel_tier_2_top",
+        "side": "storage_overhaul:block/dark_oak_barrel_side",
+        "bottom": "storage_overhaul:block/dark_oak_barrel_bottom"
+    }
+}

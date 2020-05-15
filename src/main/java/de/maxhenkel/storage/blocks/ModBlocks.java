@@ -37,12 +37,33 @@ public class ModBlocks {
     public static final ModChestBlock JUNGLE_CHEST_TIER_3 = new ModChestBlock("jungle_chest_tier_3", WoodType.JUNGLE, ChestTier.TIER_3);
     public static final ModChestBlock DARK_OAK_CHEST_TIER_3 = new ModChestBlock("dark_oak_chest_tier_3", WoodType.DARK_OAK, ChestTier.TIER_3);
 
-    public static final ModBarrelBlock OAK_BARREL = new ModBarrelBlock("oak_barrel");
-    public static final ModBarrelBlock SPRUCE_BARREL = new ModBarrelBlock("spruce_barrel");
-    public static final ModBarrelBlock BIRCH_BARREL = new ModBarrelBlock("birch_barrel");
-    public static final ModBarrelBlock ACACIA_BARREL = new ModBarrelBlock("acacia_barrel");
-    public static final ModBarrelBlock JUNGLE_BARREL = new ModBarrelBlock("jungle_barrel");
-    public static final ModBarrelBlock DARK_OAK_BARREL = new ModBarrelBlock("dark_oak_barrel");
+    public static final ModBarrelBlock OAK_BARREL = new ModBarrelBlock("oak_barrel", ChestTier.BASE_TIER);
+    public static final ModBarrelBlock SPRUCE_BARREL = new ModBarrelBlock("spruce_barrel", ChestTier.BASE_TIER);
+    public static final ModBarrelBlock BIRCH_BARREL = new ModBarrelBlock("birch_barrel", ChestTier.BASE_TIER);
+    public static final ModBarrelBlock ACACIA_BARREL = new ModBarrelBlock("acacia_barrel", ChestTier.BASE_TIER);
+    public static final ModBarrelBlock JUNGLE_BARREL = new ModBarrelBlock("jungle_barrel", ChestTier.BASE_TIER);
+    public static final ModBarrelBlock DARK_OAK_BARREL = new ModBarrelBlock("dark_oak_barrel", ChestTier.BASE_TIER);
+
+    public static final ModBarrelBlock OAK_BARREL_TIER_1 = new ModBarrelBlock("oak_barrel_tier_1", ChestTier.TIER_1);
+    public static final ModBarrelBlock SPRUCE_BARREL_TIER_1 = new ModBarrelBlock("spruce_barrel_tier_1", ChestTier.TIER_1);
+    public static final ModBarrelBlock BIRCH_BARREL_TIER_1 = new ModBarrelBlock("birch_barrel_tier_1", ChestTier.TIER_1);
+    public static final ModBarrelBlock ACACIA_BARREL_TIER_1 = new ModBarrelBlock("acacia_barrel_tier_1", ChestTier.TIER_1);
+    public static final ModBarrelBlock JUNGLE_BARREL_TIER_1 = new ModBarrelBlock("jungle_barrel_tier_1", ChestTier.TIER_1);
+    public static final ModBarrelBlock DARK_OAK_BARREL_TIER_1 = new ModBarrelBlock("dark_oak_barrel_tier_1", ChestTier.TIER_1);
+
+    public static final ModBarrelBlock OAK_BARREL_TIER_2 = new ModBarrelBlock("oak_barrel_tier_2", ChestTier.TIER_2);
+    public static final ModBarrelBlock SPRUCE_BARREL_TIER_2 = new ModBarrelBlock("spruce_barrel_tier_2", ChestTier.TIER_2);
+    public static final ModBarrelBlock BIRCH_BARREL_TIER_2 = new ModBarrelBlock("birch_barrel_tier_2", ChestTier.TIER_2);
+    public static final ModBarrelBlock ACACIA_BARREL_TIER_2 = new ModBarrelBlock("acacia_barrel_tier_2", ChestTier.TIER_2);
+    public static final ModBarrelBlock JUNGLE_BARREL_TIER_2 = new ModBarrelBlock("jungle_barrel_tier_2", ChestTier.TIER_2);
+    public static final ModBarrelBlock DARK_OAK_BARREL_TIER_2 = new ModBarrelBlock("dark_oak_barrel_tier_2", ChestTier.TIER_2);
+
+    public static final ModBarrelBlock OAK_BARREL_TIER_3 = new ModBarrelBlock("oak_barrel_tier_3", ChestTier.TIER_3);
+    public static final ModBarrelBlock SPRUCE_BARREL_TIER_3 = new ModBarrelBlock("spruce_barrel_tier_3", ChestTier.TIER_3);
+    public static final ModBarrelBlock BIRCH_BARREL_TIER_3 = new ModBarrelBlock("birch_barrel_tier_3", ChestTier.TIER_3);
+    public static final ModBarrelBlock ACACIA_BARREL_TIER_3 = new ModBarrelBlock("acacia_barrel_tier_3", ChestTier.TIER_3);
+    public static final ModBarrelBlock JUNGLE_BARREL_TIER_3 = new ModBarrelBlock("jungle_barrel_tier_3", ChestTier.TIER_3);
+    public static final ModBarrelBlock DARK_OAK_BARREL_TIER_3 = new ModBarrelBlock("dark_oak_barrel_tier_3", ChestTier.TIER_3);
 
     public static final StorageBarrelBlock OAK_STORAGE_BARREL = new StorageBarrelBlock("oak_storage_barrel");
     public static final StorageBarrelBlock SPRUCE_STORAGE_BARREL = new StorageBarrelBlock("spruce_storage_barrel");
@@ -104,6 +125,27 @@ public class ModBlocks {
                 ACACIA_BARREL,
                 JUNGLE_BARREL,
                 DARK_OAK_BARREL,
+
+                OAK_BARREL_TIER_1,
+                SPRUCE_BARREL_TIER_1,
+                BIRCH_BARREL_TIER_1,
+                ACACIA_BARREL_TIER_1,
+                JUNGLE_BARREL_TIER_1,
+                DARK_OAK_BARREL_TIER_1,
+
+                OAK_BARREL_TIER_2,
+                SPRUCE_BARREL_TIER_2,
+                BIRCH_BARREL_TIER_2,
+                ACACIA_BARREL_TIER_2,
+                JUNGLE_BARREL_TIER_2,
+                DARK_OAK_BARREL_TIER_2,
+
+                OAK_BARREL_TIER_3,
+                SPRUCE_BARREL_TIER_3,
+                BIRCH_BARREL_TIER_3,
+                ACACIA_BARREL_TIER_3,
+                JUNGLE_BARREL_TIER_3,
+                DARK_OAK_BARREL_TIER_3,
 
                 OAK_STORAGE_BARREL,
                 SPRUCE_STORAGE_BARREL,
@@ -167,6 +209,27 @@ public class ModBlocks {
                 ACACIA_BARREL.toItem(),
                 JUNGLE_BARREL.toItem(),
                 DARK_OAK_BARREL.toItem(),
+
+                OAK_BARREL_TIER_1.toItem(),
+                SPRUCE_BARREL_TIER_1.toItem(),
+                BIRCH_BARREL_TIER_1.toItem(),
+                ACACIA_BARREL_TIER_1.toItem(),
+                JUNGLE_BARREL_TIER_1.toItem(),
+                DARK_OAK_BARREL_TIER_1.toItem(),
+
+                OAK_BARREL_TIER_2.toItem(),
+                SPRUCE_BARREL_TIER_2.toItem(),
+                BIRCH_BARREL_TIER_2.toItem(),
+                ACACIA_BARREL_TIER_2.toItem(),
+                JUNGLE_BARREL_TIER_2.toItem(),
+                DARK_OAK_BARREL_TIER_2.toItem(),
+
+                OAK_BARREL_TIER_3.toItem(),
+                SPRUCE_BARREL_TIER_3.toItem(),
+                BIRCH_BARREL_TIER_3.toItem(),
+                ACACIA_BARREL_TIER_3.toItem(),
+                JUNGLE_BARREL_TIER_3.toItem(),
+                DARK_OAK_BARREL_TIER_3.toItem(),
 
                 OAK_STORAGE_BARREL.toItem(),
                 SPRUCE_STORAGE_BARREL.toItem(),

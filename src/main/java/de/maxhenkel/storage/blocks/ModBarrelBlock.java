@@ -1,5 +1,6 @@
 package de.maxhenkel.storage.blocks;
 
+import de.maxhenkel.storage.ChestTier;
 import de.maxhenkel.storage.Main;
 import de.maxhenkel.storage.blocks.tileentity.ModBarrelTileEntity;
 import net.minecraft.block.*;
@@ -27,11 +28,16 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
+
     public static final DirectionProperty PROPERTY_FACING = BlockStateProperties.FACING;
     public static final BooleanProperty PROPERTY_OPEN = BlockStateProperties.OPEN;
 
-    protected ModBarrelBlock(String name) {
+    private ChestTier tier;
+
+    protected ModBarrelBlock(String name, ChestTier tier) {
         super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
+        this.tier = tier;
+
         setRegistryName(new ResourceLocation(Main.MODID, name));
         setDefaultState(stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH).with(PROPERTY_OPEN, false));
     }
@@ -50,15 +56,14 @@ public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand
-            handIn, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (worldIn.isRemote) {
             return ActionResultType.SUCCESS;
         } else {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof ModBarrelTileEntity) {
                 player.openContainer((ModBarrelTileEntity) tileentity);
-                player.addStat(Stats.OPEN_BARREL);
+                player.addStat(Stats.OPEN_BARREL); //TODO
             }
 
             return ActionResultType.SUCCESS;
@@ -127,6 +132,6 @@ public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return new ModBarrelTileEntity();
+        return new ModBarrelTileEntity(tier);
     }
 }

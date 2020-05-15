@@ -54,16 +54,10 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
     }
 
     public WoodType getWoodType() {
-        if (woodType == null) {
-            woodType = ((ModChestBlock) getBlockState().getBlock()).getWoodType();
-        }
         return woodType;
     }
 
     public ChestTier getTier() {
-        if (tier == null) {
-            tier = ((ModChestBlock) getBlockState().getBlock()).getTier();
-        }
         return tier;
     }
 
