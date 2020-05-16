@@ -2,6 +2,7 @@ package de.maxhenkel.storage.blocks.tileentity;
 
 import de.maxhenkel.storage.Config;
 import de.maxhenkel.storage.Tools;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -18,14 +19,29 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class StorageBarrelTileEntity extends TileEntity implements IItemHandler, INameable {
 
     private ItemStack barrelContent = ItemStack.EMPTY;
     private ITextComponent customName;
 
+    private Map<UUID, Long> clicks;
+
     public StorageBarrelTileEntity() {
         super(ModTileEntities.STORAGE_BARREL);
+        clicks = new HashMap<>();
+    }
+
+    public boolean onInsert(PlayerEntity player) {
+        boolean flag = false;
+        if (world.getGameTime() - clicks.getOrDefault(player.getUniqueID(), 0L) <= 4) {
+            flag = true;
+        }
+        clicks.put(player.getUniqueID(), world.getGameTime());
+        return flag;
     }
 
     @Override

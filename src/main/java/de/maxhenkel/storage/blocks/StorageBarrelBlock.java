@@ -80,6 +80,23 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
 
         StorageBarrelTileEntity barrel = (StorageBarrelTileEntity) tileentity;
 
+        if (barrel.onInsert(player)) {
+            boolean inserted = false;
+            for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+                ItemStack stack = player.inventory.getStackInSlot(i);
+                ItemStack rest = barrel.insertItem(0, stack, false);
+                if (!ItemStack.areItemStacksEqual(rest, stack)) {
+                    player.inventory.setInventorySlotContents(i, rest);
+                    inserted = true;
+                }
+            }
+
+            if (inserted) {
+                playInsertSound(worldIn, player);
+            }
+            return ActionResultType.SUCCESS;
+        }
+
         ItemStack held = player.getHeldItem(handIn);
 
         ItemStack remaining = barrel.insertItem(0, held, false);
