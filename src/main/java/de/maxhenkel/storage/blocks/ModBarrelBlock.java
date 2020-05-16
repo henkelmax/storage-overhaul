@@ -63,7 +63,7 @@ public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof ModBarrelTileEntity) {
                 player.openContainer((ModBarrelTileEntity) tileentity);
-                player.addStat(Stats.OPEN_BARREL); //TODO
+                player.addStat(Stats.OPEN_BARREL);
             }
 
             return ActionResultType.SUCCESS;

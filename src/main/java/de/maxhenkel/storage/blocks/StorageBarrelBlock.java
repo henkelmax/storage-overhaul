@@ -19,6 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -218,7 +219,15 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
 
     @Override
     public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-        return Container.calcRedstone(worldIn.getTileEntity(pos)); //TODO
+        return calcRedstone((StorageBarrelTileEntity) worldIn.getTileEntity(pos));
+    }
+
+    public int calcRedstone(StorageBarrelTileEntity barrel) {
+        if (barrel.isEmpty()) {
+            return 0;
+        }
+        float percentage = (float) barrel.getBarrelContent().getCount() / (float) barrel.getSlotLimit(0);
+        return MathHelper.floor(percentage * 14F) + 1;
     }
 
     @Override

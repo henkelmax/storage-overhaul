@@ -284,7 +284,7 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
     }
 
     protected Stat<ResourceLocation> getOpenStat() {
-        return Stats.CUSTOM.get(Stats.OPEN_CHEST); //TODO
+        return Stats.CUSTOM.get(Stats.OPEN_CHEST);
     }
 
     @Nullable
