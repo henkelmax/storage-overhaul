@@ -1,1 +1,1 @@
-- Added german language
+- General bugfixes

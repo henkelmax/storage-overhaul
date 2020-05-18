@@ -3,7 +3,7 @@ package de.maxhenkel.storage;
 import net.minecraft.block.Block;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.IDataSerializer;
-import net.minecraft.util.registry.Registry;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModDataSerializers {
     public static final IDataSerializer<Block> BLOCK = new IDataSerializer<Block>() {
@@ -12,7 +12,7 @@ public class ModDataSerializers {
         }
 
         public Block read(PacketBuffer buf) {
-            return Registry.BLOCK.getOrDefault(buf.readResourceLocation());
+            return ForgeRegistries.BLOCKS.getValue(buf.readResourceLocation());
         }
 
         public Block copyValue(Block value) {
