@@ -20,11 +20,13 @@ public class ChestItemRenderer extends ItemStackTileEntityRenderer {
 
     public ChestItemRenderer(WoodType woodType, ChestTier tier) {
         tileEntity = new ModChestTileEntity(woodType, tier);
-        renderer = new ModChestRenderer(TileEntityRendererDispatcher.instance);
     }
 
     @Override
     public void render(ItemStack itemStackIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+        if (renderer == null) {
+            renderer = new ModChestRenderer(TileEntityRendererDispatcher.instance);
+        }
         renderer.render(tileEntity, 1F, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
     }
 }

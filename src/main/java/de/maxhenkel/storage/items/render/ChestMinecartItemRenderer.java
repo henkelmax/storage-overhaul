@@ -22,11 +22,13 @@ public class ChestMinecartItemRenderer extends ItemStackTileEntityRenderer {
     public ChestMinecartItemRenderer(Supplier<Block> block) {
         this.block = block;
         minecraft = Minecraft.getInstance();
-        renderer = new MinecartRenderer(minecraft.getRenderManager());
     }
 
     @Override
     public void render(ItemStack itemStackIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+        if (renderer == null) {
+            renderer = new MinecartRenderer(minecraft.getRenderManager());
+        }
         if (entity == null) {
             entity = ModEntities.CHEST_MINECART.create(minecraft.world);
             entity.setBlock(block.get());

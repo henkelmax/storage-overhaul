@@ -1,1 +1,1 @@
-- General bugfixes
+- Fixed a crash on startup

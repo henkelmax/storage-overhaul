@@ -17,11 +17,13 @@ public class AdvancedShulkerBoxItemRenderer extends ItemStackTileEntityRenderer 
 
     public AdvancedShulkerBoxItemRenderer(DyeColor color) {
         tileEntity = new AdvancedShulkerBoxTileEnitity(color);
-        renderer = new AdvancedShulkerBoxRenderer(TileEntityRendererDispatcher.instance);
     }
 
     @Override
     public void render(ItemStack itemStackIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+        if (renderer == null) {
+            renderer = new AdvancedShulkerBoxRenderer(TileEntityRendererDispatcher.instance);
+        }
         renderer.render(tileEntity, 1F, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
     }
 }
