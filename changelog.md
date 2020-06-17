@@ -1,1 +1,1 @@
-- Fixed a crash on startup
+- Fixed a crash on servers when opening containers

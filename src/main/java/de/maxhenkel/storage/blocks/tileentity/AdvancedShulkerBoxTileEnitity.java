@@ -21,6 +21,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
@@ -149,7 +150,7 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
 
     @Override
     protected ITextComponent getDefaultName() {
-        return getBlockState().getBlock().getNameTextComponent();
+        return new TranslationTextComponent(getBlockState().getBlock().getTranslationKey());
     }
 
     @Override

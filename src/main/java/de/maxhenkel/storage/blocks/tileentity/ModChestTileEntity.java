@@ -21,6 +21,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
@@ -68,7 +69,7 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
 
     @Override
     protected ITextComponent getDefaultName() {
-        return getBlockState().getBlock().getNameTextComponent();
+        return new TranslationTextComponent(getBlockState().getBlock().getTranslationKey());
     }
 
     @Override

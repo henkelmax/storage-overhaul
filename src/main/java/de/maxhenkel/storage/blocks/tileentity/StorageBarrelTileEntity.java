@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.INameable;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -177,7 +178,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     @Override
     public ITextComponent getName() {
-        return customName != null ? customName : getBlockState().getBlock().getNameTextComponent();
+        return customName != null ? customName : new TranslationTextComponent(getBlockState().getBlock().getTranslationKey());
     }
 
     @Override

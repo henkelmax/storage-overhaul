@@ -247,7 +247,7 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
         player.openContainer(new INamedContainerProvider() {
             @Override
             public ITextComponent getDisplayName() {
-                return getBlock().getBlock().getNameTextComponent();
+                return new TranslationTextComponent(getBlock().getBlock().getTranslationKey());
             }
 
             @Nullable

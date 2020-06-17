@@ -21,6 +21,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
 
@@ -156,7 +157,7 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
 
     @Override
     protected ITextComponent getDefaultName() {
-        return getBlockState().getBlock().getNameTextComponent();
+        return new TranslationTextComponent(getBlockState().getBlock().getTranslationKey());
     }
 
     @Override
