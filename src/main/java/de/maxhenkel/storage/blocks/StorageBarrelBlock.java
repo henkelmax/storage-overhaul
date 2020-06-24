@@ -8,7 +8,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.*;
 import net.minecraft.state.DirectionProperty;
@@ -186,11 +185,10 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof IInventory) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileentity);
+            if (tileentity instanceof StorageBarrelTileEntity) {
+                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((StorageBarrelTileEntity) tileentity).getBarrelContent());
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
-
             super.onReplaced(state, worldIn, pos, newState, isMoving);
         }
     }

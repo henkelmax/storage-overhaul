@@ -1,1 +1,1 @@
-- Fixed a crash on servers when opening containers
+- Fixed storage barrels not dropping its contents
