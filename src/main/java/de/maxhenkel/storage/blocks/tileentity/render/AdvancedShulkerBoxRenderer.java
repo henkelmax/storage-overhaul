@@ -7,8 +7,8 @@ import de.maxhenkel.storage.blocks.tileentity.AdvancedShulkerBoxTileEnitity;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.Material;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.Direction;
@@ -40,7 +40,7 @@ public class AdvancedShulkerBoxRenderer extends TileEntityRenderer<AdvancedShulk
             }
         }
 
-        Material material = ModAtlases.getShulkerBoxMaterial(box.getColor());
+        RenderMaterial material = ModAtlases.getShulkerBoxMaterial(box.getColor());
 
         matrixStackIn.push();
         matrixStackIn.translate(0.5D, 0.5D, 0.5D);

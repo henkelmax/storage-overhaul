@@ -3,6 +3,7 @@ package de.maxhenkel.storage.blocks.tileentity;
 import de.maxhenkel.storage.Tools;
 import de.maxhenkel.storage.blocks.AdvancedShulkerBoxBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -109,7 +110,7 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
     }
 
     private void updateNeighbors() {
-        getBlockState().updateNeighbors(getWorld(), getPos(), 3);
+        getBlockState().func_235734_a_(getWorld(), getPos(), 3);
     }
 
     @Override
@@ -154,8 +155,8 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void func_230337_a_(BlockState blockState, CompoundNBT compound) {
+        super.func_230337_a_(blockState, compound);
         loadFromNbt(compound);
     }
 

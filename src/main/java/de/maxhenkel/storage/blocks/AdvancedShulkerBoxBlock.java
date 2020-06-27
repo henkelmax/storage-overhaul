@@ -14,6 +14,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.*;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameters;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -22,15 +24,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -62,11 +59,6 @@ public class AdvancedShulkerBoxBlock extends ContainerBlock implements IItemBloc
     @Override
     public Item toItem() {
         return new AdvancedShulkerBoxItem(this, new Item.Properties().maxStackSize(1).group(ItemGroup.DECORATIONS).setISTER(() -> renderer)).setRegistryName(getRegistryName());
-    }
-
-    @Override
-    public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return true;
     }
 
     @Override
@@ -186,15 +178,15 @@ public class AdvancedShulkerBoxBlock extends ContainerBlock implements IItemBloc
                         itemCount++;
                         if (shownCount <= 4) {
                             shownCount++;
-                            ITextComponent itextcomponent = itemstack.getDisplayName().deepCopy();
-                            itextcomponent.appendText(" x").appendText(String.valueOf(itemstack.getCount()));
+                            IFormattableTextComponent itextcomponent = itemstack.getDisplayName().func_230531_f_(); //deepcopy
+                            itextcomponent.func_240702_b_(" x").func_240702_b_(String.valueOf(itemstack.getCount()));
                             tooltip.add(itextcomponent);
                         }
                     }
                 }
 
                 if (itemCount - shownCount > 0) {
-                    tooltip.add((new TranslationTextComponent("container.shulkerBox.more", itemCount - shownCount)).applyTextStyle(TextFormatting.ITALIC));
+                    tooltip.add((new TranslationTextComponent("container.shulkerBox.more", itemCount - shownCount)).func_240699_a_(TextFormatting.ITALIC));
                 }
             }
         }

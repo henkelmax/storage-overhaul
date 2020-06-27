@@ -6,6 +6,7 @@ import de.maxhenkel.storage.blocks.tileentity.ModChestTileEntity;
 import de.maxhenkel.storage.blocks.tileentity.render.ModChestRenderer;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
@@ -23,7 +24,7 @@ public class ChestItemRenderer extends ItemStackTileEntityRenderer {
     }
 
     @Override
-    public void render(ItemStack itemStackIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void func_239207_a_(ItemStack itemStackIn, ItemCameraTransforms.TransformType transformType, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (renderer == null) {
             renderer = new ModChestRenderer(TileEntityRendererDispatcher.instance);
         }

@@ -26,7 +26,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -211,9 +211,9 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
 
     @Nullable
     @Override
-    public Entity changeDimension(DimensionType destination, net.minecraftforge.common.util.ITeleporter teleporter) {
-        dropContentsWhenDead = false;
-        return super.changeDimension(destination, teleporter);
+    public Entity func_241206_a_(ServerWorld world) {
+        this.dropContentsWhenDead = false;
+        return super.func_241206_a_(world);
     }
 
     @Override
@@ -242,8 +242,8 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
     }
 
     @Override
-    public boolean processInitialInteract(PlayerEntity player, Hand hand) {
-        if (super.processInitialInteract(player, hand)) return true;
+    public ActionResultType processInitialInteract(PlayerEntity player, Hand hand) {
+        if (super.processInitialInteract(player, hand).isSuccessOrConsume()) return ActionResultType.SUCCESS;
         player.openContainer(new INamedContainerProvider() {
             @Override
             public ITextComponent getDisplayName() {
@@ -256,7 +256,7 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
                 return getChestTier().getContainer(id, playerInventory, ModChestMinecartEntity.this);
             }
         });
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
     @Override

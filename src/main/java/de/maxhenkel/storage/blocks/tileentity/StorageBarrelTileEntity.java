@@ -2,6 +2,7 @@ package de.maxhenkel.storage.blocks.tileentity;
 
 import de.maxhenkel.storage.Config;
 import de.maxhenkel.storage.Tools;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -50,7 +51,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
         super.markDirty();
         if (world instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) world;
-            serverWorld.getPlayers(player -> getDistanceSq(player.getPosX(), player.getPosY(), player.getPosZ()) <= 128D * 128D).forEach(this::syncContents);
+            serverWorld.getPlayers(player -> player.getDistanceSq(getPos().getX(), getPos().getY(), getPos().getZ()) <= 128D * 128D).forEach(this::syncContents);
         }
     }
 
@@ -72,14 +73,13 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
-
+    public void func_230337_a_(BlockState blockState, CompoundNBT compound) {
+        super.func_230337_a_(blockState, compound);
         barrelContent = Tools.readOverstackedItem(compound.getCompound("Item"));
 
 
         if (compound.contains("CustomName")) {
-            customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
+            customName = ITextComponent.Serializer.func_240644_b_(compound.getString("CustomName"));
         }
     }
 
@@ -193,7 +193,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        read(pkt.getNbtCompound());
+        func_230337_a_(getBlockState(), pkt.getNbtCompound());
     }
 
     @Override

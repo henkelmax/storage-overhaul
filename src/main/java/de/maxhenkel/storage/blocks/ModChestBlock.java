@@ -12,8 +12,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.DoubleSidedInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
@@ -211,7 +211,7 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         ChestType chesttype = ChestType.SINGLE;
         Direction direction = context.getPlacementHorizontalFacing().getOpposite();
-        IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+        FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
         boolean flag = context.func_225518_g_();
         Direction direction1 = context.getFace();
         if (direction1.getAxis().isHorizontal() && flag) {
@@ -234,7 +234,7 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
     }
 
     @Override
-    public IFluidState getFluidState(BlockState state) {
+    public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 
@@ -333,7 +333,7 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
         List<CatEntity> list = world.getEntitiesWithinAABB(CatEntity.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1));
         if (!list.isEmpty()) {
             for (CatEntity catentity : list) {
-                if (catentity.isSitting()) {
+                if (catentity.func_233684_eK_()) {
                     return true;
                 }
             }

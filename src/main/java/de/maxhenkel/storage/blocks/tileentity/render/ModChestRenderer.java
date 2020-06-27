@@ -11,15 +11,15 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Vector3f;
-import net.minecraft.client.renderer.model.Material;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.tileentity.ChestTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.DualBrightnessCallback;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.state.properties.ChestType;
 import net.minecraft.tileentity.TileEntityMerger;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -106,7 +106,7 @@ public class ModChestRenderer extends ChestTileEntityRenderer<ModChestTileEntity
     @Override
     public void render(ModChestTileEntity chest, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         BlockState blockstate = chest.hasWorld() ? chest.getBlockState() : ModBlocks.OAK_CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
-        ChestType chesttype = blockstate.has(ChestBlock.TYPE) ? blockstate.get(ChestBlock.TYPE) : ChestType.SINGLE;
+        ChestType chesttype = blockstate.func_235901_b_(ChestBlock.TYPE) ? blockstate.get(ChestBlock.TYPE) : ChestType.SINGLE;
         Block block = blockstate.getBlock();
         if (!(block instanceof ModChestBlock)) {
             return;
@@ -128,7 +128,7 @@ public class ModChestRenderer extends ChestTileEntityRenderer<ModChestTileEntity
         lidAngle = 1F - lidAngle;
         lidAngle = 1F - lidAngle * lidAngle * lidAngle;
         int i = callback.apply(new DualBrightnessCallback<>()).applyAsInt(combinedLightIn);
-        Material material = this.getMaterial(chest, chesttype);
+        RenderMaterial material = getMaterial(chest, chesttype);
         IVertexBuilder ivertexbuilder = material.getBuffer(bufferIn, RenderType::getEntityCutout);
         if (chesttype == ChestType.LEFT) {
             renderModels(matrixStackIn, ivertexbuilder, leftLid, getDoubleLatchLeft(chest.getTier()), leftBottom, lidAngle, i, combinedOverlayIn);
@@ -192,7 +192,7 @@ public class ModChestRenderer extends ChestTileEntityRenderer<ModChestTileEntity
     }
 
     @Override
-    protected Material getMaterial(ModChestTileEntity tileEntity, ChestType chestType) {
+    protected RenderMaterial getMaterial(ModChestTileEntity tileEntity, ChestType chestType) {
         return ModAtlases.getChestMaterial(tileEntity.getWoodType(), chestType);
     }
 }

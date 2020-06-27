@@ -39,14 +39,14 @@ public class ModMinecartItem extends Item {
             BlockState blockstate = world.getBlockState(blockpos);
             RailShape railshape = blockstate.getBlock() instanceof AbstractRailBlock ? ((AbstractRailBlock) blockstate.getBlock()).getRailDirection(blockstate, world, blockpos, null) : RailShape.NORTH_SOUTH;
             double varY;
-            if (blockstate.isIn(BlockTags.RAILS)) {
+            if (blockstate.getBlock().isIn(BlockTags.RAILS)) {
                 if (railshape.isAscending()) {
                     varY = 0.6D;
                 } else {
                     varY = 0.1D;
                 }
             } else {
-                if (!blockstate.isAir(world, blockpos) || !world.getBlockState(blockpos.down()).isIn(BlockTags.RAILS)) {
+                if (!blockstate.isAir(world, blockpos) || !world.getBlockState(blockpos.down()).getBlock().isIn(BlockTags.RAILS)) {
                     return this.behaviourDefaultDispenseItem.dispense(source, stack);
                 }
 
@@ -105,7 +105,7 @@ public class ModMinecartItem extends Item {
         World world = context.getWorld();
         BlockPos blockpos = context.getPos();
         BlockState blockstate = world.getBlockState(blockpos);
-        if (!blockstate.isIn(BlockTags.RAILS)) {
+        if (!blockstate.getBlock().isIn(BlockTags.RAILS)) {
             return ActionResultType.FAIL;
         } else {
             ItemStack itemstack = context.getItem();

@@ -78,9 +78,8 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
-
+    public void func_230337_a_(BlockState blockState, CompoundNBT compound) {
+        super.func_230337_a_(blockState, compound);
         tier = ChestTier.byTier(compound.getInt("Tier"));
 
         chestContents = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
@@ -109,7 +108,7 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        read(pkt.getNbtCompound());
+        func_230337_a_(getBlockState(), pkt.getNbtCompound());
     }
 
     @Override

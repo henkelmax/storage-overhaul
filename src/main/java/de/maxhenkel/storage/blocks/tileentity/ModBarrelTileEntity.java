@@ -19,7 +19,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -65,8 +65,8 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void func_230337_a_(BlockState blockState, CompoundNBT compound) {
+        super.func_230337_a_(blockState, compound);
 
         tier = ChestTier.byTier(compound.getInt("Tier"));
 
@@ -148,7 +148,7 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
     }
 
     private void playSound(BlockState blockState, SoundEvent soundEvent) {
-        Vec3i vec3i = blockState.get(BarrelBlock.PROPERTY_FACING).getDirectionVec();
+        Vector3i vec3i = blockState.get(BarrelBlock.PROPERTY_FACING).getDirectionVec();
         double x = (double) this.pos.getX() + 0.5D + (double) vec3i.getX() / 2D;
         double y = (double) this.pos.getY() + 0.5D + (double) vec3i.getY() / 2D;
         double z = (double) this.pos.getZ() + 0.5D + (double) vec3i.getZ() / 2D;
@@ -167,7 +167,7 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        read(pkt.getNbtCompound());
+        func_230337_a_(getBlockState(), pkt.getNbtCompound());
     }
 
     @Override

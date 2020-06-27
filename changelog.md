@@ -1,1 +1,1 @@
-- Fixed storage barrels not dropping its contents
+- Updated to 1.16.1

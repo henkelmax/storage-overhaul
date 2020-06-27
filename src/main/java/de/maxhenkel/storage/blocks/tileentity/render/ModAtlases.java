@@ -3,7 +3,7 @@ package de.maxhenkel.storage.blocks.tileentity.render;
 import de.maxhenkel.storage.Main;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.renderer.Atlases;
-import net.minecraft.client.renderer.model.Material;
+import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.item.DyeColor;
 import net.minecraft.state.properties.ChestType;
 import net.minecraft.util.ResourceLocation;
@@ -57,46 +57,46 @@ public class ModAtlases {
     private static final ResourceLocation RED_SHULKER_BOX_LOCATION = new ResourceLocation(Main.MODID, "entity/shulkerbox/shulker_red");
     private static final ResourceLocation BLACK_SHULKER_BOX_LOCATION = new ResourceLocation(Main.MODID, "entity/shulkerbox/shulker_black");
 
-    private static final Material CHEST_OAK_MATERIAL = getChestMaterial(CHEST_OAK_LOCATION);
-    private static final Material CHEST_OAK_LEFT_MATERIAL = getChestMaterial(CHEST_OAK_LEFT_LOCATION);
-    private static final Material CHEST_OAK_RIGHT_MATERIAL = getChestMaterial(CHEST_OAK_RIGHT_LOCATION);
+    private static final RenderMaterial CHEST_OAK_MATERIAL = getChestMaterial(CHEST_OAK_LOCATION);
+    private static final RenderMaterial CHEST_OAK_LEFT_MATERIAL = getChestMaterial(CHEST_OAK_LEFT_LOCATION);
+    private static final RenderMaterial CHEST_OAK_RIGHT_MATERIAL = getChestMaterial(CHEST_OAK_RIGHT_LOCATION);
 
-    private static final Material CHEST_SPRUCE_MATERIAL = getChestMaterial(CHEST_SPRUCE_LOCATION);
-    private static final Material CHEST_SPRUCE_LEFT_MATERIAL = getChestMaterial(CHEST_SPRUCE_LEFT_LOCATION);
-    private static final Material CHEST_SPRUCE_RIGHT_MATERIAL = getChestMaterial(CHEST_SPRUCE_RIGHT_LOCATION);
+    private static final RenderMaterial CHEST_SPRUCE_MATERIAL = getChestMaterial(CHEST_SPRUCE_LOCATION);
+    private static final RenderMaterial CHEST_SPRUCE_LEFT_MATERIAL = getChestMaterial(CHEST_SPRUCE_LEFT_LOCATION);
+    private static final RenderMaterial CHEST_SPRUCE_RIGHT_MATERIAL = getChestMaterial(CHEST_SPRUCE_RIGHT_LOCATION);
 
-    private static final Material CHEST_BIRCH_MATERIAL = getChestMaterial(CHEST_BIRCH_LOCATION);
-    private static final Material CHEST_BIRCH_LEFT_MATERIAL = getChestMaterial(CHEST_BIRCH_LEFT_LOCATION);
-    private static final Material CHEST_BIRCH_RIGHT_MATERIAL = getChestMaterial(CHEST_BIRCH_RIGHT_LOCATION);
+    private static final RenderMaterial CHEST_BIRCH_MATERIAL = getChestMaterial(CHEST_BIRCH_LOCATION);
+    private static final RenderMaterial CHEST_BIRCH_LEFT_MATERIAL = getChestMaterial(CHEST_BIRCH_LEFT_LOCATION);
+    private static final RenderMaterial CHEST_BIRCH_RIGHT_MATERIAL = getChestMaterial(CHEST_BIRCH_RIGHT_LOCATION);
 
-    private static final Material CHEST_ACACIA_MATERIAL = getChestMaterial(CHEST_ACACIA_LOCATION);
-    private static final Material CHEST_ACACIA_LEFT_MATERIAL = getChestMaterial(CHEST_ACACIA_LEFT_LOCATION);
-    private static final Material CHEST_ACACIA_RIGHT_MATERIAL = getChestMaterial(CHEST_ACACIA_RIGHT_LOCATION);
+    private static final RenderMaterial CHEST_ACACIA_MATERIAL = getChestMaterial(CHEST_ACACIA_LOCATION);
+    private static final RenderMaterial CHEST_ACACIA_LEFT_MATERIAL = getChestMaterial(CHEST_ACACIA_LEFT_LOCATION);
+    private static final RenderMaterial CHEST_ACACIA_RIGHT_MATERIAL = getChestMaterial(CHEST_ACACIA_RIGHT_LOCATION);
 
-    private static final Material CHEST_JUNGLE_MATERIAL = getChestMaterial(CHEST_JUNGLE_LOCATION);
-    private static final Material CHEST_JUNGLE_LEFT_MATERIAL = getChestMaterial(CHEST_JUNGLE_LEFT_LOCATION);
-    private static final Material CHEST_JUNGLE_RIGHT_MATERIAL = getChestMaterial(CHEST_JUNGLE_RIGHT_LOCATION);
+    private static final RenderMaterial CHEST_JUNGLE_MATERIAL = getChestMaterial(CHEST_JUNGLE_LOCATION);
+    private static final RenderMaterial CHEST_JUNGLE_LEFT_MATERIAL = getChestMaterial(CHEST_JUNGLE_LEFT_LOCATION);
+    private static final RenderMaterial CHEST_JUNGLE_RIGHT_MATERIAL = getChestMaterial(CHEST_JUNGLE_RIGHT_LOCATION);
 
-    private static final Material CHEST_DARK_OAK_MATERIAL = getChestMaterial(CHEST_DARK_OAK_LOCATION);
-    private static final Material CHEST_DARK_OAK_LEFT_MATERIAL = getChestMaterial(CHEST_DARK_OAK_LEFT_LOCATION);
-    private static final Material CHEST_DARK_OAK_RIGHT_MATERIAL = getChestMaterial(CHEST_DARK_OAK_RIGHT_LOCATION);
+    private static final RenderMaterial CHEST_DARK_OAK_MATERIAL = getChestMaterial(CHEST_DARK_OAK_LOCATION);
+    private static final RenderMaterial CHEST_DARK_OAK_LEFT_MATERIAL = getChestMaterial(CHEST_DARK_OAK_LEFT_LOCATION);
+    private static final RenderMaterial CHEST_DARK_OAK_RIGHT_MATERIAL = getChestMaterial(CHEST_DARK_OAK_RIGHT_LOCATION);
 
-    public static final Material WHITE_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, WHITE_SHULKER_BOX_LOCATION);
-    public static final Material ORANGE_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, ORANGE_SHULKER_BOX_LOCATION);
-    public static final Material MAGENTA_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, MAGENTA_SHULKER_BOX_LOCATION);
-    public static final Material LIGHT_BLUE_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, LIGHT_BLUE_SHULKER_BOX_LOCATION);
-    public static final Material YELLOW_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, YELLOW_SHULKER_BOX_LOCATION);
-    public static final Material LIME_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, LIME_SHULKER_BOX_LOCATION);
-    public static final Material PINK_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, PINK_SHULKER_BOX_LOCATION);
-    public static final Material GRAY_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, GRAY_SHULKER_BOX_LOCATION);
-    public static final Material LIGHT_GRAY_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, LIGHT_GRAY_SHULKER_BOX_LOCATION);
-    public static final Material CYAN_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, CYAN_SHULKER_BOX_LOCATION);
-    public static final Material PURPLE_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, PURPLE_SHULKER_BOX_LOCATION);
-    public static final Material BLUE_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, BLUE_SHULKER_BOX_LOCATION);
-    public static final Material BROWN_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, BROWN_SHULKER_BOX_LOCATION);
-    public static final Material GREEN_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, GREEN_SHULKER_BOX_LOCATION);
-    public static final Material RED_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, RED_SHULKER_BOX_LOCATION);
-    public static final Material BLACK_SHULKER_BOX_MATERIAL = new Material(Atlases.SHULKER_BOX_ATLAS, BLACK_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial WHITE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, WHITE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial ORANGE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, ORANGE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial MAGENTA_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, MAGENTA_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial LIGHT_BLUE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, LIGHT_BLUE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial YELLOW_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, YELLOW_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial LIME_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, LIME_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial PINK_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, PINK_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial GRAY_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, GRAY_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial LIGHT_GRAY_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, LIGHT_GRAY_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial CYAN_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, CYAN_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial PURPLE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, PURPLE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial BLUE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, BLUE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial BROWN_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, BROWN_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial GREEN_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, GREEN_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial RED_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, RED_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial BLACK_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, BLACK_SHULKER_BOX_LOCATION);
 
     public static final ChestMaterial CHEST_OAK = new ChestMaterial(CHEST_OAK_MATERIAL, CHEST_OAK_LEFT_MATERIAL, CHEST_OAK_RIGHT_MATERIAL);
     public static final ChestMaterial CHEST_SPRUCE = new ChestMaterial(CHEST_SPRUCE_MATERIAL, CHEST_SPRUCE_LEFT_MATERIAL, CHEST_SPRUCE_RIGHT_MATERIAL);
@@ -105,11 +105,11 @@ public class ModAtlases {
     public static final ChestMaterial CHEST_JUNGLE = new ChestMaterial(CHEST_JUNGLE_MATERIAL, CHEST_JUNGLE_LEFT_MATERIAL, CHEST_JUNGLE_RIGHT_MATERIAL);
     public static final ChestMaterial CHEST_DARK_OAK = new ChestMaterial(CHEST_DARK_OAK_MATERIAL, CHEST_DARK_OAK_LEFT_MATERIAL, CHEST_DARK_OAK_RIGHT_MATERIAL);
 
-    private static Material getChestMaterial(ResourceLocation location) {
-        return new Material(Atlases.CHEST_ATLAS, location);
+    private static RenderMaterial getChestMaterial(ResourceLocation location) {
+        return new RenderMaterial(Atlases.CHEST_ATLAS, location);
     }
 
-    public static Material getChestMaterial(WoodType type, ChestType chestType) {
+    public static RenderMaterial getChestMaterial(WoodType type, ChestType chestType) {
         if (WoodType.SPRUCE.equals(type)) {
             return getChestTypeMaterial(CHEST_SPRUCE, chestType);
         } else if (WoodType.BIRCH.equals(type)) {
@@ -125,7 +125,7 @@ public class ModAtlases {
         }
     }
 
-    private static Material getChestTypeMaterial(ChestMaterial chestMaterial, ChestType chestType) {
+    private static RenderMaterial getChestTypeMaterial(ChestMaterial chestMaterial, ChestType chestType) {
         switch (chestType) {
             case LEFT:
                 return chestMaterial.left;
@@ -137,7 +137,7 @@ public class ModAtlases {
         }
     }
 
-    public static Material getShulkerBoxMaterial(DyeColor dyeColor) {
+    public static RenderMaterial getShulkerBoxMaterial(DyeColor dyeColor) {
         switch (dyeColor) {
             case WHITE:
             default:
@@ -226,9 +226,9 @@ public class ModAtlases {
     }
 
     public static class ChestMaterial {
-        private Material single, left, right;
+        private RenderMaterial single, left, right;
 
-        public ChestMaterial(Material single, Material left, Material right) {
+        public ChestMaterial(RenderMaterial single, RenderMaterial left, RenderMaterial right) {
             this.single = single;
             this.left = left;
             this.right = right;
