@@ -20,7 +20,6 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DataSerializerEntry;
 import org.apache.logging.log4j.LogManager;
@@ -41,24 +40,11 @@ public class Main {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(EntityType.class, event -> ModEntities.registerEntities((RegistryEvent.Register<EntityType<?>>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(ContainerType.class, event -> Containers.registerContainers((RegistryEvent.Register<ContainerType<?>>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(DataSerializerEntry.class, this::registerSerializers);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_SPEC);
 
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
-            clientStart();
-        });
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void clientStart() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(Main.this::clientSetup);
-    }
-
-    @SubscribeEvent
-    public void commonSetup(FMLCommonSetupEvent event) {
-
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(Main.this::clientSetup));
     }
 
     @SubscribeEvent
