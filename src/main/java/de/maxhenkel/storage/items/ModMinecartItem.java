@@ -25,6 +25,7 @@ import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public class ModMinecartItem extends Item {
+
     private final IDispenseItemBehavior MINECART_DISPENSER_BEHAVIOR = new DefaultDispenseItemBehavior() {
         private final DefaultDispenseItemBehavior behaviourDefaultDispenseItem = new DefaultDispenseItemBehavior();
 
@@ -129,4 +130,5 @@ public class ModMinecartItem extends Item {
             return ActionResultType.SUCCESS;
         }
     }
+
 }

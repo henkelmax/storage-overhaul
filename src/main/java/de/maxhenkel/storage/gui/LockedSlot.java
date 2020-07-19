@@ -14,4 +14,5 @@ public class LockedSlot extends Slot {
     public boolean canTakeStack(PlayerEntity playerIn) {
         return false;
     }
+
 }

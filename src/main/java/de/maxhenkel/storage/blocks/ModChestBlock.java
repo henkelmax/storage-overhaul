@@ -1,5 +1,6 @@
 package de.maxhenkel.storage.blocks;
 
+import de.maxhenkel.corelib.block.IItemBlock;
 import de.maxhenkel.storage.ChestTier;
 import de.maxhenkel.storage.Main;
 import de.maxhenkel.storage.blocks.tileentity.ModChestTileEntity;

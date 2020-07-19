@@ -1,6 +1,6 @@
 package de.maxhenkel.storage.blocks.tileentity;
 
-import de.maxhenkel.storage.Tools;
+import de.maxhenkel.corelib.sound.SoundUtils;
 import de.maxhenkel.storage.blocks.AdvancedShulkerBoxBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -123,7 +123,7 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
             openCount++;
             world.addBlockEvent(pos, getBlockState().getBlock(), 1, openCount);
             if (openCount == 1) {
-                world.playSound(null, pos, getOpenSound(), SoundCategory.BLOCKS, 0.5F, Tools.getVariatedPitch(world));
+                world.playSound(null, pos, getOpenSound(), SoundCategory.BLOCKS, 0.5F, SoundUtils.getVariatedPitch(world));
             }
         }
 
@@ -143,7 +143,7 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
             openCount--;
             world.addBlockEvent(pos, getBlockState().getBlock(), 1, openCount);
             if (openCount <= 0) {
-                world.playSound(null, pos, getCloseSound(), SoundCategory.BLOCKS, 0.5F, Tools.getVariatedPitch(world));
+                world.playSound(null, pos, getCloseSound(), SoundCategory.BLOCKS, 0.5F, SoundUtils.getVariatedPitch(world));
             }
         }
 

@@ -64,7 +64,6 @@ public class ModItems {
                 ACACIA_MINECART_TIER_3.setRegistryName(Main.MODID, "acacia_chest_minecart_tier_3"),
                 JUNGLE_MINECART_TIER_3.setRegistryName(Main.MODID, "jungle_chest_minecart_tier_3"),
                 DARK_OAK_MINECART_TIER_3.setRegistryName(Main.MODID, "dark_oak_chest_minecart_tier_3")
-
         );
     }
 

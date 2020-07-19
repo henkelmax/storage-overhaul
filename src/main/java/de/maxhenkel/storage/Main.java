@@ -1,5 +1,6 @@
 package de.maxhenkel.storage;
 
+import de.maxhenkel.corelib.CommonRegistry;
 import de.maxhenkel.storage.blocks.ModBlocks;
 import de.maxhenkel.storage.blocks.tileentity.ModTileEntities;
 import de.maxhenkel.storage.entity.ModEntities;
@@ -16,7 +17,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -32,6 +32,8 @@ public class Main {
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);
 
+    public static ServerConfig SERVER_CONFIG;
+
     public Main() {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, event -> ModBlocks.registerItems((RegistryEvent.Register<Item>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, event -> ModItems.registerItems((RegistryEvent.Register<Item>) event));
@@ -41,8 +43,7 @@ public class Main {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(ContainerType.class, event -> Containers.registerContainers((RegistryEvent.Register<ContainerType<?>>) event));
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(DataSerializerEntry.class, this::registerSerializers);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_SPEC);
+        SERVER_CONFIG = CommonRegistry.registerConfig(ModConfig.Type.SERVER, ServerConfig.class);
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(Main.this::clientSetup));
     }

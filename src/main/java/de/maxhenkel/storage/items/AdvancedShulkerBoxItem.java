@@ -35,4 +35,5 @@ public class AdvancedShulkerBoxItem extends BlockItem {
         playerIn.openContainer(new ShulkerBoxItemInventory(playerIn, stack));
         return ActionResult.resultSuccess(stack);
     }
+
 }

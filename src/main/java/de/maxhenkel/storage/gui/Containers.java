@@ -1,7 +1,7 @@
 package de.maxhenkel.storage.gui;
 
+import de.maxhenkel.corelib.ClientRegistry;
 import de.maxhenkel.storage.Main;
-import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,17 +23,15 @@ public class Containers {
 
     @OnlyIn(Dist.CLIENT)
     public static void clientSetup() {
-        ScreenManager.IScreenFactory factory = (ScreenManager.IScreenFactory<AdvancedShulkerboxContainer, AdvancedShulkerboxScreen>) (container, playerInventory, name) -> new AdvancedShulkerboxScreen(playerInventory, container, name);
-        ScreenManager.registerFactory(SHULKERBOX_CONTAINER, factory);
+        ClientRegistry.<AdvancedShulkerboxContainer, AdvancedShulkerboxScreen>registerScreen(SHULKERBOX_CONTAINER, AdvancedShulkerboxScreen::new);
 
-        ScreenManager.IScreenFactory factory1 = (ScreenManager.IScreenFactory<HugeChestContainer, HugeChestScreen>) (container, playerInventory, name) -> new HugeChestScreen(playerInventory, container, name);
-        ScreenManager.registerFactory(GENERIC_18x3, factory1);
-        ScreenManager.registerFactory(GENERIC_18x4, factory1);
-        ScreenManager.registerFactory(GENERIC_18x5, factory1);
-        ScreenManager.registerFactory(GENERIC_18x6, factory1);
-        ScreenManager.registerFactory(GENERIC_18x7, factory1);
-        ScreenManager.registerFactory(GENERIC_18x8, factory1);
-        ScreenManager.registerFactory(GENERIC_18x9, factory1);
+        ClientRegistry.<HugeChestContainer, HugeChestScreen>registerScreen(GENERIC_18x3, HugeChestScreen::new);
+        ClientRegistry.<HugeChestContainer, HugeChestScreen>registerScreen(GENERIC_18x4, HugeChestScreen::new);
+        ClientRegistry.<HugeChestContainer, HugeChestScreen>registerScreen(GENERIC_18x5, HugeChestScreen::new);
+        ClientRegistry.<HugeChestContainer, HugeChestScreen>registerScreen(GENERIC_18x6, HugeChestScreen::new);
+        ClientRegistry.<HugeChestContainer, HugeChestScreen>registerScreen(GENERIC_18x7, HugeChestScreen::new);
+        ClientRegistry.<HugeChestContainer, HugeChestScreen>registerScreen(GENERIC_18x8, HugeChestScreen::new);
+        ClientRegistry.<HugeChestContainer, HugeChestScreen>registerScreen(GENERIC_18x9, HugeChestScreen::new);
     }
 
     public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
@@ -56,4 +54,5 @@ public class Containers {
         event.getRegistry().register(type);
         return type;
     }
+
 }

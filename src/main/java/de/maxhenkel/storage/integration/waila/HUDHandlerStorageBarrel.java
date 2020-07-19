@@ -1,6 +1,6 @@
 package de.maxhenkel.storage.integration.waila;
 
-import de.maxhenkel.storage.Tools;
+import de.maxhenkel.corelib.item.ItemUtils;
 import de.maxhenkel.storage.blocks.tileentity.StorageBarrelTileEntity;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.api.*;
@@ -49,7 +49,7 @@ public class HUDHandlerStorageBarrel implements IComponentProvider, IServerDataP
         StorageBarrelTileEntity barrel = (StorageBarrelTileEntity) tileEntity;
         if (!barrel.getBarrelContent().isEmpty()) {
 
-            data.put("Content", Tools.writeOverstackedItem(new CompoundNBT(), barrel.getBarrelContent()));
+            data.put("Content", ItemUtils.writeOverstackedItem(new CompoundNBT(), barrel.getBarrelContent()));
         }
     }
 }

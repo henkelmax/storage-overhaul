@@ -118,7 +118,6 @@ public class ModTileEntities {
         ).build(null);
         SHULKER_BOX.setRegistryName(new ResourceLocation(Main.MODID, "shulker_box"));
         event.getRegistry().register(SHULKER_BOX);
-
     }
 
     @OnlyIn(Dist.CLIENT)

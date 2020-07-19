@@ -17,4 +17,5 @@ public class JEIPlugin implements IModPlugin {
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
 
     }
+    
 }

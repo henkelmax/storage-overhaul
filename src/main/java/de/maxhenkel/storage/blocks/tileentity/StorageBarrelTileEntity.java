@@ -1,7 +1,7 @@
 package de.maxhenkel.storage.blocks.tileentity;
 
-import de.maxhenkel.storage.Config;
-import de.maxhenkel.storage.Tools;
+import de.maxhenkel.corelib.item.ItemUtils;
+import de.maxhenkel.storage.Main;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -63,7 +63,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
 
-        compound.put("Item", Tools.writeOverstackedItem(new CompoundNBT(), barrelContent));
+        compound.put("Item", ItemUtils.writeOverstackedItem(new CompoundNBT(), barrelContent));
 
         if (this.customName != null) {
             compound.putString("CustomName", ITextComponent.Serializer.toJson(customName));
@@ -75,7 +75,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
     @Override
     public void func_230337_a_(BlockState blockState, CompoundNBT compound) {
         super.func_230337_a_(blockState, compound);
-        barrelContent = Tools.readOverstackedItem(compound.getCompound("Item"));
+        barrelContent = ItemUtils.readOverstackedItem(compound.getCompound("Item"));
 
 
         if (compound.contains("CustomName")) {
@@ -126,9 +126,9 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
         ItemStack ret = stack.copy();
-        int freeSpace = Config.SERVER.STORAGE_BARREL_SIZE.get() - getBarrelContent().getCount();
+        int freeSpace = Main.SERVER_CONFIG.storageBarrelSize.get() - getBarrelContent().getCount();
         int amount = Math.min(stack.getCount(), freeSpace);
-        if (Tools.isStackable(barrelContent, stack)) {
+        if (ItemUtils.isStackable(barrelContent, stack)) {
             if (!simulate) {
                 addCount(amount);
             }
@@ -164,7 +164,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     @Override
     public int getSlotLimit(int slot) {
-        return Config.SERVER.STORAGE_BARREL_SIZE.get();
+        return Main.SERVER_CONFIG.storageBarrelSize.get();
     }
 
     @Override

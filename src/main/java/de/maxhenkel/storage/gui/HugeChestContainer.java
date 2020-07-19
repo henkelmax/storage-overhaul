@@ -1,15 +1,14 @@
 package de.maxhenkel.storage.gui;
 
+import de.maxhenkel.corelib.inventory.ContainerBase;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
 
-public class HugeChestContainer extends Container {
+public class HugeChestContainer extends ContainerBase {
 
     private static final int NUM_COLS = 18;
     private static final int NUM_PLAYER_INV_COLS = 9;
@@ -17,7 +16,7 @@ public class HugeChestContainer extends Container {
     private final int numRows;
 
     public HugeChestContainer(ContainerType type, int id, PlayerInventory playerInventory, IInventory inventory, int numRows) {
-        super(type, id);
+        super(type, id, playerInventory, inventory);
         this.inventory = inventory;
         this.numRows = numRows;
 
@@ -45,43 +44,13 @@ public class HugeChestContainer extends Container {
         this(type, id, playerInventory, new Inventory(numRows * NUM_COLS), numRows);
     }
 
-    @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
-            if (index < numRows * NUM_COLS) {
-                if (!mergeItemStack(itemstack1, numRows * NUM_COLS, inventorySlots.size(), true)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!mergeItemStack(itemstack1, 0, numRows * NUM_COLS, false)) {
-                return ItemStack.EMPTY;
-            }
-
-            if (itemstack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
-            } else {
-                slot.onSlotChanged();
-            }
-        }
-
-        return itemstack;
-    }
-
     public int getNumRows() {
         return numRows;
-    }
-
-    @Override
-    public void onContainerClosed(PlayerEntity playerIn) {
-        super.onContainerClosed(playerIn);
-        inventory.closeInventory(playerIn);
     }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
         return inventory.isUsableByPlayer(playerIn);
     }
+
 }

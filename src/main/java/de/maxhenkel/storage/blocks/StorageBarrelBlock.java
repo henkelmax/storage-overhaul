@@ -1,8 +1,10 @@
 package de.maxhenkel.storage.blocks;
 
-import com.google.common.collect.Maps;
+import de.maxhenkel.corelib.block.DirectionalVoxelShape;
+import de.maxhenkel.corelib.block.IItemBlock;
+import de.maxhenkel.corelib.item.ItemUtils;
+import de.maxhenkel.corelib.sound.SoundUtils;
 import de.maxhenkel.storage.Main;
-import de.maxhenkel.storage.Tools;
 import de.maxhenkel.storage.blocks.tileentity.StorageBarrelTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -28,10 +30,52 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
+
+    private static final DirectionalVoxelShape SHAPES = new DirectionalVoxelShape.Builder()
+            .direction(Direction.NORTH,
+                    Block.makeCuboidShape(0D, 0D, 1D, 16D, 16D, 16D),
+                    Block.makeCuboidShape(0D, 0D, 0D, 1D, 16D, 1D),
+                    Block.makeCuboidShape(0D, 15D, 0D, 16D, 16D, 1D),
+                    Block.makeCuboidShape(15D, 0D, 0D, 16D, 16D, 1D),
+                    Block.makeCuboidShape(0D, 0D, 0D, 16D, 1D, 1D)
+            )
+            .direction(Direction.SOUTH,
+                    Block.makeCuboidShape(0D, 0D, 0D, 16D, 16D, 15D),
+                    Block.makeCuboidShape(0D, 0D, 15D, 1D, 16D, 16D),
+                    Block.makeCuboidShape(0D, 15D, 15D, 16D, 16D, 16D),
+                    Block.makeCuboidShape(15D, 0D, 15D, 16D, 16D, 16D),
+                    Block.makeCuboidShape(0D, 0D, 15D, 16D, 1D, 16D)
+            )
+            .direction(Direction.EAST,
+                    Block.makeCuboidShape(0D, 0D, 0D, 15D, 16D, 16D),
+                    Block.makeCuboidShape(15D, 0D, 0D, 16D, 16D, 1D),
+                    Block.makeCuboidShape(15D, 15D, 0D, 16D, 16D, 16D),
+                    Block.makeCuboidShape(15D, 16D, 15D, 16D, 0D, 16D),
+                    Block.makeCuboidShape(15D, 0D, 0D, 16D, 1D, 16D)
+            )
+            .direction(Direction.WEST,
+                    Block.makeCuboidShape(1D, 0D, 0D, 16D, 16D, 16D),
+                    Block.makeCuboidShape(0D, 0D, 0D, 1D, 16D, 1D),
+                    Block.makeCuboidShape(0D, 15D, 0D, 1D, 16D, 16D),
+                    Block.makeCuboidShape(0D, 16D, 15D, 1D, 0D, 16D),
+                    Block.makeCuboidShape(0D, 0D, 0D, 1D, 1D, 16D)
+            )
+            .direction(Direction.UP,
+                    Block.makeCuboidShape(0D, 0D, 0D, 16D, 15D, 16D),
+                    Block.makeCuboidShape(0D, 15D, 0D, 1D, 16D, 16D),
+                    Block.makeCuboidShape(0D, 15D, 15D, 16D, 16D, 16D),
+                    Block.makeCuboidShape(16D, 16D, 16D, 15D, 15D, 0D),
+                    Block.makeCuboidShape(0D, 16D, 0D, 16D, 15D, 1D)
+            )
+            .direction(Direction.DOWN,
+                    Block.makeCuboidShape(0D, 1D, 0D, 16D, 16D, 16D),
+                    Block.makeCuboidShape(0D, 0D, 0D, 1D, 1D, 16D),
+                    Block.makeCuboidShape(0D, 0D, 15D, 16D, 1D, 16D),
+                    Block.makeCuboidShape(16D, 1D, 16D, 15D, 0D, 0D),
+                    Block.makeCuboidShape(0D, 0D, 0D, 16D, 1D, 1D)
+            ).build();
 
     public static final DirectionProperty PROPERTY_FACING = BlockStateProperties.FACING;
 
@@ -111,7 +155,7 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
     }
 
     public void playInsertSound(World world, PlayerEntity player) {
-        world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, Tools.getVariatedPitch(world));
+        world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, SoundUtils.getVariatedPitch(world));
     }
 
     public void playExtractSound(World world, PlayerEntity player) {
@@ -154,7 +198,7 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
             player.inventory.add(player.inventory.currentItem, newItem);
             playExtractSound(worldIn, player);
             return;
-        } else if (Tools.isStackable(heldItem, barrelContent)) {
+        } else if (ItemUtils.isStackable(heldItem, barrelContent)) {
             int space = Math.max(heldItem.getMaxStackSize() - heldItem.getCount(), 0);
 
             if (space > 0) {
@@ -258,67 +302,6 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
         return SHAPES.get(state.get(PROPERTY_FACING));
     }
 
-    private static final Map<Direction, VoxelShape> SHAPES;
-
-    static {
-        Map<Direction, VoxelShape> shapes = new HashMap<>();
-        shapes.put(Direction.NORTH,
-                Tools.combine(
-                        Block.makeCuboidShape(0D, 0D, 1D, 16D, 16D, 16D),
-                        Block.makeCuboidShape(0D, 0D, 0D, 1D, 16D, 1D),
-                        Block.makeCuboidShape(0D, 15D, 0D, 16D, 16D, 1D),
-                        Block.makeCuboidShape(15D, 0D, 0D, 16D, 16D, 1D),
-                        Block.makeCuboidShape(0D, 0D, 0D, 16D, 1D, 1D)
-                ));
-
-        shapes.put(Direction.SOUTH,
-                Tools.combine(
-                        Block.makeCuboidShape(0D, 0D, 0D, 16D, 16D, 15D),
-                        Block.makeCuboidShape(0D, 0D, 15D, 1D, 16D, 16D),
-                        Block.makeCuboidShape(0D, 15D, 15D, 16D, 16D, 16D),
-                        Block.makeCuboidShape(15D, 0D, 15D, 16D, 16D, 16D),
-                        Block.makeCuboidShape(0D, 0D, 15D, 16D, 1D, 16D)
-                ));
-
-        shapes.put(Direction.EAST,
-                Tools.combine(
-                        Block.makeCuboidShape(0D, 0D, 0D, 15D, 16D, 16D),
-                        Block.makeCuboidShape(15D, 0D, 0D, 16D, 16D, 1D),
-                        Block.makeCuboidShape(15D, 15D, 0D, 16D, 16D, 16D),
-                        Block.makeCuboidShape(15D, 16D, 15D, 16D, 0D, 16D),
-                        Block.makeCuboidShape(15D, 0D, 0D, 16D, 1D, 16D)
-                ));
-
-        shapes.put(Direction.WEST,
-                Tools.combine(
-                        Block.makeCuboidShape(1D, 0D, 0D, 16D, 16D, 16D),
-                        Block.makeCuboidShape(0D, 0D, 0D, 1D, 16D, 1D),
-                        Block.makeCuboidShape(0D, 15D, 0D, 1D, 16D, 16D),
-                        Block.makeCuboidShape(0D, 16D, 15D, 1D, 0D, 16D),
-                        Block.makeCuboidShape(0D, 0D, 0D, 1D, 1D, 16D)
-                ));
-
-        shapes.put(Direction.UP,
-                Tools.combine(
-                        Block.makeCuboidShape(0D, 0D, 0D, 16D, 15D, 16D),
-                        Block.makeCuboidShape(0D, 15D, 0D, 1D, 16D, 16D),
-                        Block.makeCuboidShape(0D, 15D, 15D, 16D, 16D, 16D),
-                        Block.makeCuboidShape(16D, 16D, 16D, 15D, 15D, 0D),
-                        Block.makeCuboidShape(0D, 16D, 0D, 16D, 15D, 1D)
-                ));
-
-        shapes.put(Direction.DOWN,
-                Tools.combine(
-                        Block.makeCuboidShape(0D, 1D, 0D, 16D, 16D, 16D),
-                        Block.makeCuboidShape(0D, 0D, 0D, 1D, 1D, 16D),
-                        Block.makeCuboidShape(0D, 0D, 15D, 16D, 1D, 16D),
-                        Block.makeCuboidShape(16D, 1D, 16D, 15D, 0D, 0D),
-                        Block.makeCuboidShape(0D, 0D, 0D, 16D, 1D, 1D)
-                ));
-
-        SHAPES = Maps.newEnumMap(shapes);
-    }
-
     @Override
     public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
         if (((BlockRayTraceResult) target).getFace().equals(state.get(PROPERTY_FACING))) {
@@ -331,4 +314,5 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
         }
         return super.getPickBlock(state, target, world, pos, player);
     }
+
 }

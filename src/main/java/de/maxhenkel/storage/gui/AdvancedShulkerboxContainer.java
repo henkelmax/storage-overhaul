@@ -1,21 +1,21 @@
 package de.maxhenkel.storage.gui;
 
+import de.maxhenkel.corelib.inventory.ContainerBase;
 import de.maxhenkel.storage.items.AdvancedShulkerBoxItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 
-public class AdvancedShulkerboxContainer extends Container {
+public class AdvancedShulkerboxContainer extends ContainerBase {
 
     private IInventory shulkerboxInventory;
     private int numRows = 3;
 
     public AdvancedShulkerboxContainer(int id, PlayerInventory playerInventoryIn, IInventory shulkerboxInventory) {
-        super(Containers.SHULKERBOX_CONTAINER, id);
+        super(Containers.SHULKERBOX_CONTAINER, id, playerInventoryIn, shulkerboxInventory);
         this.shulkerboxInventory = shulkerboxInventory;
         shulkerboxInventory.openInventory(playerInventoryIn.player);
         int i = (numRows - 4) * 18;
@@ -49,42 +49,6 @@ public class AdvancedShulkerboxContainer extends Container {
         this(id, playerInventory, new ShulkerBoxItemInventory(playerInventory.player, getShulkerBox(playerInventory.player)));
     }
 
-    @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
-            if (index < this.numRows * 9) {
-                if (!this.mergeItemStack(itemstack1, numRows * 9, this.inventorySlots.size(), true)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!this.mergeItemStack(itemstack1, 0, numRows * 9, false)) {
-                return ItemStack.EMPTY;
-            }
-
-            if (itemstack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
-            } else {
-                slot.onSlotChanged();
-            }
-        }
-
-        return itemstack;
-    }
-
-    @Override
-    public void onContainerClosed(PlayerEntity playerIn) {
-        super.onContainerClosed(playerIn);
-        shulkerboxInventory.closeInventory(playerIn);
-    }
-
-    @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return shulkerboxInventory.isUsableByPlayer(playerIn);
-    }
-
     public static int getLockedSlot(PlayerEntity player) {
         ItemStack stack = player.getHeldItem(Hand.MAIN_HAND);
         if (isOpenableShulkerBox(stack)) {
@@ -116,4 +80,5 @@ public class AdvancedShulkerboxContainer extends Container {
 
         return false;
     }
+
 }

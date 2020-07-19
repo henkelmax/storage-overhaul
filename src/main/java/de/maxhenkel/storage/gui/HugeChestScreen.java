@@ -16,7 +16,7 @@ public class HugeChestScreen extends ContainerScreen<HugeChestContainer> {
     private final PlayerInventory playerInventory;
     private final int inventoryRows;
 
-    public HugeChestScreen(PlayerInventory playerInventory, HugeChestContainer container, ITextComponent name) {
+    public HugeChestScreen(HugeChestContainer container, PlayerInventory playerInventory, ITextComponent name) {
         super(container, playerInventory, name);
         this.playerInventory = playerInventory;
         //passEvents = false;

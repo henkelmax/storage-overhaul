@@ -292,7 +292,6 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
                         ((ModChestMinecartEntity) event.getEntity()).dropContentsWhenDead = true;
                     }
                 }
-
             }
         });
     }

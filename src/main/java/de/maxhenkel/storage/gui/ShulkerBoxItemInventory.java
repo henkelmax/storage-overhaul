@@ -162,4 +162,5 @@ public class ShulkerBoxItemInventory implements IInventory, INamedContainerProvi
     public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
         return new AdvancedShulkerboxContainer(id, inventory, this);
     }
+
 }

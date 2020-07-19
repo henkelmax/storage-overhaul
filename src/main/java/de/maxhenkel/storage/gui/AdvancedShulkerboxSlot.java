@@ -6,6 +6,7 @@ import net.minecraft.inventory.container.ShulkerBoxSlot;
 import net.minecraft.item.ItemStack;
 
 public class AdvancedShulkerboxSlot extends ShulkerBoxSlot {
+
     public AdvancedShulkerboxSlot(IInventory inventoryIn, int slotIndexIn, int xPosition, int yPosition) {
         super(inventoryIn, slotIndexIn, xPosition, yPosition);
     }
@@ -22,4 +23,5 @@ public class AdvancedShulkerboxSlot extends ShulkerBoxSlot {
 
         return true;
     }
+
 }
