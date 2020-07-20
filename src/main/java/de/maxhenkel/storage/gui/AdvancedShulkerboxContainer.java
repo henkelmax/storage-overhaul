@@ -1,6 +1,7 @@
 package de.maxhenkel.storage.gui;
 
 import de.maxhenkel.corelib.inventory.ContainerBase;
+import de.maxhenkel.corelib.inventory.LockedSlot;
 import de.maxhenkel.storage.items.AdvancedShulkerBoxItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -11,38 +12,31 @@ import net.minecraft.util.Hand;
 
 public class AdvancedShulkerboxContainer extends ContainerBase {
 
-    private IInventory shulkerboxInventory;
-    private int numRows = 3;
+    public AdvancedShulkerboxContainer(int id, PlayerInventory playerInventory, IInventory shulkerboxInventory) {
+        super(Containers.SHULKERBOX_CONTAINER, id, playerInventory, shulkerboxInventory);
 
-    public AdvancedShulkerboxContainer(int id, PlayerInventory playerInventoryIn, IInventory shulkerboxInventory) {
-        super(Containers.SHULKERBOX_CONTAINER, id, playerInventoryIn, shulkerboxInventory);
-        this.shulkerboxInventory = shulkerboxInventory;
-        shulkerboxInventory.openInventory(playerInventoryIn.player);
-        int i = (numRows - 4) * 18;
-
-        for (int j = 0; j < numRows; j++) {
-            for (int k = 0; k < 9; k++) {
-                addSlot(new AdvancedShulkerboxSlot(shulkerboxInventory, k + j * 9, 8 + k * 18, 18 + j * 18));
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 9; x++) {
+                addSlot(new AdvancedShulkerboxSlot(shulkerboxInventory, x + y * 9, 8 + x * 18, 18 + y * 18));
             }
         }
 
         for (int l = 0; l < 3; l++) {
             for (int j1 = 0; j1 < 9; j1++) {
-                addSlot(new Slot(playerInventoryIn, j1 + l * 9 + 9, 8 + j1 * 18, 102 + l * 18 + i));
+                addSlot(new Slot(playerInventory, j1 + l * 9 + 9, 8 + j1 * 18, 102 + l * 18 - 18));
             }
         }
 
-        int locked = getLockedSlot(playerInventoryIn.player);
-        for (int i1 = 0; i1 < 9; i1++) {
-            int x = 8 + i1 * 18;
-            int y = 160 + i;
-            if (i1 == locked) {
-                addSlot(new LockedSlot(playerInventoryIn, i1, x, y));
+        int locked = getLockedSlot(playerInventory.player);
+        for (int i = 0; i < 9; i++) {
+            int x = 8 + i * 18;
+            int y = 142;
+            if (i == locked) {
+                addSlot(new LockedSlot(playerInventory, i, x, y));
             } else {
-                addSlot(new Slot(playerInventoryIn, i1, x, y));
+                addSlot(new Slot(playerInventory, i, x, y));
             }
         }
-
     }
 
     public AdvancedShulkerboxContainer(int id, PlayerInventory playerInventory) {

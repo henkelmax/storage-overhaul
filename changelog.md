@@ -1,1 +1,1 @@
-- Fixed chests didn't display custom names
+- Fixed GUIs not showing tooltips

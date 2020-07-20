@@ -1,9 +1,7 @@
 package de.maxhenkel.storage.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import de.maxhenkel.corelib.inventory.ScreenBase;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -16,7 +14,6 @@ public class AdvancedShulkerboxScreen extends ScreenBase<AdvancedShulkerboxConta
 
     public AdvancedShulkerboxScreen(AdvancedShulkerboxContainer shulkerboxContainer, PlayerInventory playerInventory, ITextComponent name) {
         super(DEFAULT_IMAGE, shulkerboxContainer, playerInventory, name);
-
         this.playerInventory = playerInventory;
         xSize = 176;
         ySize = 166;
