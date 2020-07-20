@@ -1,1 +1,1 @@
-- Internal changes
+- Fixed chests didn't display custom names

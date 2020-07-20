@@ -30,7 +30,6 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.ChestType;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
-import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.IChestLid;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMerger;
@@ -202,7 +201,6 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
         }
     }
 
-
     public static Direction getDirectionToAttached(BlockState state) {
         Direction direction = state.get(FACING);
         return state.get(TYPE) == ChestType.LEFT ? direction.rotateY() : direction.rotateYCCW();
@@ -250,11 +248,10 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         if (stack.hasDisplayName()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof ChestTileEntity) {
-                ((ChestTileEntity) tileentity).setCustomName(stack.getDisplayName());
+            if (tileentity instanceof ModChestTileEntity) {
+                ((ModChestTileEntity) tileentity).setCustomName(stack.getDisplayName());
             }
         }
-
     }
 
     @Override
