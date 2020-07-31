@@ -12,7 +12,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -23,18 +22,20 @@ public class HUDHandlerStorageBarrel implements IComponentProvider, IServerDataP
     static final HUDHandlerStorageBarrel INSTANCE = new HUDHandlerStorageBarrel();
 
     @Override
-    public void appendHead(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
-        ((ITaggableList<ResourceLocation, ITextComponent>) tooltip).setTag(PluginStorageOverhaul.OBJECT_NAME_TAG, new StringTextComponent(String.format(Waila.CONFIG.get().getFormatting().getEntityName(), ((StorageBarrelTileEntity) accessor.getTileEntity()).getDisplayName().getFormattedText())));
-        if (config.get(PluginStorageOverhaul.CONFIG_SHOW_REGISTRY))
-            ((ITaggableList<ResourceLocation, ITextComponent>) tooltip).setTag(PluginStorageOverhaul.REGISTRY_NAME_TAG, new StringTextComponent(accessor.getBlock().getRegistryName().toString()).setStyle(new Style().setColor(TextFormatting.GRAY)));
+    public void appendHead(List<ITextComponent> t, IDataAccessor accessor, IPluginConfig config) {
+        ITaggableList<ResourceLocation, ITextComponent> tooltip = (ITaggableList<ResourceLocation, ITextComponent>) t;
+        tooltip.setTag(PluginStorageOverhaul.OBJECT_NAME_TAG, new StringTextComponent(String.format(Waila.CONFIG.get().getFormatting().getBlockName(), ((StorageBarrelTileEntity) accessor.getTileEntity()).getDisplayName().getString())));
+        if (config.get(PluginStorageOverhaul.CONFIG_SHOW_REGISTRY)) {
+            tooltip.setTag(PluginStorageOverhaul.REGISTRY_NAME_TAG, new StringTextComponent(accessor.getBlock().getRegistryName().toString()).func_240699_a_(TextFormatting.GRAY));
+        }
     }
 
     @Override
     public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
         if (accessor.getServerData().contains("Content")) {
-            ItemStack stack = Tools.readOverstackedItem(accessor.getServerData().getCompound("Content"));
+            ItemStack stack = ItemUtils.readOverstackedItem(accessor.getServerData().getCompound("Content"));
 
-            tooltip.add(new StringTextComponent(stack.getCount() + "x ").appendSibling((stack.getDisplayName())));
+            tooltip.add(new StringTextComponent(stack.getCount() + "x ").func_230529_a_((stack.getDisplayName())));
         }
     }
 
@@ -48,8 +49,8 @@ public class HUDHandlerStorageBarrel implements IComponentProvider, IServerDataP
     public void appendServerData(CompoundNBT data, ServerPlayerEntity serverPlayerEntity, World world, TileEntity tileEntity) {
         StorageBarrelTileEntity barrel = (StorageBarrelTileEntity) tileEntity;
         if (!barrel.getBarrelContent().isEmpty()) {
-
             data.put("Content", ItemUtils.writeOverstackedItem(new CompoundNBT(), barrel.getBarrelContent()));
         }
     }
+
 }

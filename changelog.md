@@ -1,1 +1,1 @@
-- Fixed chests not filled correctly by hoppers
+- Re-added HWYLA integration
