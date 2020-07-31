@@ -245,13 +245,13 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
         }
         ChestType type = state.get(ModChestBlock.TYPE);
         if (type != ChestType.SINGLE) {
-            BlockPos opos = this.getPos().offset(ModChestBlock.getDirectionToAttached(state));
-            BlockState ostate = this.getWorld().getBlockState(opos);
+            BlockPos opos = getPos().offset(ModChestBlock.getDirectionToAttached(state));
+            BlockState ostate = getWorld().getBlockState(opos);
             if (state.getBlock() == ostate.getBlock()) {
                 ChestType otype = ostate.get(ModChestBlock.TYPE);
                 if (otype != ChestType.SINGLE && type != otype && state.get(ModChestBlock.FACING) == ostate.get(ModChestBlock.FACING)) {
-                    TileEntity ote = this.getWorld().getTileEntity(opos);
-                    if (ote instanceof ChestTileEntity) {
+                    TileEntity ote = getWorld().getTileEntity(opos);
+                    if (ote instanceof ModChestTileEntity) {
                         IInventory top = type == ChestType.RIGHT ? this : (IInventory) ote;
                         IInventory bottom = type == ChestType.RIGHT ? (IInventory) ote : this;
                         return new CombinedInvWrapper(new InvWrapper(top), new InvWrapper(bottom));

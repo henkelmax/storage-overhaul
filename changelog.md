@@ -1,1 +1,1 @@
-- Fixed crash with the latest forge version
+- Fixed chests not filled correctly by hoppers
