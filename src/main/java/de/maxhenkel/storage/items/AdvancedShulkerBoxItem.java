@@ -11,8 +11,8 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -28,12 +28,11 @@ public class AdvancedShulkerBoxItem extends BlockItem {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
+    public ActionResultType tryPlace(BlockItemUseContext context) {
         if (!context.getPlayer().isSneaking()) {
-            context.getPlayer().openContainer(new ShulkerBoxItemInventory(context.getPlayer(), context.getItem()));
-            return ActionResultType.SUCCESS;
+            return ActionResultType.PASS;
         }
-        return super.onItemUse(context);
+        return super.tryPlace(context);
     }
 
     @Override

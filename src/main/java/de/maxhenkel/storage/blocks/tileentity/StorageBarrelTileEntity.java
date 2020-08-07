@@ -1,5 +1,6 @@
 package de.maxhenkel.storage.blocks.tileentity;
 
+import de.maxhenkel.corelib.entity.EntityUtils;
 import de.maxhenkel.corelib.item.ItemUtils;
 import de.maxhenkel.storage.Main;
 import net.minecraft.block.BlockState;
@@ -50,8 +51,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
     public void markDirty() {
         super.markDirty();
         if (world instanceof ServerWorld) {
-            ServerWorld serverWorld = (ServerWorld) world;
-            serverWorld.getPlayers(player -> player.getDistanceSq(getPos().getX(), getPos().getY(), getPos().getZ()) <= 128D * 128D).forEach(this::syncContents);
+            EntityUtils.forEachPlayerAround((ServerWorld) world, getPos(), 128D, this::syncContents);
         }
     }
 
