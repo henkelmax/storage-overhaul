@@ -25,6 +25,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.*;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -108,7 +109,7 @@ public class AdvancedShulkerBoxBlock extends ContainerBlock implements IItemBloc
             if (player.isCreative() && !world.isRemote && !box.isEmpty()) {
                 LootContext.Builder builder = new LootContext.Builder((ServerWorld) world)
                         .withRandom(world.rand)
-                        .withParameter(LootParameters.POSITION, pos)
+                        .withParameter(LootParameters.field_237457_g_, new Vector3d(pos.getX(), pos.getY(), pos.getZ()))
                         .withParameter(LootParameters.BLOCK_STATE, state)
                         .withParameter(LootParameters.BLOCK_ENTITY, box)
                         .withParameter(LootParameters.TOOL, ItemStack.EMPTY);

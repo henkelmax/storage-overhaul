@@ -1,1 +1,1 @@
-- Fixed advanced shulkerbox inventory
+- Updated to 1.16.2

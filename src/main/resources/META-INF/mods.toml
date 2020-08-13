@@ -1,15 +1,16 @@
 modLoader="javafml"
 loaderVersion="${mod_forge_version}"
+license="All rights reserved"
 issueTrackerURL="https://www.curseforge.com/minecraft/mc-mods/storage-overhaul/issues"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/storage-overhaul"
-# logoFile="storage_overhaul.png"
-# credits=""
-authors="${mod_vendor}"
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
 updateJSONURL="https://maxhenkel.de/update/storage_overhaul.json"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/storage-overhaul"
+# logoFile="storage_overhaul.png"
+# credits=""
+authors="${mod_vendor}"
 description='''A complete overhaul of storage containers'''
 [[dependencies.${mod_id}]]
     modId="forge"
