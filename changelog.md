@@ -1,1 +1,1 @@
-- Updated pack format
+- Fixed tooltips not showing up in tier 3 double chests
