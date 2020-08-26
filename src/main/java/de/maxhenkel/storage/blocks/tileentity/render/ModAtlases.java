@@ -40,6 +40,14 @@ public class ModAtlases {
     private static final ResourceLocation CHEST_DARK_OAK_LEFT_LOCATION = new ResourceLocation(Main.MODID, "entity/chest/dark_oak_left");
     private static final ResourceLocation CHEST_DARK_OAK_RIGHT_LOCATION = new ResourceLocation(Main.MODID, "entity/chest/dark_oak_right");
 
+    private static final ResourceLocation CHEST_CRIMSON_LOCATION = new ResourceLocation(Main.MODID, "entity/chest/crimson");
+    private static final ResourceLocation CHEST_CRIMSON_LEFT_LOCATION = new ResourceLocation(Main.MODID, "entity/chest/crimson_left");
+    private static final ResourceLocation CHEST_CRIMSON_RIGHT_LOCATION = new ResourceLocation(Main.MODID, "entity/chest/crimson_right");
+
+    private static final ResourceLocation CHEST_WARPED_LOCATION = new ResourceLocation(Main.MODID, "entity/chest/warped");
+    private static final ResourceLocation CHEST_WARPED_LEFT_LOCATION = new ResourceLocation(Main.MODID, "entity/chest/warped_left");
+    private static final ResourceLocation CHEST_WARPED_RIGHT_LOCATION = new ResourceLocation(Main.MODID, "entity/chest/warped_right");
+
     private static final ResourceLocation WHITE_SHULKER_BOX_LOCATION = new ResourceLocation(Main.MODID, "entity/shulkerbox/shulker_white");
     private static final ResourceLocation ORANGE_SHULKER_BOX_LOCATION = new ResourceLocation(Main.MODID, "entity/shulkerbox/shulker_orange");
     private static final ResourceLocation MAGENTA_SHULKER_BOX_LOCATION = new ResourceLocation(Main.MODID, "entity/shulkerbox/shulker_magenta");
@@ -81,6 +89,14 @@ public class ModAtlases {
     private static final RenderMaterial CHEST_DARK_OAK_LEFT_MATERIAL = getChestMaterial(CHEST_DARK_OAK_LEFT_LOCATION);
     private static final RenderMaterial CHEST_DARK_OAK_RIGHT_MATERIAL = getChestMaterial(CHEST_DARK_OAK_RIGHT_LOCATION);
 
+    private static final RenderMaterial CHEST_CRIMSON_MATERIAL = getChestMaterial(CHEST_CRIMSON_LOCATION);
+    private static final RenderMaterial CHEST_CRIMSON_LEFT_MATERIAL = getChestMaterial(CHEST_CRIMSON_LEFT_LOCATION);
+    private static final RenderMaterial CHEST_CRIMSON_RIGHT_MATERIAL = getChestMaterial(CHEST_CRIMSON_RIGHT_LOCATION);
+
+    private static final RenderMaterial CHEST_WARPED_MATERIAL = getChestMaterial(CHEST_WARPED_LOCATION);
+    private static final RenderMaterial CHEST_WARPED_LEFT_MATERIAL = getChestMaterial(CHEST_WARPED_LEFT_LOCATION);
+    private static final RenderMaterial CHEST_WARPED_RIGHT_MATERIAL = getChestMaterial(CHEST_WARPED_RIGHT_LOCATION);
+
     public static final RenderMaterial WHITE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, WHITE_SHULKER_BOX_LOCATION);
     public static final RenderMaterial ORANGE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, ORANGE_SHULKER_BOX_LOCATION);
     public static final RenderMaterial MAGENTA_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, MAGENTA_SHULKER_BOX_LOCATION);
@@ -104,6 +120,8 @@ public class ModAtlases {
     public static final ChestMaterial CHEST_ACACIA = new ChestMaterial(CHEST_ACACIA_MATERIAL, CHEST_ACACIA_LEFT_MATERIAL, CHEST_ACACIA_RIGHT_MATERIAL);
     public static final ChestMaterial CHEST_JUNGLE = new ChestMaterial(CHEST_JUNGLE_MATERIAL, CHEST_JUNGLE_LEFT_MATERIAL, CHEST_JUNGLE_RIGHT_MATERIAL);
     public static final ChestMaterial CHEST_DARK_OAK = new ChestMaterial(CHEST_DARK_OAK_MATERIAL, CHEST_DARK_OAK_LEFT_MATERIAL, CHEST_DARK_OAK_RIGHT_MATERIAL);
+    public static final ChestMaterial CHEST_CRIMSON = new ChestMaterial(CHEST_CRIMSON_MATERIAL, CHEST_CRIMSON_LEFT_MATERIAL, CHEST_CRIMSON_RIGHT_MATERIAL);
+    public static final ChestMaterial CHEST_WARPED = new ChestMaterial(CHEST_WARPED_MATERIAL, CHEST_WARPED_LEFT_MATERIAL, CHEST_WARPED_RIGHT_MATERIAL);
 
     private static RenderMaterial getChestMaterial(ResourceLocation location) {
         return new RenderMaterial(Atlases.CHEST_ATLAS, location);
@@ -120,6 +138,10 @@ public class ModAtlases {
             return getChestTypeMaterial(CHEST_JUNGLE, chestType);
         } else if (WoodType.DARK_OAK.equals(type)) {
             return getChestTypeMaterial(CHEST_DARK_OAK, chestType);
+        } else if (WoodType.field_235923_g_.equals(type)) {
+            return getChestTypeMaterial(CHEST_CRIMSON, chestType);
+        } else if (WoodType.field_235924_h_.equals(type)) {
+            return getChestTypeMaterial(CHEST_WARPED, chestType);
         } else {
             return getChestTypeMaterial(CHEST_OAK, chestType);
         }
@@ -202,6 +224,14 @@ public class ModAtlases {
             event.addSprite(CHEST_DARK_OAK_LOCATION);
             event.addSprite(CHEST_DARK_OAK_LEFT_LOCATION);
             event.addSprite(CHEST_DARK_OAK_RIGHT_LOCATION);
+
+            event.addSprite(CHEST_CRIMSON_LOCATION);
+            event.addSprite(CHEST_CRIMSON_LEFT_LOCATION);
+            event.addSprite(CHEST_CRIMSON_RIGHT_LOCATION);
+
+            event.addSprite(CHEST_WARPED_LOCATION);
+            event.addSprite(CHEST_WARPED_LEFT_LOCATION);
+            event.addSprite(CHEST_WARPED_RIGHT_LOCATION);
 
         } else if (event.getMap().getTextureLocation().equals(Atlases.SHULKER_BOX_ATLAS)) {
 

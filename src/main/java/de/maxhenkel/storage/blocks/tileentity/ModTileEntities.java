@@ -30,6 +30,8 @@ public class ModTileEntities {
                 ModBlocks.ACACIA_CHEST,
                 ModBlocks.JUNGLE_CHEST,
                 ModBlocks.DARK_OAK_CHEST,
+                ModBlocks.CRIMSON_CHEST,
+                ModBlocks.WARPED_CHEST,
 
                 ModBlocks.OAK_CHEST_TIER_1,
                 ModBlocks.SPRUCE_CHEST_TIER_1,
@@ -37,6 +39,8 @@ public class ModTileEntities {
                 ModBlocks.ACACIA_CHEST_TIER_1,
                 ModBlocks.JUNGLE_CHEST_TIER_1,
                 ModBlocks.DARK_OAK_CHEST_TIER_1,
+                ModBlocks.CRIMSON_CHEST_TIER_1,
+                ModBlocks.WARPED_CHEST_TIER_1,
 
                 ModBlocks.OAK_CHEST_TIER_2,
                 ModBlocks.SPRUCE_CHEST_TIER_2,
@@ -44,13 +48,17 @@ public class ModTileEntities {
                 ModBlocks.ACACIA_CHEST_TIER_2,
                 ModBlocks.JUNGLE_CHEST_TIER_2,
                 ModBlocks.DARK_OAK_CHEST_TIER_2,
+                ModBlocks.CRIMSON_CHEST_TIER_2,
+                ModBlocks.WARPED_CHEST_TIER_2,
 
                 ModBlocks.OAK_CHEST_TIER_3,
                 ModBlocks.SPRUCE_CHEST_TIER_3,
                 ModBlocks.BIRCH_CHEST_TIER_3,
                 ModBlocks.ACACIA_CHEST_TIER_3,
                 ModBlocks.JUNGLE_CHEST_TIER_3,
-                ModBlocks.DARK_OAK_CHEST_TIER_3
+                ModBlocks.DARK_OAK_CHEST_TIER_3,
+                ModBlocks.CRIMSON_CHEST_TIER_3,
+                ModBlocks.WARPED_CHEST_TIER_3
         ).build(null);
         CHEST.setRegistryName(new ResourceLocation(Main.MODID, "chest"));
         event.getRegistry().register(CHEST);
@@ -62,6 +70,8 @@ public class ModTileEntities {
                 ModBlocks.ACACIA_BARREL,
                 ModBlocks.JUNGLE_BARREL,
                 ModBlocks.DARK_OAK_BARREL,
+                ModBlocks.CRIMSON_BARREL,
+                ModBlocks.WARPED_BARREL,
 
                 ModBlocks.OAK_BARREL_TIER_1,
                 ModBlocks.SPRUCE_BARREL_TIER_1,
@@ -69,6 +79,8 @@ public class ModTileEntities {
                 ModBlocks.ACACIA_BARREL_TIER_1,
                 ModBlocks.JUNGLE_BARREL_TIER_1,
                 ModBlocks.DARK_OAK_BARREL_TIER_1,
+                ModBlocks.CRIMSON_BARREL_TIER_1,
+                ModBlocks.WARPED_BARREL_TIER_1,
 
                 ModBlocks.OAK_BARREL_TIER_2,
                 ModBlocks.SPRUCE_BARREL_TIER_2,
@@ -76,13 +88,17 @@ public class ModTileEntities {
                 ModBlocks.ACACIA_BARREL_TIER_2,
                 ModBlocks.JUNGLE_BARREL_TIER_2,
                 ModBlocks.DARK_OAK_BARREL_TIER_2,
+                ModBlocks.CRIMSON_BARREL_TIER_2,
+                ModBlocks.WARPED_BARREL_TIER_2,
 
                 ModBlocks.OAK_BARREL_TIER_3,
                 ModBlocks.SPRUCE_BARREL_TIER_3,
                 ModBlocks.BIRCH_BARREL_TIER_3,
                 ModBlocks.ACACIA_BARREL_TIER_3,
                 ModBlocks.JUNGLE_BARREL_TIER_3,
-                ModBlocks.DARK_OAK_BARREL_TIER_3
+                ModBlocks.DARK_OAK_BARREL_TIER_3,
+                ModBlocks.CRIMSON_BARREL_TIER_3,
+                ModBlocks.WARPED_BARREL_TIER_3
         ).build(null);
         BARREL.setRegistryName(new ResourceLocation(Main.MODID, "barrel"));
         event.getRegistry().register(BARREL);
@@ -93,7 +109,9 @@ public class ModTileEntities {
                 ModBlocks.BIRCH_STORAGE_BARREL,
                 ModBlocks.ACACIA_STORAGE_BARREL,
                 ModBlocks.JUNGLE_STORAGE_BARREL,
-                ModBlocks.DARK_OAK_STORAGE_BARREL
+                ModBlocks.DARK_OAK_STORAGE_BARREL,
+                ModBlocks.CRIMSON_STORAGE_BARREL,
+                ModBlocks.WARPED_STORAGE_BARREL
         ).build(null);
         STORAGE_BARREL.setRegistryName(new ResourceLocation(Main.MODID, "storage_barrel"));
         event.getRegistry().register(STORAGE_BARREL);

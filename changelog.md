@@ -1,1 +1,1 @@
-- Fixed tooltips not showing up in tier 3 double chests
+- Added nether wood variants

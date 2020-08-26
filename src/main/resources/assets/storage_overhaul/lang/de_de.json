@@ -5,6 +5,8 @@
   "block.storage_overhaul.acacia_chest": "Akazientruhe",
   "block.storage_overhaul.jungle_chest": "Tropentruhe",
   "block.storage_overhaul.dark_oak_chest": "Schwarzeichentruhe",
+  "block.storage_overhaul.crimson_chest": "Karmesintruhe",
+  "block.storage_overhaul.warped_chest": "Wirrtruhe",
 
   "block.storage_overhaul.oak_chest_tier_1": "Eichentruhe Stufe 1",
   "block.storage_overhaul.spruce_chest_tier_1": "Fichtentruhe Stufe 1",
@@ -12,6 +14,8 @@
   "block.storage_overhaul.acacia_chest_tier_1": "Akazientruhe Stufe 1",
   "block.storage_overhaul.jungle_chest_tier_1": "Tropentruhe Stufe 1",
   "block.storage_overhaul.dark_oak_chest_tier_1": "Schwarzeichentruhe Stufe 1",
+  "block.storage_overhaul.crimson_chest_tier_1": "Karmesintruhe Stufe 1",
+  "block.storage_overhaul.warped_chest_tier_1": "Wirrtruhe Stufe 1",
 
   "block.storage_overhaul.oak_chest_tier_2": "Eichentruhe Stufe 2",
   "block.storage_overhaul.spruce_chest_tier_2": "Fichtentruhe Stufe 2",
@@ -19,6 +23,8 @@
   "block.storage_overhaul.acacia_chest_tier_2": "Akazientruhe Stufe 2",
   "block.storage_overhaul.jungle_chest_tier_2": "Tropentruhe Stufe 2",
   "block.storage_overhaul.dark_oak_chest_tier_2": "Schwarzeichentruhe Stufe 2",
+  "block.storage_overhaul.crimson_chest_tier_2": "Karmesintruhe Stufe 2",
+  "block.storage_overhaul.warped_chest_tier_2": "Wirrtruhe Stufe 2",
 
   "block.storage_overhaul.oak_chest_tier_3": "Eichentruhe Stufe 3",
   "block.storage_overhaul.spruce_chest_tier_3": "Fichtentruhe Stufe 3",
@@ -26,6 +32,8 @@
   "block.storage_overhaul.acacia_chest_tier_3": "Akazientruhe Stufe 3",
   "block.storage_overhaul.jungle_chest_tier_3": "Tropentruhe Stufe 3",
   "block.storage_overhaul.dark_oak_chest_tier_3": "Schwarzeichentruhe Stufe 3",
+  "block.storage_overhaul.crimson_chest_tier_3": "Karmesintruhe Stufe 3",
+  "block.storage_overhaul.warped_chest_tier_3": "Wirrtruhe Stufe 3",
 
   "block.storage_overhaul.oak_barrel": "Eichenfass",
   "block.storage_overhaul.spruce_barrel": "Fichtenfass",
@@ -33,6 +41,8 @@
   "block.storage_overhaul.acacia_barrel": "Akazienfass",
   "block.storage_overhaul.jungle_barrel": "Tropenfass",
   "block.storage_overhaul.dark_oak_barrel": "Schwarzeichenfass",
+  "block.storage_overhaul.crimson_barrel": "Karmesinfass",
+  "block.storage_overhaul.warped_barrel": "Wirrfass",
 
   "block.storage_overhaul.oak_barrel_tier_1": "Eichenfass Stufe 1",
   "block.storage_overhaul.spruce_barrel_tier_1": "Fichtenfass Stufe 1",
@@ -40,6 +50,8 @@
   "block.storage_overhaul.acacia_barrel_tier_1": "Akazienfass Stufe 1",
   "block.storage_overhaul.jungle_barrel_tier_1": "Tropenfass Stufe 1",
   "block.storage_overhaul.dark_oak_barrel_tier_1": "Schwarzeichenfass Stufe 1",
+  "block.storage_overhaul.crimson_barrel_tier_1": "Karmesinfass Stufe 1",
+  "block.storage_overhaul.warped_barrel_tier_1": "Wirrfass Stufe 1",
 
   "block.storage_overhaul.oak_barrel_tier_2": "Eichenfass Stufe 2",
   "block.storage_overhaul.spruce_barrel_tier_2": "Fichtenfass Stufe 2",
@@ -47,6 +59,8 @@
   "block.storage_overhaul.acacia_barrel_tier_2": "Akazienfass Stufe 2",
   "block.storage_overhaul.jungle_barrel_tier_2": "Tropenfass Stufe 2",
   "block.storage_overhaul.dark_oak_barrel_tier_2": "Schwarzeichenfass Stufe 2",
+  "block.storage_overhaul.crimson_barrel_tier_2": "Karmesinfass Stufe 2",
+  "block.storage_overhaul.warped_barrel_tier_2": "Wirrfass Stufe 2",
 
   "block.storage_overhaul.oak_barrel_tier_3": "Eichenfass Stufe 3",
   "block.storage_overhaul.spruce_barrel_tier_3": "Fichtenfass Stufe 3",
@@ -54,6 +68,8 @@
   "block.storage_overhaul.acacia_barrel_tier_3": "Akazienfass Stufe 3",
   "block.storage_overhaul.jungle_barrel_tier_3": "Tropenfass Stufe 3",
   "block.storage_overhaul.dark_oak_barrel_tier_3": "Schwarzeichenfass Stufe 3",
+  "block.storage_overhaul.crimson_barrel_tier_3": "Karmesinfass Stufe 3",
+  "block.storage_overhaul.warped_barrel_tier_3": "Wirrfass Stufe 3",
 
   "block.storage_overhaul.oak_storage_barrel": "Eichen Lagerfass",
   "block.storage_overhaul.spruce_storage_barrel": "Fichten Lagerfass",
@@ -61,6 +77,8 @@
   "block.storage_overhaul.acacia_storage_barrel": "Akazien Lagerfass",
   "block.storage_overhaul.jungle_storage_barrel": "Tropen Lagerfass",
   "block.storage_overhaul.dark_oak_storage_barrel": "Schwarzeichen Lagerfass",
+  "block.storage_overhaul.crimson_storage_barrel": "Karmesin Lagerfass",
+  "block.storage_overhaul.warped_storage_barrel": "Wirr Lagerfass",
 
   "block.storage_overhaul.white_shulker_box": "Verbesserte Weiße Schulkerkiste",
   "block.storage_overhaul.orange_shulker_box": "Verbesserte Orange Schulkerkiste",
@@ -90,6 +108,8 @@
   "item.storage_overhaul.acacia_chest_minecart": "Lore mit Akazientruhe",
   "item.storage_overhaul.jungle_chest_minecart": "Lore mit Tropentruhe",
   "item.storage_overhaul.dark_oak_chest_minecart": "Lore mit Schwarzeichentruhe",
+  "item.storage_overhaul.crimson_chest_minecart": "Lore mit Karmesintruhe",
+  "item.storage_overhaul.warped_chest_minecart": "Lore mit Wirrtruhe",
 
   "item.storage_overhaul.oak_chest_minecart_tier_1": "Lore mit Eichentruhe Stufe 1",
   "item.storage_overhaul.spruce_chest_minecart_tier_1": "Lore mit Fichtentruhe Stufe 1",
@@ -97,6 +117,8 @@
   "item.storage_overhaul.acacia_chest_minecart_tier_1": "Lore mit Akazientruhe Stufe 1",
   "item.storage_overhaul.jungle_chest_minecart_tier_1": "Lore mit Tropentruhe Stufe 1",
   "item.storage_overhaul.dark_oak_chest_minecart_tier_1": "Lore mit Schwarzeichentruhe Stufe 1",
+  "item.storage_overhaul.crimson_chest_minecart_tier_1": "Lore mit Karmesintruhe Stufe 1",
+  "item.storage_overhaul.warped_chest_minecart_tier_1": "Lore mit Wirrtruhe Stufe 1",
 
   "item.storage_overhaul.oak_chest_minecart_tier_2": "Lore mit Eichentruhe Stufe 2",
   "item.storage_overhaul.spruce_chest_minecart_tier_2": "Lore mit Fichtentruhe Stufe 2",
@@ -104,11 +126,15 @@
   "item.storage_overhaul.acacia_chest_minecart_tier_2": "Lore mit Akazientruhe Stufe 2",
   "item.storage_overhaul.jungle_chest_minecart_tier_2": "Lore mit Tropentruhe Stufe 2",
   "item.storage_overhaul.dark_oak_chest_minecart_tier_2": "Lore mit Schwarzeichentruhe Stufe 2",
+  "item.storage_overhaul.crimson_chest_minecart_tier_2": "Lore mit Karmesintruhe Stufe 2",
+  "item.storage_overhaul.warped_chest_minecart_tier_2": "Lore mit Wirrtruhe Stufe 2",
 
   "item.storage_overhaul.oak_chest_minecart_tier_3": "Lore mit Eichentruhe Stufe 3",
   "item.storage_overhaul.spruce_chest_minecart_tier_3": "Lore mit Fichtentruhe Stufe 3",
   "item.storage_overhaul.birch_chest_minecart_tier_3": "Lore mit Birkentruhe Stufe 3",
   "item.storage_overhaul.acacia_chest_minecart_tier_3": "Lore mit Akazientruhe Stufe 3",
   "item.storage_overhaul.jungle_chest_minecart_tier_3": "Lore mit Tropentruhe Stufe 3",
-  "item.storage_overhaul.dark_oak_chest_minecart_tier_3": "Lore mit Schwarzeichentruhe Stufe 3"
+  "item.storage_overhaul.dark_oak_chest_minecart_tier_3": "Lore mit Schwarzeichentruhe Stufe 3",
+  "item.storage_overhaul.crimson_chest_minecart_tier_3": "Lore mit Karmesintruhe Stufe 3",
+  "item.storage_overhaul.warped_chest_minecart_tier_3": "Lore mit Wirrtruhe Stufe 3"
 }
