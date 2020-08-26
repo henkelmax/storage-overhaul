@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["#L#", "#I#", "###"],
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_slab"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "L": {
+      "item": "minecraft:crimson_stem"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:crimson_storage_barrel"
+  }
+}

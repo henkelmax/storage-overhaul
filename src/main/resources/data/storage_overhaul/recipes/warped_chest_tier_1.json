@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["###", "##I", "###"],
+  "key": {
+    "#": {
+      "item": "minecraft:warped_planks"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:warped_chest_tier_1"
+  }
+}

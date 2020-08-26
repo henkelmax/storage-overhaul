@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_slab"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:crimson_barrel"
+  }
+}
