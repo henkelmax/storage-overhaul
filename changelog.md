@@ -1,1 +1,1 @@
-- Added nether wood variants
+- Added russian translation
