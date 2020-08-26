@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["#L#", "#I#", "###"],
+  "key": {
+    "#": {
+      "item": "minecraft:warped_slab"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "L": {
+      "item": "minecraft:warped_stem"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:warped_storage_barrel"
+  }
+}

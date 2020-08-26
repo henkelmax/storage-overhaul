@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["###", "##D", "###"],
+  "key": {
+    "#": {
+      "item": "minecraft:warped_planks"
+    },
+    "D": {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:warped_chest_tier_3"
+  }
+}

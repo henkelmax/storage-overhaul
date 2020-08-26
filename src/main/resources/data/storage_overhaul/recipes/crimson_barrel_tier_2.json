@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["###", "#G#", "###"],
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_slab"
+    },
+    "G": {
+      "tag": "forge:ingots/gold"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:crimson_barrel_tier_2"
+  }
+}

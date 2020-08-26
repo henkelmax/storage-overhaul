@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["###", "##D", "###"],
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_planks"
+    },
+    "D": {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:crimson_chest_tier_3"
+  }
+}

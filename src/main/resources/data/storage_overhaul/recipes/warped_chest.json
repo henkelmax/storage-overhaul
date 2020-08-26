@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["###", "###", "###"],
+  "key": {
+    "#": {
+      "item": "minecraft:warped_planks"
+    }
+  },
+  "result": {
+    "item": "storage_overhaul:warped_chest"
+  }
+}
