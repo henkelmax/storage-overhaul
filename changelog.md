@@ -1,1 +1,1 @@
-- Fixed advanced shulkerbox inventory
+- Fixed tooltips not showing up in tier 2/3 double chests
