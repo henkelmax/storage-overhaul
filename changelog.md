@@ -1,2 +1,1 @@
-- Updated dependencies
-- Updated mods.toml
+- Fixed some blocks drop the wrong items
