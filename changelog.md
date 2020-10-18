@@ -1,1 +1,1 @@
-- Fixed some blocks drop the wrong items
+- Improved russian language
