@@ -110,7 +110,7 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
     }
 
     private void updateNeighbors() {
-        getBlockState().func_235734_a_(getWorld(), getPos(), 3);
+        getBlockState().updateNeighbours(getWorld(), getPos(), 3);
     }
 
     @Override
@@ -155,8 +155,8 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
     }
 
     @Override
-    public void func_230337_a_(BlockState blockState, CompoundNBT compound) {
-        super.func_230337_a_(blockState, compound);
+    public void read(BlockState blockState, CompoundNBT compound) {
+        super.read(blockState, compound);
         loadFromNbt(compound);
     }
 

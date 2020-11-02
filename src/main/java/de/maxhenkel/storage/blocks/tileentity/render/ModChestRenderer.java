@@ -106,7 +106,7 @@ public class ModChestRenderer extends ChestTileEntityRenderer<ModChestTileEntity
     @Override
     public void render(ModChestTileEntity chest, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         BlockState blockstate = chest.hasWorld() ? chest.getBlockState() : ModBlocks.OAK_CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
-        ChestType chesttype = blockstate.func_235901_b_(ChestBlock.TYPE) ? blockstate.get(ChestBlock.TYPE) : ChestType.SINGLE;
+        ChestType chesttype = blockstate.hasProperty(ChestBlock.TYPE) ? blockstate.get(ChestBlock.TYPE) : ChestType.SINGLE;
         Block block = blockstate.getBlock();
         if (!(block instanceof ModChestBlock)) {
             return;

@@ -180,15 +180,15 @@ public class AdvancedShulkerBoxBlock extends ContainerBlock implements IItemBloc
                         itemCount++;
                         if (shownCount <= 4) {
                             shownCount++;
-                            IFormattableTextComponent itextcomponent = itemstack.getDisplayName().func_230531_f_(); //deepcopy
-                            itextcomponent.func_240702_b_(" x").func_240702_b_(String.valueOf(itemstack.getCount()));
+                            IFormattableTextComponent itextcomponent = itemstack.getDisplayName().deepCopy();
+                            itextcomponent.appendString(" x").appendString(String.valueOf(itemstack.getCount()));
                             tooltip.add(itextcomponent);
                         }
                     }
                 }
 
                 if (itemCount - shownCount > 0) {
-                    tooltip.add((new TranslationTextComponent("container.shulkerBox.more", itemCount - shownCount)).func_240699_a_(TextFormatting.ITALIC));
+                    tooltip.add((new TranslationTextComponent("container.shulkerBox.more", itemCount - shownCount)).mergeStyle(TextFormatting.ITALIC));
                 }
             }
         }

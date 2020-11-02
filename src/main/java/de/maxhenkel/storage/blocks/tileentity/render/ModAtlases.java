@@ -138,9 +138,9 @@ public class ModAtlases {
             return getChestTypeMaterial(CHEST_JUNGLE, chestType);
         } else if (WoodType.DARK_OAK.equals(type)) {
             return getChestTypeMaterial(CHEST_DARK_OAK, chestType);
-        } else if (WoodType.field_235923_g_.equals(type)) {
+        } else if (WoodType.CRIMSON.equals(type)) {
             return getChestTypeMaterial(CHEST_CRIMSON, chestType);
-        } else if (WoodType.field_235924_h_.equals(type)) {
+        } else if (WoodType.WARPED.equals(type)) {
             return getChestTypeMaterial(CHEST_WARPED, chestType);
         } else {
             return getChestTypeMaterial(CHEST_OAK, chestType);

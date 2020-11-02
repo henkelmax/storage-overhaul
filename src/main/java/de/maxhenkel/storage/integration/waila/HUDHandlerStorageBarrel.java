@@ -26,7 +26,7 @@ public class HUDHandlerStorageBarrel implements IComponentProvider, IServerDataP
         ITaggableList<ResourceLocation, ITextComponent> tooltip = (ITaggableList<ResourceLocation, ITextComponent>) t;
         tooltip.setTag(PluginStorageOverhaul.OBJECT_NAME_TAG, new StringTextComponent(String.format(Waila.CONFIG.get().getFormatting().getBlockName(), ((StorageBarrelTileEntity) accessor.getTileEntity()).getDisplayName().getString())));
         if (config.get(PluginStorageOverhaul.CONFIG_SHOW_REGISTRY)) {
-            tooltip.setTag(PluginStorageOverhaul.REGISTRY_NAME_TAG, new StringTextComponent(accessor.getBlock().getRegistryName().toString()).func_240699_a_(TextFormatting.GRAY));
+            tooltip.setTag(PluginStorageOverhaul.REGISTRY_NAME_TAG, new StringTextComponent(accessor.getBlock().getRegistryName().toString()).mergeStyle(TextFormatting.GRAY));
         }
     }
 
@@ -35,7 +35,7 @@ public class HUDHandlerStorageBarrel implements IComponentProvider, IServerDataP
         if (accessor.getServerData().contains("Content")) {
             ItemStack stack = ItemUtils.readOverstackedItem(accessor.getServerData().getCompound("Content"));
 
-            tooltip.add(new StringTextComponent(stack.getCount() + "x ").func_230529_a_((stack.getDisplayName())));
+            tooltip.add(new StringTextComponent(stack.getCount() + "x ").append((stack.getDisplayName())));
         }
     }
 

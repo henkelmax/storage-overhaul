@@ -73,13 +73,13 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
     }
 
     @Override
-    public void func_230337_a_(BlockState blockState, CompoundNBT compound) {
-        super.func_230337_a_(blockState, compound);
+    public void read(BlockState blockState, CompoundNBT compound) {
+        super.read(blockState, compound);
         barrelContent = ItemUtils.readOverstackedItem(compound.getCompound("Item"));
 
 
         if (compound.contains("CustomName")) {
-            customName = ITextComponent.Serializer.func_240644_b_(compound.getString("CustomName"));
+            customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
         }
     }
 
@@ -193,7 +193,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        func_230337_a_(getBlockState(), pkt.getNbtCompound());
+        read(getBlockState(), pkt.getNbtCompound());
     }
 
     @Override

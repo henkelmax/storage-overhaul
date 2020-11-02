@@ -211,9 +211,9 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
 
     @Nullable
     @Override
-    public Entity func_241206_a_(ServerWorld world) {
+    public Entity changeDimension(ServerWorld world) {
         this.dropContentsWhenDead = false;
-        return super.func_241206_a_(world);
+        return super.changeDimension(world);
     }
 
     @Override

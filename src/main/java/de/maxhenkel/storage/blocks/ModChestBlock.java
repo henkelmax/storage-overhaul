@@ -211,7 +211,7 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
         ChestType chesttype = ChestType.SINGLE;
         Direction direction = context.getPlacementHorizontalFacing().getOpposite();
         FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-        boolean flag = context.func_225518_g_();
+        boolean flag = context.hasSecondaryUseForPlayer();
         Direction direction1 = context.getFace();
         if (direction1.getAxis().isHorizontal() && flag) {
             Direction direction2 = getDirectionToAttach(context, direction1.getOpposite());
@@ -331,7 +331,7 @@ public class ModChestBlock extends ContainerBlock implements IWaterLoggable, IIt
         List<CatEntity> list = world.getEntitiesWithinAABB(CatEntity.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1));
         if (!list.isEmpty()) {
             for (CatEntity catentity : list) {
-                if (catentity.func_233684_eK_()) {
+                if (catentity.isSitting()) {
                     return true;
                 }
             }

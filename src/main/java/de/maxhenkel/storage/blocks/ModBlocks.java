@@ -15,8 +15,8 @@ public class ModBlocks {
     public static final ModChestBlock ACACIA_CHEST = new ModChestBlock("acacia_chest", WoodType.ACACIA, ChestTier.BASE_TIER);
     public static final ModChestBlock JUNGLE_CHEST = new ModChestBlock("jungle_chest", WoodType.JUNGLE, ChestTier.BASE_TIER);
     public static final ModChestBlock DARK_OAK_CHEST = new ModChestBlock("dark_oak_chest", WoodType.DARK_OAK, ChestTier.BASE_TIER);
-    public static final ModChestBlock CRIMSON_CHEST = new ModChestBlock("crimson_chest", WoodType.field_235923_g_, ChestTier.BASE_TIER);
-    public static final ModChestBlock WARPED_CHEST = new ModChestBlock("warped_chest", WoodType.field_235924_h_, ChestTier.BASE_TIER);
+    public static final ModChestBlock CRIMSON_CHEST = new ModChestBlock("crimson_chest", WoodType.CRIMSON, ChestTier.BASE_TIER);
+    public static final ModChestBlock WARPED_CHEST = new ModChestBlock("warped_chest", WoodType.WARPED, ChestTier.BASE_TIER);
 
     public static final ModChestBlock OAK_CHEST_TIER_1 = new ModChestBlock("oak_chest_tier_1", WoodType.OAK, ChestTier.TIER_1);
     public static final ModChestBlock SPRUCE_CHEST_TIER_1 = new ModChestBlock("spruce_chest_tier_1", WoodType.SPRUCE, ChestTier.TIER_1);
@@ -24,8 +24,8 @@ public class ModBlocks {
     public static final ModChestBlock ACACIA_CHEST_TIER_1 = new ModChestBlock("acacia_chest_tier_1", WoodType.ACACIA, ChestTier.TIER_1);
     public static final ModChestBlock JUNGLE_CHEST_TIER_1 = new ModChestBlock("jungle_chest_tier_1", WoodType.JUNGLE, ChestTier.TIER_1);
     public static final ModChestBlock DARK_OAK_CHEST_TIER_1 = new ModChestBlock("dark_oak_chest_tier_1", WoodType.DARK_OAK, ChestTier.TIER_1);
-    public static final ModChestBlock CRIMSON_CHEST_TIER_1 = new ModChestBlock("crimson_chest_tier_1", WoodType.field_235923_g_, ChestTier.TIER_1);
-    public static final ModChestBlock WARPED_CHEST_TIER_1 = new ModChestBlock("warped_chest_tier_1", WoodType.field_235924_h_, ChestTier.TIER_1);
+    public static final ModChestBlock CRIMSON_CHEST_TIER_1 = new ModChestBlock("crimson_chest_tier_1", WoodType.CRIMSON, ChestTier.TIER_1);
+    public static final ModChestBlock WARPED_CHEST_TIER_1 = new ModChestBlock("warped_chest_tier_1", WoodType.WARPED, ChestTier.TIER_1);
 
     public static final ModChestBlock OAK_CHEST_TIER_2 = new ModChestBlock("oak_chest_tier_2", WoodType.OAK, ChestTier.TIER_2);
     public static final ModChestBlock SPRUCE_CHEST_TIER_2 = new ModChestBlock("spruce_chest_tier_2", WoodType.SPRUCE, ChestTier.TIER_2);
@@ -33,8 +33,8 @@ public class ModBlocks {
     public static final ModChestBlock ACACIA_CHEST_TIER_2 = new ModChestBlock("acacia_chest_tier_2", WoodType.ACACIA, ChestTier.TIER_2);
     public static final ModChestBlock JUNGLE_CHEST_TIER_2 = new ModChestBlock("jungle_chest_tier_2", WoodType.JUNGLE, ChestTier.TIER_2);
     public static final ModChestBlock DARK_OAK_CHEST_TIER_2 = new ModChestBlock("dark_oak_chest_tier_2", WoodType.DARK_OAK, ChestTier.TIER_2);
-    public static final ModChestBlock CRIMSON_CHEST_TIER_2 = new ModChestBlock("crimson_chest_tier_2", WoodType.field_235923_g_, ChestTier.TIER_2);
-    public static final ModChestBlock WARPED_CHEST_TIER_2 = new ModChestBlock("warped_chest_tier_2", WoodType.field_235924_h_, ChestTier.TIER_2);
+    public static final ModChestBlock CRIMSON_CHEST_TIER_2 = new ModChestBlock("crimson_chest_tier_2", WoodType.CRIMSON, ChestTier.TIER_2);
+    public static final ModChestBlock WARPED_CHEST_TIER_2 = new ModChestBlock("warped_chest_tier_2", WoodType.WARPED, ChestTier.TIER_2);
 
     public static final ModChestBlock OAK_CHEST_TIER_3 = new ModChestBlock("oak_chest_tier_3", WoodType.OAK, ChestTier.TIER_3);
     public static final ModChestBlock SPRUCE_CHEST_TIER_3 = new ModChestBlock("spruce_chest_tier_3", WoodType.SPRUCE, ChestTier.TIER_3);
@@ -42,8 +42,8 @@ public class ModBlocks {
     public static final ModChestBlock ACACIA_CHEST_TIER_3 = new ModChestBlock("acacia_chest_tier_3", WoodType.ACACIA, ChestTier.TIER_3);
     public static final ModChestBlock JUNGLE_CHEST_TIER_3 = new ModChestBlock("jungle_chest_tier_3", WoodType.JUNGLE, ChestTier.TIER_3);
     public static final ModChestBlock DARK_OAK_CHEST_TIER_3 = new ModChestBlock("dark_oak_chest_tier_3", WoodType.DARK_OAK, ChestTier.TIER_3);
-    public static final ModChestBlock CRIMSON_CHEST_TIER_3 = new ModChestBlock("crimson_chest_tier_3", WoodType.field_235923_g_, ChestTier.TIER_3);
-    public static final ModChestBlock WARPED_CHEST_TIER_3 = new ModChestBlock("warped_chest_tier_3", WoodType.field_235924_h_, ChestTier.TIER_3);
+    public static final ModChestBlock CRIMSON_CHEST_TIER_3 = new ModChestBlock("crimson_chest_tier_3", WoodType.CRIMSON, ChestTier.TIER_3);
+    public static final ModChestBlock WARPED_CHEST_TIER_3 = new ModChestBlock("warped_chest_tier_3", WoodType.WARPED, ChestTier.TIER_3);
 
     public static final ModBarrelBlock OAK_BARREL = new ModBarrelBlock("oak_barrel", ChestTier.BASE_TIER);
     public static final ModBarrelBlock SPRUCE_BARREL = new ModBarrelBlock("spruce_barrel", ChestTier.BASE_TIER);

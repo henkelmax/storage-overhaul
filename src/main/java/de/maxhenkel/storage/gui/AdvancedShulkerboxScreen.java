@@ -20,9 +20,9 @@ public class AdvancedShulkerboxScreen extends ScreenBase<AdvancedShulkerboxConta
     }
 
     @Override
-    protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY) {
-        field_230712_o_.func_238421_b_(matrixStack, field_230704_d_.getString(), 8F, 6F, FONT_COLOR);
-        field_230712_o_.func_238421_b_(matrixStack, playerInventory.getDisplayName().getString(), 8F, (float) (ySize - 96 + 3), FONT_COLOR);
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
+        font.func_243248_b(matrixStack, getTitle(), 8F, 6F, FONT_COLOR);
+        font.func_243248_b(matrixStack, playerInventory.getDisplayName(), 8F, (float) (ySize - 96 + 3), FONT_COLOR);
     }
 
 }

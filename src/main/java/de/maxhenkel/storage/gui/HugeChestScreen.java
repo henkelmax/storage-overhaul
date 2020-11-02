@@ -26,26 +26,26 @@ public class HugeChestScreen extends ContainerScreen<HugeChestContainer> {
     }
 
     @Override
-    protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY) {
-        field_230712_o_.func_238421_b_(matrixStack, field_230704_d_.getString(), 8F, 6F, FONT_COLOR);
-        field_230712_o_.func_238421_b_(matrixStack, playerInventory.getDisplayName().getString(), 89F, (float) (ySize - 96 + 2), FONT_COLOR);
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
+        font.func_243248_b(matrixStack, getTitle(), 8F, 6F, FONT_COLOR);
+        font.func_243248_b(matrixStack, playerInventory.getDisplayName(), 89F, (float) (ySize - 96 + 2), FONT_COLOR);
     }
 
     @Override
-    public void func_230430_a_(MatrixStack matrixStack, int x, int y, float f) {
-        super.func_230430_a_(matrixStack, x, y, f);
-        func_230459_a_(matrixStack, x, y);
+    public void render(MatrixStack matrixStack, int x, int y, float f) {
+        super.render(matrixStack, x, y, f);
+        renderHoveredTooltip(matrixStack, x, y);
     }
 
     @Override
-    protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        func_230446_a_(matrixStack);
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+        renderBackground(matrixStack);
         RenderSystem.color4f(1F, 1F, 1F, 1F);
-        field_230706_i_.getTextureManager().bindTexture(TEXTURE);
+        minecraft.getTextureManager().bindTexture(TEXTURE);
 
         int invStart = inventoryRows * 18 + 17;
-        func_238463_a_(matrixStack, guiLeft, guiTop, 0, 0, xSize, invStart, 512, 512);
-        func_238463_a_(matrixStack, guiLeft, guiTop + invStart, 0, 179, xSize, 96, 512, 512);
+        blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, invStart, 512, 512);
+        blit(matrixStack, guiLeft, guiTop + invStart, 0, 179, xSize, 96, 512, 512);
     }
 
 }

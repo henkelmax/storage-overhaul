@@ -65,8 +65,8 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void func_230337_a_(BlockState blockState, CompoundNBT compound) {
-        super.func_230337_a_(blockState, compound);
+    public void read(BlockState blockState, CompoundNBT compound) {
+        super.read(blockState, compound);
 
         tier = ChestTier.byTier(compound.getInt("Tier"));
 
@@ -167,7 +167,7 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        func_230337_a_(getBlockState(), pkt.getNbtCompound());
+        read(getBlockState(), pkt.getNbtCompound());
     }
 
     @Override
