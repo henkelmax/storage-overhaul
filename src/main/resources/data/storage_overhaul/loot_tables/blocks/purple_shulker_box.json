@@ -29,6 +29,11 @@
                   "source": "LootTableSeed",
                   "target": "BlockEntityTag.LootTableSeed",
                   "op": "replace"
+                },
+                {
+                  "source": "Enchantments",
+                  "target": "Enchantments",
+                  "op": "replace"
                 }
               ]
             },
