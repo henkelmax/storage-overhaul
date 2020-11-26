@@ -1,1 +1,1 @@
-- Added compatibility with Shulker Enchantments
+- Fixed russian translation
