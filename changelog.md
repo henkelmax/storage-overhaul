@@ -1,1 +1,1 @@
-- Updated dependencies
+- Added compatibility with Shulker Enchantments
