@@ -2,6 +2,7 @@ package de.maxhenkel.storage.items;
 
 import de.maxhenkel.storage.gui.AdvancedShulkerboxContainer;
 import de.maxhenkel.storage.gui.ShulkerBoxItemInventory;
+import de.maxhenkel.storage.util.ShulkerBoxInventoryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.ShulkerBoxDispenseBehavior;
@@ -13,12 +14,21 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.CapabilityItemHandler;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class AdvancedShulkerBoxItem extends BlockItem {
 
@@ -54,4 +64,18 @@ public class AdvancedShulkerBoxItem extends BlockItem {
         return ActionResult.resultSuccess(stack);
     }
 
+    @Nullable
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+        return new ICapabilityProvider() {
+            @Nonnull
+            @Override
+            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+                if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+                    return LazyOptional.of(() -> new ShulkerBoxInventoryHandler(stack)).cast();
+                }
+                return LazyOptional.empty();
+            }
+        };
+    }
 }

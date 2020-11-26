@@ -14,6 +14,7 @@ import net.minecraft.inventory.container.ShulkerBoxContainer;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.ShulkerBoxTileEntity;
@@ -37,6 +38,7 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
     private ShulkerBoxTileEntity.AnimationStatus animationStatus = ShulkerBoxTileEntity.AnimationStatus.CLOSED;
     private float progress;
     private float progressOld;
+    private INBT enchantments;
 
     @Nullable
     private DyeColor color;
@@ -171,15 +173,27 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
         if (!checkLootAndRead(compound) && compound.contains("Items", 9)) {
             ItemStackHelper.loadAllItems(compound, items);
         }
-
+        INBT enchantmentsNbt = compound.get("Enchantments");
+        if (enchantmentsNbt != null) {
+            enchantments = enchantmentsNbt.copy();
+        }
     }
 
     public CompoundNBT saveToNbt(CompoundNBT compound) {
         if (!checkLootAndWrite(compound)) {
             ItemStackHelper.saveAllItems(compound, items, false);
         }
-
+        if (enchantments != null) {
+            compound.put("Enchantments", enchantments);
+        }
         return compound;
+    }
+
+    public void readFromItemStackNbt(CompoundNBT nbtIn) {
+        INBT nbt = nbtIn.get("Enchantments");
+        if (nbt != null) {
+            this.enchantments = nbt.copy();
+        }
     }
 
     @Override

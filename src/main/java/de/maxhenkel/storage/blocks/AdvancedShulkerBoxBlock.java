@@ -140,10 +140,14 @@ public class AdvancedShulkerBoxBlock extends ContainerBlock implements IItemBloc
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-        if (stack.hasDisplayName()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof AdvancedShulkerBoxTileEnitity) {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if (tileentity instanceof AdvancedShulkerBoxTileEnitity) {
+            if (stack.hasDisplayName()) {
                 ((AdvancedShulkerBoxTileEnitity) tileentity).setCustomName(stack.getDisplayName());
+            }
+            CompoundNBT tag = stack.getTag();
+            if (tag != null) {
+                ((AdvancedShulkerBoxTileEnitity) tileentity).readFromItemStackNbt(tag);
             }
         }
     }

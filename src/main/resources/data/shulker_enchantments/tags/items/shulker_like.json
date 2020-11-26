@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "storage_overhaul:white_shulker_box",
+    "storage_overhaul:orange_shulker_box",
+    "storage_overhaul:magenta_shulker_box",
+    "storage_overhaul:light_blue_shulker_box",
+    "storage_overhaul:yellow_shulker_box",
+    "storage_overhaul:lime_shulker_box",
+    "storage_overhaul:pink_shulker_box",
+    "storage_overhaul:gray_shulker_box",
+    "storage_overhaul:light_gray_shulker_box",
+    "storage_overhaul:cyan_shulker_box",
+    "storage_overhaul:purple_shulker_box",
+    "storage_overhaul:blue_shulker_box",
+    "storage_overhaul:brown_shulker_box",
+    "storage_overhaul:green_shulker_box",
+    "storage_overhaul:red_shulker_box",
+    "storage_overhaul:black_shulker_box"
+  ]
+}
