@@ -230,7 +230,11 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof StorageBarrelTileEntity) {
-                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((StorageBarrelTileEntity) tileentity).getBarrelContent());
+                ItemStack content = ((StorageBarrelTileEntity) tileentity).getBarrelContent();
+                while (!content.isEmpty()) {
+                    ItemStack split = content.split(content.getMaxStackSize());
+                    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), split);
+                }
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
             super.onReplaced(state, worldIn, pos, newState, isMoving);
