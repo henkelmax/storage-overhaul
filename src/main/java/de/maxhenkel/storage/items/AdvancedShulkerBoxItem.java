@@ -39,7 +39,7 @@ public class AdvancedShulkerBoxItem extends BlockItem {
 
     @Override
     public ActionResultType tryPlace(BlockItemUseContext context) {
-        if (!context.getPlayer().isSneaking()) {
+        if (context.getPlayer() != null && !context.getPlayer().isSneaking()) {
             return ActionResultType.PASS;
         }
         return super.tryPlace(context);

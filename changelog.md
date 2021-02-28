@@ -1,1 +1,1 @@
-- Fixed storage barrel dropping overstacked items
+- Fixed crash when dispensing advanced shulkerboxes
