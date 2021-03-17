@@ -37,7 +37,7 @@ public enum ChestTier {
     }
 
     public Container getContainer(int id, PlayerInventory player, IInventory inventory) {
-        int slotCount = inventory.getSizeInventory();
+        int slotCount = inventory.getContainerSize();
         int rows;
         if (slotCount % 18 == 0) {
             rows = slotCount / 18;
@@ -58,16 +58,16 @@ public enum ChestTier {
             rows = slotCount / 9;
             switch (rows) {
                 case 3:
-                    return ChestContainer.createGeneric9X3(id, player, inventory);
+                    return ChestContainer.threeRows(id, player, inventory);
                 case 4:
-                    return new ChestContainer(ContainerType.GENERIC_9X4, id, player, inventory, 4);
+                    return new ChestContainer(ContainerType.GENERIC_9x4, id, player, inventory, 4);
                 case 5:
-                    return new ChestContainer(ContainerType.GENERIC_9X5, id, player, inventory, 5);
+                    return new ChestContainer(ContainerType.GENERIC_9x5, id, player, inventory, 5);
                 case 6:
-                    return ChestContainer.createGeneric9X6(id, player, inventory);
+                    return ChestContainer.sixRows(id, player, inventory);
             }
         }
 
-        return ChestContainer.createGeneric9X3(id, player, inventory);
+        return ChestContainer.threeRows(id, player, inventory);
     }
 }

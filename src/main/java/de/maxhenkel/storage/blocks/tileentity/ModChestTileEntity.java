@@ -69,32 +69,32 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
 
     @Override
     protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent(getBlockState().getBlock().getTranslationKey());
+        return new TranslationTextComponent(getBlockState().getBlock().getDescriptionId());
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return getTier().numSlots();
     }
 
     @Override
-    public void read(BlockState blockState, CompoundNBT compound) {
-        super.read(blockState, compound);
+    public void load(BlockState blockState, CompoundNBT compound) {
+        super.load(blockState, compound);
         tier = ChestTier.byTier(compound.getInt("Tier"));
 
-        chestContents = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
-        if (!checkLootAndRead(compound)) {
+        chestContents = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        if (!tryLoadLootTable(compound)) {
             ItemStackHelper.loadAllItems(compound, chestContents);
         }
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundNBT save(CompoundNBT compound) {
+        super.save(compound);
 
         compound.putInt("Tier", getTier().getTier());
 
-        if (!checkLootAndWrite(compound)) {
+        if (!trySaveLootTable(compound)) {
             ItemStackHelper.saveAllItems(compound, getItems());
         }
 
@@ -103,24 +103,24 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
 
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(pos, 1, getUpdateTag());
+        return new SUpdateTileEntityPacket(worldPosition, 1, getUpdateTag());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        read(getBlockState(), pkt.getNbtCompound());
+        load(getBlockState(), pkt.getTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return write(new CompoundNBT());
+        return save(new CompoundNBT());
     }
 
     @Override
     public void tick() {
         prevLidAngle = lidAngle;
         if (numPlayersUsing > 0 && lidAngle == 0F) {
-            playSound(SoundEvents.BLOCK_CHEST_OPEN);
+            playSound(SoundEvents.CHEST_OPEN);
         }
 
         if (numPlayersUsing == 0 && lidAngle > 0F || numPlayersUsing > 0 && lidAngle < 1F) {
@@ -136,7 +136,7 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
             }
 
             if (lidAngle < 0.5F && oldAngle >= 0.5F) {
-                playSound(SoundEvents.BLOCK_CHEST_CLOSE);
+                playSound(SoundEvents.CHEST_CLOSE);
             }
 
             if (lidAngle < 0F) {
@@ -147,32 +147,33 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
     }
 
     private void playSound(SoundEvent soundIn) {
-        ChestType chesttype = getBlockState().get(ModChestBlock.TYPE);
+        ChestType chesttype = getBlockState().getValue(ModChestBlock.TYPE);
         if (chesttype != ChestType.LEFT) {
-            double x = (double) pos.getX() + 0.5D;
-            double y = (double) pos.getY() + 0.5D;
-            double z = (double) pos.getZ() + 0.5D;
+            double x = (double) worldPosition.getX() + 0.5D;
+            double y = (double) worldPosition.getY() + 0.5D;
+            double z = (double) worldPosition.getZ() + 0.5D;
             if (chesttype == ChestType.RIGHT) {
-                Direction direction = ChestBlock.getDirectionToAttached(getBlockState());
-                x += (double) direction.getXOffset() * 0.5D;
-                z += (double) direction.getZOffset() * 0.5D;
+                Direction direction = ChestBlock.getConnectedDirection(getBlockState());
+                x += (double) direction.getStepX() * 0.5D;
+                z += (double) direction.getStepZ() * 0.5D;
             }
 
-            world.playSound(null, x, y, z, soundIn, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-        }
-    }
-
-    public boolean receiveClientEvent(int id, int value) {
-        if (id == 1) {
-            numPlayersUsing = value;
-            return true;
-        } else {
-            return super.receiveClientEvent(id, value);
+            level.playSound(null, x, y, z, soundIn, SoundCategory.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
         }
     }
 
     @Override
-    public void openInventory(PlayerEntity player) {
+    public boolean triggerEvent(int id, int value) {
+        if (id == 1) {
+            numPlayersUsing = value;
+            return true;
+        } else {
+            return super.triggerEvent(id, value);
+        }
+    }
+
+    @Override
+    public void startOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             if (numPlayersUsing < 0) {
                 numPlayersUsing = 0;
@@ -185,7 +186,7 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
     }
 
     @Override
-    public void closeInventory(PlayerEntity player) {
+    public void stopOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             numPlayersUsing--;
             onOpenOrClose();
@@ -196,8 +197,8 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
     protected void onOpenOrClose() {
         Block block = getBlockState().getBlock();
         if (block instanceof ModChestBlock) {
-            world.addBlockEvent(pos, block, 1, numPlayersUsing);
-            world.notifyNeighborsOfStateChange(pos, block);
+            level.blockEvent(worldPosition, block, 1, numPlayersUsing);
+            level.updateNeighborsAt(worldPosition, block);
         }
     }
 
@@ -214,13 +215,13 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public float getLidAngle(float partialTicks) {
+    public float getOpenNess(float partialTicks) {
         return MathHelper.lerp(partialTicks, prevLidAngle, lidAngle);
     }
 
     @Override
-    public void updateContainingBlockInfo() {
-        super.updateContainingBlockInfo();
+    public void clearCache() {
+        super.clearCache();
         if (chestHandler != null) {
             chestHandler.invalidate();
             chestHandler = null;
@@ -229,7 +230,7 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if (!removed && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (!remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (chestHandler == null) {
                 chestHandler = LazyOptional.of(this::createHandler);
             }
@@ -243,14 +244,14 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
         if (!(state.getBlock() instanceof ModChestBlock)) {
             return new InvWrapper(this);
         }
-        ChestType type = state.get(ModChestBlock.TYPE);
+        ChestType type = state.getValue(ModChestBlock.TYPE);
         if (type != ChestType.SINGLE) {
-            BlockPos opos = getPos().offset(ModChestBlock.getDirectionToAttached(state));
-            BlockState ostate = getWorld().getBlockState(opos);
+            BlockPos opos = getBlockPos().relative(ModChestBlock.getDirectionToAttached(state));
+            BlockState ostate = getLevel().getBlockState(opos);
             if (state.getBlock() == ostate.getBlock()) {
-                ChestType otype = ostate.get(ModChestBlock.TYPE);
-                if (otype != ChestType.SINGLE && type != otype && state.get(ModChestBlock.FACING) == ostate.get(ModChestBlock.FACING)) {
-                    TileEntity ote = getWorld().getTileEntity(opos);
+                ChestType otype = ostate.getValue(ModChestBlock.TYPE);
+                if (otype != ChestType.SINGLE && type != otype && state.getValue(ModChestBlock.FACING) == ostate.getValue(ModChestBlock.FACING)) {
+                    TileEntity ote = getLevel().getBlockEntity(opos);
                     if (ote instanceof ModChestTileEntity) {
                         IInventory top = type == ChestType.RIGHT ? this : (IInventory) ote;
                         IInventory bottom = type == ChestType.RIGHT ? (IInventory) ote : this;
@@ -263,8 +264,8 @@ public class ModChestTileEntity extends LockableLootTileEntity implements IChest
     }
 
     @Override
-    public void remove() {
-        super.remove();
+    public void setRemoved() {
+        super.setRemoved();
         if (chestHandler != null)
             chestHandler.invalidate();
     }

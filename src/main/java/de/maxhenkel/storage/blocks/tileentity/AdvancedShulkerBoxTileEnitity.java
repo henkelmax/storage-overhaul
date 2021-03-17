@@ -78,21 +78,21 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
 
     public boolean canOpen() {
         if (animationStatus == ShulkerBoxTileEntity.AnimationStatus.CLOSED) {
-            Direction direction = getBlockState().get(AdvancedShulkerBoxBlock.FACING);
-            AxisAlignedBB axisalignedbb = VoxelShapes.fullCube().getBoundingBox().expand(0.5F * (float) direction.getXOffset(), 0.5F * (float) direction.getYOffset(), 0.5F * (float) direction.getZOffset()).contract(direction.getXOffset(), direction.getYOffset(), direction.getZOffset());
-            return world.hasNoCollisions(axisalignedbb.offset(pos.offset(direction)));
+            Direction direction = getBlockState().getValue(AdvancedShulkerBoxBlock.FACING);
+            AxisAlignedBB axisalignedbb = VoxelShapes.block().bounds().expandTowards(0.5F * (float) direction.getStepX(), 0.5F * (float) direction.getStepY(), 0.5F * (float) direction.getStepZ()).contract(direction.getStepX(), direction.getStepY(), direction.getStepZ());
+            return level.noCollision(axisalignedbb.move(worldPosition.relative(direction)));
         } else {
             return true;
         }
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return items.size();
     }
 
     @Override
-    public boolean receiveClientEvent(int id, int type) {
+    public boolean triggerEvent(int id, int type) {
         if (id == 1) {
             openCount = type;
             if (type == 0) {
@@ -107,45 +107,45 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
 
             return true;
         } else {
-            return super.receiveClientEvent(id, type);
+            return super.triggerEvent(id, type);
         }
     }
 
     private void updateNeighbors() {
-        getBlockState().updateNeighbours(getWorld(), getPos(), 3);
+        getBlockState().updateNeighbourShapes(getLevel(), getBlockPos(), 3);
     }
 
     @Override
-    public void openInventory(PlayerEntity player) {
+    public void startOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             if (openCount < 0) {
                 openCount = 0;
             }
 
             openCount++;
-            world.addBlockEvent(pos, getBlockState().getBlock(), 1, openCount);
+            level.blockEvent(worldPosition, getBlockState().getBlock(), 1, openCount);
             if (openCount == 1) {
-                world.playSound(null, pos, getOpenSound(), SoundCategory.BLOCKS, 0.5F, SoundUtils.getVariatedPitch(world));
+                level.playSound(null, worldPosition, getOpenSound(), SoundCategory.BLOCKS, 0.5F, SoundUtils.getVariatedPitch(level));
             }
         }
 
     }
 
     public static SoundEvent getOpenSound() {
-        return SoundEvents.ENTITY_SHULKER_OPEN; //BLOCK_SHULKER_BOX_OPEN;
+        return SoundEvents.SHULKER_OPEN;
     }
 
     public static SoundEvent getCloseSound() {
-        return SoundEvents.ENTITY_SHULKER_CLOSE; //BLOCK_SHULKER_BOX_CLOSE;
+        return SoundEvents.SHULKER_CLOSE;
     }
 
     @Override
-    public void closeInventory(PlayerEntity player) {
+    public void stopOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             openCount--;
-            world.addBlockEvent(pos, getBlockState().getBlock(), 1, openCount);
+            level.blockEvent(worldPosition, getBlockState().getBlock(), 1, openCount);
             if (openCount <= 0) {
-                world.playSound(null, pos, getCloseSound(), SoundCategory.BLOCKS, 0.5F, SoundUtils.getVariatedPitch(world));
+                level.playSound(null, worldPosition, getCloseSound(), SoundCategory.BLOCKS, 0.5F, SoundUtils.getVariatedPitch(level));
             }
         }
 
@@ -153,24 +153,24 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
 
     @Override
     protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent(getBlockState().getBlock().getTranslationKey());
+        return new TranslationTextComponent(getBlockState().getBlock().getDescriptionId());
     }
 
     @Override
-    public void read(BlockState blockState, CompoundNBT compound) {
-        super.read(blockState, compound);
+    public void load(BlockState blockState, CompoundNBT compound) {
+        super.load(blockState, compound);
         loadFromNbt(compound);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundNBT save(CompoundNBT compound) {
+        super.save(compound);
         return saveToNbt(compound);
     }
 
     public void loadFromNbt(CompoundNBT compound) {
-        items = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
-        if (!checkLootAndRead(compound) && compound.contains("Items", 9)) {
+        items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        if (!tryLoadLootTable(compound) && compound.contains("Items", 9)) {
             ItemStackHelper.loadAllItems(compound, items);
         }
         INBT enchantmentsNbt = compound.get("Enchantments");
@@ -180,7 +180,7 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
     }
 
     public CompoundNBT saveToNbt(CompoundNBT compound) {
-        if (!checkLootAndWrite(compound)) {
+        if (!trySaveLootTable(compound)) {
             ItemStackHelper.saveAllItems(compound, items, false);
         }
         if (enchantments != null) {
@@ -212,12 +212,12 @@ public class AdvancedShulkerBoxTileEnitity extends LockableLootTileEntity implem
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
-        return !(Block.getBlockFromItem(itemStackIn.getItem()) instanceof ShulkerBoxBlock);
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStackIn, @Nullable Direction direction) {
+        return !(Block.byItem(itemStackIn.getItem()) instanceof ShulkerBoxBlock);
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
         return true;
     }
 

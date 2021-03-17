@@ -42,7 +42,7 @@ import javax.annotation.Nullable;
 
 public class ModChestMinecartEntity extends AbstractMinecartEntity implements IInventory {
 
-    private static final DataParameter<Block> BLOCK = EntityDataManager.createKey(ModChestMinecartEntity.class, ModDataSerializers.BLOCK);
+    private static final DataParameter<Block> BLOCK = EntityDataManager.defineId(ModChestMinecartEntity.class, ModDataSerializers.BLOCK);
 
     protected NonNullList<ItemStack> inventoryContents;
     private boolean dropContentsWhenDead = true;
@@ -55,21 +55,21 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
 
     public NonNullList<ItemStack> getInventoryContents() {
         if (inventoryContents == null) {
-            inventoryContents = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+            inventoryContents = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
         }
         return inventoryContents;
     }
 
     public BlockState getBlock() {
         if (cachedBlock == null) {
-            cachedBlock = dataManager.get(BLOCK).getDefaultState();
+            cachedBlock = entityData.get(BLOCK).defaultBlockState();
         }
 
         return cachedBlock;
     }
 
     public void setBlock(Block block) {
-        dataManager.set(BLOCK, block);
+        entityData.set(BLOCK, block);
     }
 
     public ChestTier getChestTier() {
@@ -85,33 +85,33 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        dataManager.register(BLOCK, ModBlocks.OAK_CHEST);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        entityData.define(BLOCK, ModBlocks.OAK_CHEST);
     }
 
     @Override
-    public BlockState getDefaultDisplayTile() {
+    public BlockState getDefaultDisplayBlockState() {
         return getBlock();
     }
 
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Override
-    public void openInventory(PlayerEntity player) {
-        world.playSound(null, getPosX(), getPosY(), getPosZ(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+    public void startOpen(PlayerEntity player) {
+        level.playSound(null, getX(), getY(), getZ(), SoundEvents.CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
     }
 
     @Override
-    public void closeInventory(PlayerEntity player) {
-        world.playSound(null, getPosX(), getPosY(), getPosZ(), SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+    public void stopOpen(PlayerEntity player) {
+        level.playSound(null, getX(), getY(), getZ(), SoundEvents.CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return getChestTier().numSlots();
     }
 
@@ -121,7 +121,7 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
     }
 
     @Override
-    public int getDefaultDisplayTileOffset() {
+    public int getDefaultDisplayOffset() {
         return 8;
     }
 
@@ -132,16 +132,16 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
 
 
     @Override
-    protected ITextComponent getProfessionName() {
+    protected ITextComponent getTypeName() {
         return new TranslationTextComponent("entity.storage_overhaul.chest_minecart_generic", getItem().getDisplayName());
     }
 
     @Override
-    public void killMinecart(DamageSource source) {
-        super.killMinecart(source);
-        if (world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-            InventoryHelper.dropInventoryItems(world, this, this);
-            entityDropItem(getItem());
+    public void destroy(DamageSource source) {
+        super.destroy(source);
+        if (level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+            InventoryHelper.dropContents(level, this, this);
+            spawnAtLocation(getItem());
         }
     }
 
@@ -157,17 +157,17 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
     }
 
     @Override
-    public ItemStack getStackInSlot(int index) {
+    public ItemStack getItem(int index) {
         return getInventoryContents().get(index);
     }
 
     @Override
-    public ItemStack decrStackSize(int index, int count) {
-        return ItemStackHelper.getAndSplit(getInventoryContents(), index, count);
+    public ItemStack removeItem(int index, int count) {
+        return ItemStackHelper.removeItem(getInventoryContents(), index, count);
     }
 
     @Override
-    public ItemStack removeStackFromSlot(int index) {
+    public ItemStack removeItemNoUpdate(int index) {
         ItemStack itemstack = getInventoryContents().get(index);
         if (itemstack.isEmpty()) {
             return ItemStack.EMPTY;
@@ -178,18 +178,18 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
     }
 
     @Override
-    public void setInventorySlotContents(int index, ItemStack stack) {
+    public void setItem(int index, ItemStack stack) {
         getInventoryContents().set(index, stack);
-        if (!stack.isEmpty() && stack.getCount() > getInventoryStackLimit()) {
-            stack.setCount(getInventoryStackLimit());
+        if (!stack.isEmpty() && stack.getCount() > getMaxStackSize()) {
+            stack.setCount(getMaxStackSize());
         }
 
     }
 
     @Override
-    public boolean replaceItemInInventory(int inventorySlot, ItemStack itemStackIn) {
-        if (inventorySlot >= 0 && inventorySlot < this.getSizeInventory()) {
-            setInventorySlotContents(inventorySlot, itemStackIn);
+    public boolean setSlot(int inventorySlot, ItemStack itemStackIn) {
+        if (inventorySlot >= 0 && inventorySlot < this.getContainerSize()) {
+            setItem(inventorySlot, itemStackIn);
             return true;
         } else {
             return false;
@@ -197,15 +197,15 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
     }
 
     @Override
-    public void markDirty() {
+    public void setChanged() {
     }
 
     @Override
-    public boolean isUsableByPlayer(PlayerEntity player) {
+    public boolean stillValid(PlayerEntity player) {
         if (removed) {
             return false;
         } else {
-            return !(player.getDistanceSq(this) > 64.0D);
+            return !(player.distanceToSqr(this) > 64.0D);
         }
     }
 
@@ -218,8 +218,8 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
 
     @Override
     public void remove(boolean keepData) {
-        if (!world.isRemote && dropContentsWhenDead) {
-            InventoryHelper.dropInventoryItems(world, this, this);
+        if (!level.isClientSide && dropContentsWhenDead) {
+            InventoryHelper.dropContents(level, this, this);
         }
 
         super.remove(keepData);
@@ -227,27 +227,27 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
     }
 
     @Override
-    protected void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
+    protected void addAdditionalSaveData(CompoundNBT compound) {
+        super.addAdditionalSaveData(compound);
         ItemStackHelper.saveAllItems(compound, getInventoryContents());
         compound.putString("Block", getBlock().getBlock().getRegistryName().toString());
     }
 
     @Override
-    protected void readAdditional(CompoundNBT compound) {
-        super.readAdditional(compound);
+    protected void readAdditionalSaveData(CompoundNBT compound) {
+        super.readAdditionalSaveData(compound);
         setBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(compound.getString("Block"))));
-        inventoryContents = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+        inventoryContents = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, inventoryContents);
     }
 
     @Override
-    public ActionResultType processInitialInteract(PlayerEntity player, Hand hand) {
-        if (super.processInitialInteract(player, hand).isSuccessOrConsume()) return ActionResultType.SUCCESS;
-        player.openContainer(new INamedContainerProvider() {
+    public ActionResultType interact(PlayerEntity player, Hand hand) {
+        if (super.interact(player, hand).consumesAction()) return ActionResultType.SUCCESS;
+        player.openMenu(new INamedContainerProvider() {
             @Override
             public ITextComponent getDisplayName() {
-                return new TranslationTextComponent(getBlock().getBlock().getTranslationKey());
+                return new TranslationTextComponent(getBlock().getBlock().getDescriptionId());
             }
 
             @Nullable
@@ -260,16 +260,16 @@ public class ModChestMinecartEntity extends AbstractMinecartEntity implements II
     }
 
     @Override
-    protected void applyDrag() {
+    protected void applyNaturalSlowdown() {
         float motion = 0.98F;
-        int i = 15 - Container.calcRedstoneFromInventory(this);
+        int i = 15 - Container.getRedstoneSignalFromContainer(this);
         motion += (float) i * 0.001F;
 
-        setMotion(getMotion().mul(motion, 0D, motion));
+        setDeltaMovement(getDeltaMovement().multiply(motion, 0D, motion));
     }
 
     @Override
-    public void clear() {
+    public void clearContent() {
         getInventoryContents().clear();
     }
 

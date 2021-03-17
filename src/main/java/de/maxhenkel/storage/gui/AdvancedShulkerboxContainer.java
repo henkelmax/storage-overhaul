@@ -44,19 +44,19 @@ public class AdvancedShulkerboxContainer extends ContainerBase {
     }
 
     public static int getLockedSlot(PlayerEntity player) {
-        ItemStack stack = player.getHeldItem(Hand.MAIN_HAND);
+        ItemStack stack = player.getItemInHand(Hand.MAIN_HAND);
         if (isOpenableShulkerBox(stack)) {
-            return player.inventory.currentItem;
+            return player.inventory.selected;
         }
         return -1;
     }
 
     public static ItemStack getShulkerBox(PlayerEntity player) {
-        ItemStack stack = player.getHeldItem(Hand.MAIN_HAND);
+        ItemStack stack = player.getItemInHand(Hand.MAIN_HAND);
         if (isOpenableShulkerBox(stack)) {
             return stack;
         }
-        stack = player.getHeldItem(Hand.OFF_HAND);
+        stack = player.getItemInHand(Hand.OFF_HAND);
         if (isOpenableShulkerBox(stack)) {
             return stack;
         }

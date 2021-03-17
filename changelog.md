@@ -1,1 +1,1 @@
-- Fixed crash when dispensing advanced shulkerboxes
+- Updated to official mappings

@@ -23,7 +23,7 @@ public class ModTileEntities {
     public static TileEntityType<AdvancedShulkerBoxTileEnitity> SHULKER_BOX;
 
     public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-        CHEST = TileEntityType.Builder.create(() -> new ModChestTileEntity(null, null),
+        CHEST = TileEntityType.Builder.of(() -> new ModChestTileEntity(null, null),
                 ModBlocks.OAK_CHEST,
                 ModBlocks.SPRUCE_CHEST,
                 ModBlocks.BIRCH_CHEST,
@@ -63,7 +63,7 @@ public class ModTileEntities {
         CHEST.setRegistryName(new ResourceLocation(Main.MODID, "chest"));
         event.getRegistry().register(CHEST);
 
-        BARREL = TileEntityType.Builder.create(() -> new ModBarrelTileEntity(null),
+        BARREL = TileEntityType.Builder.of(() -> new ModBarrelTileEntity(null),
                 ModBlocks.OAK_BARREL,
                 ModBlocks.SPRUCE_BARREL,
                 ModBlocks.BIRCH_BARREL,
@@ -103,7 +103,7 @@ public class ModTileEntities {
         BARREL.setRegistryName(new ResourceLocation(Main.MODID, "barrel"));
         event.getRegistry().register(BARREL);
 
-        STORAGE_BARREL = TileEntityType.Builder.create(StorageBarrelTileEntity::new,
+        STORAGE_BARREL = TileEntityType.Builder.of(StorageBarrelTileEntity::new,
                 ModBlocks.OAK_STORAGE_BARREL,
                 ModBlocks.SPRUCE_STORAGE_BARREL,
                 ModBlocks.BIRCH_STORAGE_BARREL,
@@ -116,7 +116,7 @@ public class ModTileEntities {
         STORAGE_BARREL.setRegistryName(new ResourceLocation(Main.MODID, "storage_barrel"));
         event.getRegistry().register(STORAGE_BARREL);
 
-        SHULKER_BOX = TileEntityType.Builder.create(() -> new AdvancedShulkerBoxTileEnitity(null),
+        SHULKER_BOX = TileEntityType.Builder.of(() -> new AdvancedShulkerBoxTileEnitity(null),
                 ModBlocks.WHITE_SHULKER_BOX,
                 ModBlocks.ORANGE_SHULKER_BOX,
                 ModBlocks.MAGENTA_SHULKER_BOX,

@@ -32,28 +32,28 @@ public class StorageBarrelRenderer extends TileEntityRenderer<StorageBarrelTileE
     @Override
     public void render(StorageBarrelTileEntity barrel, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         Direction direction = Direction.UP;
-        if (barrel.hasWorld()) {
-            BlockState blockstate = barrel.getWorld().getBlockState(barrel.getPos());
+        if (barrel.hasLevel()) {
+            BlockState blockstate = barrel.getLevel().getBlockState(barrel.getBlockPos());
             if (blockstate.getBlock() instanceof StorageBarrelBlock) {
-                direction = blockstate.get(StorageBarrelBlock.PROPERTY_FACING);
-                combinedLightIn = minecraft.worldRenderer.getCombinedLight(barrel.getWorld(), barrel.getPos().offset(direction));
+                direction = blockstate.getValue(StorageBarrelBlock.PROPERTY_FACING);
+                combinedLightIn = minecraft.levelRenderer.getLightColor(barrel.getLevel(), barrel.getBlockPos().relative(direction));
             }
         }
 
 
-        matrixStackIn.push();
+        matrixStackIn.pushPose();
         matrixStackIn.translate(0.5D, 0.5D, 0.5D);
-        matrixStackIn.rotate(direction.getRotation());
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F));
-        matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
+        matrixStackIn.mulPose(direction.getRotation());
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+        matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(90.0F));
         matrixStackIn.translate(0D, 0D, -0.5D + 1D / 16D);
 
         ItemStack itemstack = barrel.getBarrelContent();
         if (!itemstack.isEmpty()) {
             matrixStackIn.scale(0.5F, 0.5F, 0.5F);
-            itemRenderer.renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
+            itemRenderer.renderStatic(itemstack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
         }
 
-        matrixStackIn.pop();
+        matrixStackIn.popPose();
     }
 }

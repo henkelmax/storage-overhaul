@@ -35,60 +35,60 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
 
     private static final DirectionalVoxelShape SHAPES = new DirectionalVoxelShape.Builder()
             .direction(Direction.NORTH,
-                    Block.makeCuboidShape(0D, 0D, 1D, 16D, 16D, 16D),
-                    Block.makeCuboidShape(0D, 0D, 0D, 1D, 16D, 1D),
-                    Block.makeCuboidShape(0D, 15D, 0D, 16D, 16D, 1D),
-                    Block.makeCuboidShape(15D, 0D, 0D, 16D, 16D, 1D),
-                    Block.makeCuboidShape(0D, 0D, 0D, 16D, 1D, 1D)
+                    Block.box(0D, 0D, 1D, 16D, 16D, 16D),
+                    Block.box(0D, 0D, 0D, 1D, 16D, 1D),
+                    Block.box(0D, 15D, 0D, 16D, 16D, 1D),
+                    Block.box(15D, 0D, 0D, 16D, 16D, 1D),
+                    Block.box(0D, 0D, 0D, 16D, 1D, 1D)
             )
             .direction(Direction.SOUTH,
-                    Block.makeCuboidShape(0D, 0D, 0D, 16D, 16D, 15D),
-                    Block.makeCuboidShape(0D, 0D, 15D, 1D, 16D, 16D),
-                    Block.makeCuboidShape(0D, 15D, 15D, 16D, 16D, 16D),
-                    Block.makeCuboidShape(15D, 0D, 15D, 16D, 16D, 16D),
-                    Block.makeCuboidShape(0D, 0D, 15D, 16D, 1D, 16D)
+                    Block.box(0D, 0D, 0D, 16D, 16D, 15D),
+                    Block.box(0D, 0D, 15D, 1D, 16D, 16D),
+                    Block.box(0D, 15D, 15D, 16D, 16D, 16D),
+                    Block.box(15D, 0D, 15D, 16D, 16D, 16D),
+                    Block.box(0D, 0D, 15D, 16D, 1D, 16D)
             )
             .direction(Direction.EAST,
-                    Block.makeCuboidShape(0D, 0D, 0D, 15D, 16D, 16D),
-                    Block.makeCuboidShape(15D, 0D, 0D, 16D, 16D, 1D),
-                    Block.makeCuboidShape(15D, 15D, 0D, 16D, 16D, 16D),
-                    Block.makeCuboidShape(15D, 16D, 15D, 16D, 0D, 16D),
-                    Block.makeCuboidShape(15D, 0D, 0D, 16D, 1D, 16D)
+                    Block.box(0D, 0D, 0D, 15D, 16D, 16D),
+                    Block.box(15D, 0D, 0D, 16D, 16D, 1D),
+                    Block.box(15D, 15D, 0D, 16D, 16D, 16D),
+                    Block.box(15D, 16D, 15D, 16D, 0D, 16D),
+                    Block.box(15D, 0D, 0D, 16D, 1D, 16D)
             )
             .direction(Direction.WEST,
-                    Block.makeCuboidShape(1D, 0D, 0D, 16D, 16D, 16D),
-                    Block.makeCuboidShape(0D, 0D, 0D, 1D, 16D, 1D),
-                    Block.makeCuboidShape(0D, 15D, 0D, 1D, 16D, 16D),
-                    Block.makeCuboidShape(0D, 16D, 15D, 1D, 0D, 16D),
-                    Block.makeCuboidShape(0D, 0D, 0D, 1D, 1D, 16D)
+                    Block.box(1D, 0D, 0D, 16D, 16D, 16D),
+                    Block.box(0D, 0D, 0D, 1D, 16D, 1D),
+                    Block.box(0D, 15D, 0D, 1D, 16D, 16D),
+                    Block.box(0D, 16D, 15D, 1D, 0D, 16D),
+                    Block.box(0D, 0D, 0D, 1D, 1D, 16D)
             )
             .direction(Direction.UP,
-                    Block.makeCuboidShape(0D, 0D, 0D, 16D, 15D, 16D),
-                    Block.makeCuboidShape(0D, 15D, 0D, 1D, 16D, 16D),
-                    Block.makeCuboidShape(0D, 15D, 15D, 16D, 16D, 16D),
-                    Block.makeCuboidShape(16D, 16D, 16D, 15D, 15D, 0D),
-                    Block.makeCuboidShape(0D, 16D, 0D, 16D, 15D, 1D)
+                    Block.box(0D, 0D, 0D, 16D, 15D, 16D),
+                    Block.box(0D, 15D, 0D, 1D, 16D, 16D),
+                    Block.box(0D, 15D, 15D, 16D, 16D, 16D),
+                    Block.box(16D, 16D, 16D, 15D, 15D, 0D),
+                    Block.box(0D, 16D, 0D, 16D, 15D, 1D)
             )
             .direction(Direction.DOWN,
-                    Block.makeCuboidShape(0D, 1D, 0D, 16D, 16D, 16D),
-                    Block.makeCuboidShape(0D, 0D, 0D, 1D, 1D, 16D),
-                    Block.makeCuboidShape(0D, 0D, 15D, 16D, 1D, 16D),
-                    Block.makeCuboidShape(16D, 1D, 16D, 15D, 0D, 0D),
-                    Block.makeCuboidShape(0D, 0D, 0D, 16D, 1D, 1D)
+                    Block.box(0D, 1D, 0D, 16D, 16D, 16D),
+                    Block.box(0D, 0D, 0D, 1D, 1D, 16D),
+                    Block.box(0D, 0D, 15D, 16D, 1D, 16D),
+                    Block.box(16D, 1D, 16D, 15D, 0D, 0D),
+                    Block.box(0D, 0D, 0D, 16D, 1D, 1D)
             ).build();
 
     public static final DirectionProperty PROPERTY_FACING = BlockStateProperties.FACING;
 
     protected StorageBarrelBlock(String name) {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
+        super(Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD));
         setRegistryName(new ResourceLocation(Main.MODID, name));
-        setDefaultState(stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH));
+        registerDefaultState(stateDefinition.any().setValue(PROPERTY_FACING, Direction.NORTH));
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Override
     public Item toItem() {
-        return new BlockItem(this, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName(getRegistryName());
+        return new BlockItem(this, new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)).setRegistryName(getRegistryName());
     }
 
     @SubscribeEvent
@@ -98,7 +98,7 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
             return;
         }
 
-        if (event.getFace().equals(state.get(PROPERTY_FACING))) {
+        if (event.getFace().equals(state.getValue(PROPERTY_FACING))) {
             if (event.getPlayer().isCreative()) {
                 event.setCanceled(true);
                 onFrontClicked(state, event.getWorld(), event.getPos(), event.getPlayer());
@@ -107,16 +107,16 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!hit.getFace().equals(state.get(PROPERTY_FACING))) {
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!hit.getDirection().equals(state.getValue(PROPERTY_FACING))) {
             return ActionResultType.PASS;
         }
 
-        if (worldIn.isRemote) {
+        if (worldIn.isClientSide) {
             return ActionResultType.SUCCESS;
         }
 
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
         if (!(tileentity instanceof StorageBarrelTileEntity)) {
             return ActionResultType.SUCCESS;
         }
@@ -125,11 +125,11 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
 
         if (barrel.onInsert(player)) {
             boolean inserted = false;
-            for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-                ItemStack stack = player.inventory.getStackInSlot(i);
+            for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+                ItemStack stack = player.inventory.getItem(i);
                 ItemStack rest = barrel.insertItem(0, stack, false);
-                if (!ItemStack.areItemStacksEqual(rest, stack)) {
-                    player.inventory.setInventorySlotContents(i, rest);
+                if (!ItemStack.matches(rest, stack)) {
+                    player.inventory.setItem(i, rest);
                     inserted = true;
                 }
             }
@@ -140,11 +140,11 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
             return ActionResultType.SUCCESS;
         }
 
-        ItemStack held = player.getHeldItem(handIn);
+        ItemStack held = player.getItemInHand(handIn);
 
         ItemStack remaining = barrel.insertItem(0, held, false);
 
-        if (ItemStack.areItemStacksEqual(remaining, held)) {
+        if (ItemStack.matches(remaining, held)) {
             return ActionResultType.SUCCESS;
         }
 
@@ -155,26 +155,26 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
     }
 
     public void playInsertSound(World world, PlayerEntity player) {
-        world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, SoundUtils.getVariatedPitch(world));
+        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, SoundUtils.getVariatedPitch(world));
     }
 
     public void playExtractSound(World world, PlayerEntity player) {
-        world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() * 0.1F + 1.3F);
+        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 1.3F);
     }
 
     @Override
-    public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-        super.onBlockClicked(state, worldIn, pos, player);
+    public void attack(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+        super.attack(state, worldIn, pos, player);
         if (!player.isCreative()) {
             onFrontClicked(state, worldIn, pos, player);
         }
     }
 
     public void onFrontClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-        if (worldIn.isRemote) {
+        if (worldIn.isClientSide) {
             return;
         }
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
         if (!(tileentity instanceof StorageBarrelTileEntity)) {
             return;
         }
@@ -187,15 +187,15 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
 
         ItemStack barrelContent = barrel.getBarrelContent();
 
-        int amount = Math.min(player.isSneaking() ? barrelContent.getMaxStackSize() : 1, barrelContent.getCount());
+        int amount = Math.min(player.isShiftKeyDown() ? barrelContent.getMaxStackSize() : 1, barrelContent.getCount());
 
-        ItemStack heldItem = player.getHeldItemMainhand();
+        ItemStack heldItem = player.getMainHandItem();
 
         if (heldItem.isEmpty()) {
             ItemStack newItem = barrelContent.copy();
             newItem.setCount(amount);
             barrel.removeCount(amount);
-            player.inventory.add(player.inventory.currentItem, newItem);
+            player.inventory.add(player.inventory.selected, newItem);
             playExtractSound(worldIn, player);
             return;
         } else if (ItemUtils.isStackable(heldItem, barrelContent)) {
@@ -206,7 +206,7 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
                 ItemStack newItem = heldItem.copy();
                 newItem.setCount(amount);
                 barrel.removeCount(amount);
-                player.inventory.add(player.inventory.currentItem, newItem);
+                player.inventory.add(player.inventory.selected, newItem);
                 playExtractSound(worldIn, player);
                 return;
             }
@@ -216,55 +216,54 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
         newItem.setCount(amount);
         barrel.removeCount(amount);
 
-        player.inventory.addItemStackToInventory(newItem);
+        player.inventory.add(newItem);
 
         if (!newItem.isEmpty()) {
-            spawnAsEntity(worldIn, pos.offset(state.get(PROPERTY_FACING)), newItem);
+            popResource(worldIn, pos.relative(state.getValue(PROPERTY_FACING)), newItem);
         }
 
         playExtractSound(worldIn, player);
     }
 
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof StorageBarrelTileEntity) {
                 ItemStack content = ((StorageBarrelTileEntity) tileentity).getBarrelContent();
                 while (!content.isEmpty()) {
                     ItemStack split = content.split(content.getMaxStackSize());
-                    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), split);
+                    InventoryHelper.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), split);
                 }
-                worldIn.updateComparatorOutputLevel(pos, this);
+                worldIn.updateNeighbourForOutputSignal(pos, this);
             }
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onRemove(state, worldIn, pos, newState, isMoving);
         }
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
+    public BlockRenderType getRenderShape(BlockState state) {
         return BlockRenderType.MODEL;
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if (stack.hasDisplayName()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof StorageBarrelTileEntity) {
                 ((StorageBarrelTileEntity) tileentity).setCustomName(stack.getDisplayName());
             }
         }
-
     }
 
     @Override
-    public boolean hasComparatorInputOverride(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
-    public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-        return calcRedstone((StorageBarrelTileEntity) worldIn.getTileEntity(pos));
+    public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+        return calcRedstone((StorageBarrelTileEntity) worldIn.getBlockEntity(pos));
     }
 
     public int calcRedstone(StorageBarrelTileEntity barrel) {
@@ -277,39 +276,39 @@ public class StorageBarrelBlock extends ContainerBlock implements IItemBlock {
 
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(PROPERTY_FACING, rot.rotate(state.get(PROPERTY_FACING)));
+        return state.setValue(PROPERTY_FACING, rot.rotate(state.getValue(PROPERTY_FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(PROPERTY_FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(PROPERTY_FACING)));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(PROPERTY_FACING);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return getDefaultState().with(PROPERTY_FACING, context.getNearestLookingDirection().getOpposite());
+        return defaultBlockState().setValue(PROPERTY_FACING, context.getNearestLookingDirection().getOpposite());
     }
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity newBlockEntity(IBlockReader worldIn) {
         return new StorageBarrelTileEntity();
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPES.get(state.get(PROPERTY_FACING));
+        return SHAPES.get(state.getValue(PROPERTY_FACING));
     }
 
     @Override
     public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
-        if (((BlockRayTraceResult) target).getFace().equals(state.get(PROPERTY_FACING))) {
-            StorageBarrelTileEntity barrel = (StorageBarrelTileEntity) world.getTileEntity(pos);
+        if (((BlockRayTraceResult) target).getDirection().equals(state.getValue(PROPERTY_FACING))) {
+            StorageBarrelTileEntity barrel = (StorageBarrelTileEntity) world.getBlockEntity(pos);
             ItemStack stack = barrel.getBarrelContent().copy();
             if (!stack.isEmpty()) {
                 stack.setCount(1);

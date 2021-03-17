@@ -25,36 +25,36 @@ public class AdvancedShulkerBoxRenderer extends TileEntityRenderer<AdvancedShulk
         base = new ModelRenderer(64, 64, 0, 28);
         lid = new ModelRenderer(64, 64, 0, 0);
         lid.addBox(-8F, -16F, -8F, 16F, 12F, 16F);
-        lid.setRotationPoint(0F, 24F, 0F);
+        lid.setPos(0F, 24F, 0F);
         base.addBox(-8F, -4F, -8F, 16F, 4F, 16F);
-        base.setRotationPoint(0F, 24F, 0F);
+        base.setPos(0F, 24F, 0F);
     }
 
     @Override
     public void render(AdvancedShulkerBoxTileEnitity box, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         Direction direction = Direction.UP;
-        if (box.hasWorld()) {
-            BlockState blockstate = box.getWorld().getBlockState(box.getPos());
+        if (box.hasLevel()) {
+            BlockState blockstate = box.getLevel().getBlockState(box.getBlockPos());
             if (blockstate.getBlock() instanceof AdvancedShulkerBoxBlock) {
-                direction = blockstate.get(AdvancedShulkerBoxBlock.FACING);
+                direction = blockstate.getValue(AdvancedShulkerBoxBlock.FACING);
             }
         }
 
         RenderMaterial material = ModAtlases.getShulkerBoxMaterial(box.getColor());
 
-        matrixStackIn.push();
+        matrixStackIn.pushPose();
         matrixStackIn.translate(0.5D, 0.5D, 0.5D);
         matrixStackIn.scale(0.9995F, 0.9995F, 0.9995F);
-        matrixStackIn.rotate(direction.getRotation());
+        matrixStackIn.mulPose(direction.getRotation());
         matrixStackIn.scale(1F, -1F, -1F);
         matrixStackIn.translate(0D, -1D, 0D);
-        IVertexBuilder ivertexbuilder = material.getBuffer(bufferIn, RenderType::getEntityCutoutNoCull);
+        IVertexBuilder ivertexbuilder = material.buffer(bufferIn, RenderType::entityCutoutNoCull);
         base.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn);
 
         float progress = box.getProgress(partialTicks);
         matrixStackIn.translate(0D, -progress * 0.5F, 0D);
         lid.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn);
 
-        matrixStackIn.pop();
+        matrixStackIn.popPose();
     }
 }

@@ -97,22 +97,22 @@ public class ModAtlases {
     private static final RenderMaterial CHEST_WARPED_LEFT_MATERIAL = getChestMaterial(CHEST_WARPED_LEFT_LOCATION);
     private static final RenderMaterial CHEST_WARPED_RIGHT_MATERIAL = getChestMaterial(CHEST_WARPED_RIGHT_LOCATION);
 
-    public static final RenderMaterial WHITE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, WHITE_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial ORANGE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, ORANGE_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial MAGENTA_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, MAGENTA_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial LIGHT_BLUE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, LIGHT_BLUE_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial YELLOW_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, YELLOW_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial LIME_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, LIME_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial PINK_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, PINK_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial GRAY_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, GRAY_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial LIGHT_GRAY_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, LIGHT_GRAY_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial CYAN_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, CYAN_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial PURPLE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, PURPLE_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial BLUE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, BLUE_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial BROWN_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, BROWN_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial GREEN_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, GREEN_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial RED_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, RED_SHULKER_BOX_LOCATION);
-    public static final RenderMaterial BLACK_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_BOX_ATLAS, BLACK_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial WHITE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, WHITE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial ORANGE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, ORANGE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial MAGENTA_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, MAGENTA_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial LIGHT_BLUE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, LIGHT_BLUE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial YELLOW_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, YELLOW_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial LIME_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, LIME_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial PINK_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, PINK_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial GRAY_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, GRAY_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial LIGHT_GRAY_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, LIGHT_GRAY_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial CYAN_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, CYAN_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial PURPLE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, PURPLE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial BLUE_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, BLUE_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial BROWN_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, BROWN_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial GREEN_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, GREEN_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial RED_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, RED_SHULKER_BOX_LOCATION);
+    public static final RenderMaterial BLACK_SHULKER_BOX_MATERIAL = new RenderMaterial(Atlases.SHULKER_SHEET, BLACK_SHULKER_BOX_LOCATION);
 
     public static final ChestMaterial CHEST_OAK = new ChestMaterial(CHEST_OAK_MATERIAL, CHEST_OAK_LEFT_MATERIAL, CHEST_OAK_RIGHT_MATERIAL);
     public static final ChestMaterial CHEST_SPRUCE = new ChestMaterial(CHEST_SPRUCE_MATERIAL, CHEST_SPRUCE_LEFT_MATERIAL, CHEST_SPRUCE_RIGHT_MATERIAL);
@@ -124,7 +124,7 @@ public class ModAtlases {
     public static final ChestMaterial CHEST_WARPED = new ChestMaterial(CHEST_WARPED_MATERIAL, CHEST_WARPED_LEFT_MATERIAL, CHEST_WARPED_RIGHT_MATERIAL);
 
     private static RenderMaterial getChestMaterial(ResourceLocation location) {
-        return new RenderMaterial(Atlases.CHEST_ATLAS, location);
+        return new RenderMaterial(Atlases.CHEST_SHEET, location);
     }
 
     public static RenderMaterial getChestMaterial(WoodType type, ChestType chestType) {
@@ -199,7 +199,7 @@ public class ModAtlases {
 
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event) {
-        if (event.getMap().getTextureLocation().equals(Atlases.CHEST_ATLAS)) {
+        if (event.getMap().location().equals(Atlases.CHEST_SHEET)) {
 
             event.addSprite(CHEST_OAK_LOCATION);
             event.addSprite(CHEST_OAK_LEFT_LOCATION);
@@ -233,7 +233,7 @@ public class ModAtlases {
             event.addSprite(CHEST_WARPED_LEFT_LOCATION);
             event.addSprite(CHEST_WARPED_RIGHT_LOCATION);
 
-        } else if (event.getMap().getTextureLocation().equals(Atlases.SHULKER_BOX_ATLAS)) {
+        } else if (event.getMap().location().equals(Atlases.SHULKER_SHEET)) {
 
             event.addSprite(WHITE_SHULKER_BOX_LOCATION);
             event.addSprite(ORANGE_SHULKER_BOX_LOCATION);

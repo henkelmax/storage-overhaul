@@ -40,28 +40,28 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     public boolean onInsert(PlayerEntity player) {
         boolean flag = false;
-        if (world.getGameTime() - clicks.getOrDefault(player.getUniqueID(), 0L) <= 4) {
+        if (level.getGameTime() - clicks.getOrDefault(player.getUUID(), 0L) <= 4) {
             flag = true;
         }
-        clicks.put(player.getUniqueID(), world.getGameTime());
+        clicks.put(player.getUUID(), level.getGameTime());
         return flag;
     }
 
     @Override
-    public void markDirty() {
-        super.markDirty();
-        if (world instanceof ServerWorld) {
-            EntityUtils.forEachPlayerAround((ServerWorld) world, getPos(), 128D, this::syncContents);
+    public void setChanged() {
+        super.setChanged();
+        if (level instanceof ServerWorld) {
+            EntityUtils.forEachPlayerAround((ServerWorld) level, getBlockPos(), 128D, this::syncContents);
         }
     }
 
     public void syncContents(ServerPlayerEntity player) {
-        player.connection.sendPacket(getUpdatePacket());
+        player.connection.send(getUpdatePacket());
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundNBT save(CompoundNBT compound) {
+        super.save(compound);
 
         compound.put("Item", ItemUtils.writeOverstackedItem(new CompoundNBT(), barrelContent));
 
@@ -73,13 +73,13 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
     }
 
     @Override
-    public void read(BlockState blockState, CompoundNBT compound) {
-        super.read(blockState, compound);
+    public void load(BlockState blockState, CompoundNBT compound) {
+        super.load(blockState, compound);
         barrelContent = ItemUtils.readOverstackedItem(compound.getCompound("Item"));
 
 
         if (compound.contains("CustomName")) {
-            customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
+            customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
         }
     }
 
@@ -89,7 +89,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     public void setBarrelContent(ItemStack barrelContent) {
         this.barrelContent = barrelContent;
-        markDirty();
+        setChanged();
     }
 
     public void addCount(int amount) {
@@ -97,7 +97,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
             return;
         }
         barrelContent.grow(amount);
-        markDirty();
+        setChanged();
     }
 
     public void removeCount(int amount) {
@@ -105,7 +105,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
             return;
         }
         barrelContent.shrink(amount);
-        markDirty();
+        setChanged();
     }
 
     public boolean isEmpty() {
@@ -178,7 +178,7 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     @Override
     public ITextComponent getName() {
-        return customName != null ? customName : new TranslationTextComponent(getBlockState().getBlock().getTranslationKey());
+        return customName != null ? customName : new TranslationTextComponent(getBlockState().getBlock().getDescriptionId());
     }
 
     @Override
@@ -188,22 +188,22 @@ public class StorageBarrelTileEntity extends TileEntity implements IItemHandler,
 
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(pos, 1, getUpdateTag());
+        return new SUpdateTileEntityPacket(worldPosition, 1, getUpdateTag());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        read(getBlockState(), pkt.getNbtCompound());
+        load(getBlockState(), pkt.getTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return write(new CompoundNBT());
+        return save(new CompoundNBT());
     }
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if (!removed && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (!remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return LazyOptional.of(() -> this).cast();
         }
         return super.getCapability(cap, side);

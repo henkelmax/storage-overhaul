@@ -34,20 +34,20 @@ public class AdvancedShulkerBoxItem extends BlockItem {
 
     public AdvancedShulkerBoxItem(Block blockIn, Properties builder) {
         super(blockIn, builder);
-        DispenserBlock.registerDispenseBehavior(this, new ShulkerBoxDispenseBehavior());
+        DispenserBlock.registerBehavior(this, new ShulkerBoxDispenseBehavior());
     }
 
     @Override
-    public ActionResultType tryPlace(BlockItemUseContext context) {
-        if (context.getPlayer() != null && !context.getPlayer().isSneaking()) {
+    public ActionResultType place(BlockItemUseContext context) {
+        if (context.getPlayer() != null && !context.getPlayer().isShiftKeyDown()) {
             return ActionResultType.PASS;
         }
-        return super.tryPlace(context);
+        return super.place(context);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity player, Hand handIn) {
-        ItemStack stack = player.getHeldItem(handIn);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity player, Hand handIn) {
+        ItemStack stack = player.getItemInHand(handIn);
         if (player instanceof ServerPlayerEntity) {
             NetworkHooks.openGui((ServerPlayerEntity) player, new INamedContainerProvider() {
                 @Override
@@ -61,7 +61,7 @@ public class AdvancedShulkerBoxItem extends BlockItem {
                 }
             });
         }
-        return ActionResult.resultSuccess(stack);
+        return ActionResult.success(stack);
     }
 
     @Nullable

@@ -16,7 +16,7 @@ public class ModEntities {
 
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
         CHEST_MINECART = CommonRegistry.registerEntity(Main.MODID, "chest_minecart", EntityClassification.MISC, ModChestMinecartEntity.class, builder -> {
-            builder.size(0.98F, 0.7F);
+            builder.sized(0.98F, 0.7F);
         });
         event.getRegistry().register(CHEST_MINECART);
     }

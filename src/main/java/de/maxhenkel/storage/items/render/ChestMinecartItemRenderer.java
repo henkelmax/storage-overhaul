@@ -26,12 +26,12 @@ public class ChestMinecartItemRenderer extends ItemStackTileEntityRenderer {
     }
 
     @Override
-    public void func_239207_a_(ItemStack itemStackIn, ItemCameraTransforms.TransformType transformType, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void renderByItem(ItemStack itemStackIn, ItemCameraTransforms.TransformType transformType, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (renderer == null) {
-            renderer = new MinecartRenderer(minecraft.getRenderManager());
+            renderer = new MinecartRenderer(minecraft.getEntityRenderDispatcher());
         }
         if (entity == null) {
-            entity = ModEntities.CHEST_MINECART.create(minecraft.world);
+            entity = ModEntities.CHEST_MINECART.create(minecraft.level);
             entity.setBlock(block.get());
         }
         renderer.render(entity, 0F, 1F, matrixStackIn, bufferIn, combinedLightIn);

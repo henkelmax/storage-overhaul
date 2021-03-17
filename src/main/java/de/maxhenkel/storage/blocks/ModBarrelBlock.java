@@ -36,16 +36,16 @@ public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
     private ChestTier tier;
 
     protected ModBarrelBlock(String name, ChestTier tier) {
-        super(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD));
+        super(Block.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD));
         this.tier = tier;
 
         setRegistryName(new ResourceLocation(Main.MODID, name));
-        setDefaultState(stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH).with(PROPERTY_OPEN, false));
+        registerDefaultState(stateDefinition.any().setValue(PROPERTY_FACING, Direction.NORTH).setValue(PROPERTY_OPEN, false));
     }
 
     @Override
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
         if (tileentity instanceof ModBarrelTileEntity) {
             ((ModBarrelTileEntity) tileentity).barrelTick();
         }
@@ -53,18 +53,18 @@ public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
 
     @Override
     public Item toItem() {
-        return new BlockItem(this, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName(getRegistryName());
+        return new BlockItem(this, new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)).setRegistryName(getRegistryName());
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isRemote) {
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (worldIn.isClientSide) {
             return ActionResultType.SUCCESS;
         } else {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof ModBarrelTileEntity) {
-                player.openContainer((ModBarrelTileEntity) tileentity);
-                player.addStat(Stats.OPEN_BARREL);
+                player.openMenu((ModBarrelTileEntity) tileentity);
+                player.awardStat(Stats.OPEN_BARREL);
             }
 
             return ActionResultType.SUCCESS;
@@ -72,27 +72,27 @@ public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
     }
 
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof IInventory) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileentity);
-                worldIn.updateComparatorOutputLevel(pos, this);
+                InventoryHelper.dropContents(worldIn, pos, (IInventory) tileentity);
+                worldIn.updateNeighbourForOutputSignal(pos, this);
             }
 
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onRemove(state, worldIn, pos, newState, isMoving);
         }
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
+    public BlockRenderType getRenderShape(BlockState state) {
         return BlockRenderType.MODEL;
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if (stack.hasDisplayName()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof ModBarrelTileEntity) {
                 ((ModBarrelTileEntity) tileentity).setCustomName(stack.getDisplayName());
             }
@@ -100,38 +100,38 @@ public class ModBarrelBlock extends ContainerBlock implements IItemBlock {
     }
 
     @Override
-    public boolean hasComparatorInputOverride(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
-    public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-        return Container.calcRedstone(worldIn.getTileEntity(pos));
+    public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+        return Container.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
     }
 
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(PROPERTY_FACING, rot.rotate(state.get(PROPERTY_FACING)));
+        return state.setValue(PROPERTY_FACING, rot.rotate(state.getValue(PROPERTY_FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(PROPERTY_FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(PROPERTY_FACING)));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(PROPERTY_FACING, PROPERTY_OPEN);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return getDefaultState().with(PROPERTY_FACING, context.getNearestLookingDirection().getOpposite());
+        return defaultBlockState().setValue(PROPERTY_FACING, context.getNearestLookingDirection().getOpposite());
     }
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity newBlockEntity(IBlockReader worldIn) {
         return new ModBarrelTileEntity(tier);
     }
 }

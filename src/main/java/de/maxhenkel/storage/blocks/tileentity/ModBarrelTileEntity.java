@@ -52,12 +52,12 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundNBT save(CompoundNBT compound) {
+        super.save(compound);
 
         compound.putInt("Tier", getTier().getTier());
 
-        if (!checkLootAndWrite(compound)) {
+        if (!trySaveLootTable(compound)) {
             ItemStackHelper.saveAllItems(compound, getItems());
         }
 
@@ -65,19 +65,19 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void read(BlockState blockState, CompoundNBT compound) {
-        super.read(blockState, compound);
+    public void load(BlockState blockState, CompoundNBT compound) {
+        super.load(blockState, compound);
 
         tier = ChestTier.byTier(compound.getInt("Tier"));
 
-        barrelContents = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
-        if (!checkLootAndRead(compound)) {
+        barrelContents = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        if (!tryLoadLootTable(compound)) {
             ItemStackHelper.loadAllItems(compound, barrelContents);
         }
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return getTier().numSlots();
     }
 
@@ -92,7 +92,7 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void openInventory(PlayerEntity player) {
+    public void startOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             if (numPlayersUsing < 0) {
                 numPlayersUsing = 0;
@@ -100,8 +100,8 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
 
             numPlayersUsing++;
             BlockState blockstate = getBlockState();
-            if (!blockstate.get(BarrelBlock.PROPERTY_OPEN)) {
-                playSound(blockstate, SoundEvents.BLOCK_BARREL_OPEN);
+            if (!blockstate.getValue(BarrelBlock.OPEN)) {
+                playSound(blockstate, SoundEvents.BARREL_OPEN);
                 setOpenProperty(blockstate, true);
             }
             scheduleTick();
@@ -110,26 +110,26 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
     }
 
     private void scheduleTick() {
-        world.getPendingBlockTicks().scheduleTick(getPos(), getBlockState().getBlock(), 5);
+        level.getBlockTicks().scheduleTick(getBlockPos(), getBlockState().getBlock(), 5);
     }
 
     public void barrelTick() {
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
-        numPlayersUsing = ChestTileEntity.calculatePlayersUsing(world, this, x, y, z);
+        int x = worldPosition.getX();
+        int y = worldPosition.getY();
+        int z = worldPosition.getZ();
+        numPlayersUsing = ChestTileEntity.getOpenCount(level, this, x, y, z);
         if (numPlayersUsing > 0) {
             scheduleTick();
         } else {
             BlockState blockstate = getBlockState();
             if (!(blockstate.getBlock() instanceof ModBarrelBlock)) {
-                remove();
+                setRemoved();
                 return;
             }
 
-            boolean flag = blockstate.get(BarrelBlock.PROPERTY_OPEN);
+            boolean flag = blockstate.getValue(BarrelBlock.OPEN);
             if (flag) {
-                playSound(blockstate, SoundEvents.BLOCK_BARREL_CLOSE);
+                playSound(blockstate, SoundEvents.BARREL_CLOSE);
                 setOpenProperty(blockstate, false);
             }
         }
@@ -137,42 +137,42 @@ public class ModBarrelTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void closeInventory(PlayerEntity player) {
+    public void stopOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             numPlayersUsing--;
         }
     }
 
     private void setOpenProperty(BlockState blockState, boolean open) {
-        world.setBlockState(getPos(), blockState.with(BarrelBlock.PROPERTY_OPEN, open), 3);
+        level.setBlock(getBlockPos(), blockState.setValue(BarrelBlock.OPEN, open), 3);
     }
 
     private void playSound(BlockState blockState, SoundEvent soundEvent) {
-        Vector3i vec3i = blockState.get(BarrelBlock.PROPERTY_FACING).getDirectionVec();
-        double x = (double) this.pos.getX() + 0.5D + (double) vec3i.getX() / 2D;
-        double y = (double) this.pos.getY() + 0.5D + (double) vec3i.getY() / 2D;
-        double z = (double) this.pos.getZ() + 0.5D + (double) vec3i.getZ() / 2D;
-        world.playSound(null, x, y, z, soundEvent, SoundCategory.BLOCKS, 0.5F, SoundUtils.getVariatedPitch(world));
+        Vector3i vec3i = blockState.getValue(BarrelBlock.FACING).getNormal();
+        double x = (double) this.worldPosition.getX() + 0.5D + (double) vec3i.getX() / 2D;
+        double y = (double) this.worldPosition.getY() + 0.5D + (double) vec3i.getY() / 2D;
+        double z = (double) this.worldPosition.getZ() + 0.5D + (double) vec3i.getZ() / 2D;
+        level.playSound(null, x, y, z, soundEvent, SoundCategory.BLOCKS, 0.5F, SoundUtils.getVariatedPitch(level));
     }
 
     @Override
     protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent(getBlockState().getBlock().getTranslationKey());
+        return new TranslationTextComponent(getBlockState().getBlock().getDescriptionId());
     }
 
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(pos, 1, getUpdateTag());
+        return new SUpdateTileEntityPacket(worldPosition, 1, getUpdateTag());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        read(getBlockState(), pkt.getNbtCompound());
+        load(getBlockState(), pkt.getTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return write(new CompoundNBT());
+        return save(new CompoundNBT());
     }
 
 }

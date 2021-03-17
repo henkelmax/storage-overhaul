@@ -20,7 +20,7 @@ public class HugeChestContainer extends ContainerBase {
         this.inventory = inventory;
         this.numRows = numRows;
 
-        inventory.openInventory(playerInventory.player);
+        inventory.startOpen(playerInventory.player);
         int i = (numRows - 4) * 18;
 
         for (int j = 0; j < numRows; j++) {
@@ -49,8 +49,8 @@ public class HugeChestContainer extends ContainerBase {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return inventory.isUsableByPlayer(playerIn);
+    public boolean stillValid(PlayerEntity playerIn) {
+        return inventory.stillValid(playerIn);
     }
 
 }

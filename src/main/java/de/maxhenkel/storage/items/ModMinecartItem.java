@@ -30,29 +30,29 @@ public class ModMinecartItem extends Item {
         private final DefaultDispenseItemBehavior behaviourDefaultDispenseItem = new DefaultDispenseItemBehavior();
 
         @Override
-        public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
-            Direction direction = source.getBlockState().get(DispenserBlock.FACING);
-            World world = source.getWorld();
-            double x = source.getX() + (double) direction.getXOffset() * 1.125D;
-            double y = Math.floor(source.getY()) + (double) direction.getYOffset();
-            double z = source.getZ() + (double) direction.getZOffset() * 1.125D;
-            BlockPos blockpos = source.getBlockPos().offset(direction);
+        public ItemStack execute(IBlockSource source, ItemStack stack) {
+            Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
+            World world = source.getLevel();
+            double x = source.x() + (double) direction.getStepX() * 1.125D;
+            double y = Math.floor(source.y()) + (double) direction.getStepY();
+            double z = source.z() + (double) direction.getStepZ() * 1.125D;
+            BlockPos blockpos = source.getPos().relative(direction);
             BlockState blockstate = world.getBlockState(blockpos);
             RailShape railshape = blockstate.getBlock() instanceof AbstractRailBlock ? ((AbstractRailBlock) blockstate.getBlock()).getRailDirection(blockstate, world, blockpos, null) : RailShape.NORTH_SOUTH;
             double varY;
-            if (blockstate.getBlock().isIn(BlockTags.RAILS)) {
+            if (blockstate.getBlock().is(BlockTags.RAILS)) {
                 if (railshape.isAscending()) {
                     varY = 0.6D;
                 } else {
                     varY = 0.1D;
                 }
             } else {
-                if (!blockstate.isAir(world, blockpos) || !world.getBlockState(blockpos.down()).getBlock().isIn(BlockTags.RAILS)) {
+                if (!blockstate.isAir(world, blockpos) || !world.getBlockState(blockpos.below()).getBlock().is(BlockTags.RAILS)) {
                     return this.behaviourDefaultDispenseItem.dispense(source, stack);
                 }
 
-                BlockState blockstate1 = world.getBlockState(blockpos.down());
-                RailShape railshape1 = blockstate1.getBlock() instanceof AbstractRailBlock ? ((AbstractRailBlock) blockstate1.getBlock()).getRailDirection(blockstate1, world, blockpos.down(), null) : RailShape.NORTH_SOUTH;
+                BlockState blockstate1 = world.getBlockState(blockpos.below());
+                RailShape railshape1 = blockstate1.getBlock() instanceof AbstractRailBlock ? ((AbstractRailBlock) blockstate1.getBlock()).getRailDirection(blockstate1, world, blockpos.below(), null) : RailShape.NORTH_SOUTH;
                 if (direction != Direction.DOWN && railshape1.isAscending()) {
                     varY = -0.4D;
                 } else {
@@ -60,19 +60,19 @@ public class ModMinecartItem extends Item {
                 }
             }
             ModChestMinecartEntity cart = create(world);
-            cart.setPosition(x, y + varY, z);
-            if (stack.hasDisplayName()) {
+            cart.setPos(x, y + varY, z);
+            if (stack.hasCustomHoverName()) {
                 cart.setCustomName(stack.getDisplayName());
             }
 
-            world.addEntity(cart);
+            world.addFreshEntity(cart);
             stack.shrink(1);
             return stack;
         }
 
         @Override
-        protected void playDispenseSound(IBlockSource source) {
-            source.getWorld().playEvent(1000, source.getBlockPos(), 0);
+        protected void playSound(IBlockSource source) {
+            source.getLevel().levelEvent(1000, source.getPos(), 0);
         }
     };
 
@@ -91,9 +91,9 @@ public class ModMinecartItem extends Item {
     }
 
     public ModMinecartItem(Supplier<Block> block) {
-        super(new Item.Properties().maxStackSize(1).group(ItemGroup.TRANSPORTATION).setISTER(() -> new CallableProvider(block).getCallable()));
+        super(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_TRANSPORTATION).setISTER(() -> new CallableProvider(block).getCallable()));
         this.block = block;
-        DispenserBlock.registerDispenseBehavior(this, MINECART_DISPENSER_BEHAVIOR);
+        DispenserBlock.registerBehavior(this, MINECART_DISPENSER_BEHAVIOR);
     }
 
     public ModChestMinecartEntity create(World world) {
@@ -102,15 +102,16 @@ public class ModMinecartItem extends Item {
         return cart;
     }
 
-    public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
-        BlockPos blockpos = context.getPos();
+    @Override
+    public ActionResultType useOn(ItemUseContext context) {
+        World world = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
         BlockState blockstate = world.getBlockState(blockpos);
-        if (!blockstate.getBlock().isIn(BlockTags.RAILS)) {
+        if (!blockstate.getBlock().is(BlockTags.RAILS)) {
             return ActionResultType.FAIL;
         } else {
-            ItemStack itemstack = context.getItem();
-            if (!world.isRemote) {
+            ItemStack itemstack = context.getItemInHand();
+            if (!world.isClientSide) {
                 RailShape railshape = blockstate.getBlock() instanceof AbstractRailBlock ? ((AbstractRailBlock) blockstate.getBlock()).getRailDirection(blockstate, world, blockpos, null) : RailShape.NORTH_SOUTH;
                 double height = 0.0D;
                 if (railshape.isAscending()) {
@@ -118,12 +119,12 @@ public class ModMinecartItem extends Item {
                 }
 
                 ModChestMinecartEntity cart = create(world);
-                cart.setPosition((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.0625D + height, (double) blockpos.getZ() + 0.5D);
-                if (itemstack.hasDisplayName()) {
+                cart.setPos((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.0625D + height, (double) blockpos.getZ() + 0.5D);
+                if (itemstack.hasCustomHoverName()) {
                     cart.setCustomName(itemstack.getDisplayName());
                 }
 
-                world.addEntity(cart);
+                world.addFreshEntity(cart);
             }
 
             itemstack.shrink(1);
