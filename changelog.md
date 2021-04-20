@@ -1,1 +1,1 @@
-- Improved russian language
+- Fixed russian language
