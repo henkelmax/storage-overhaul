@@ -1,5 +1,4 @@
-# Storage Overhaul ![](http://cf.way2muchnoise.eu/full_382599_downloads.svg)
-![](http://cf.way2muchnoise.eu/versions/382599.svg)
+# Storage Overhaul ![](http://cf.way2muchnoise.eu/full_382599_downloads.svg) ![](http://cf.way2muchnoise.eu/versions/382599.svg)
 
 ## Links
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/storage-overhaul)
