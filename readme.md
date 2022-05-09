@@ -19,6 +19,10 @@
 - Storage barrels in every type of wood
 - Minecart chests in every type of wood
 
+## Addon Mods
+
+- [Storage Overhaul Chest Upgrader](https://www.curseforge.com/minecraft/mc-mods/storage-overhaul-chest-upgrader) by [JokTronki](https://www.curseforge.com/members/joktronki)
+
 ## Chests
 
 Normal chests have 27 slots of storage space. Each type of chest has a base tier and three addidtional tiers.
