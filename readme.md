@@ -2,9 +2,6 @@
 
 ## Links
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/storage-overhaul)
-- [ModRepo](https://modrepo.de/minecraft/storage_overhaul/overview)
-- [GitHub](https://github.com/henkelmax/storage-overhaul)
-- [FAQ](https://modrepo.de/minecraft/storage_overhaul/faq)
 - [Credits](https://modrepo.de/minecraft/storage_overhaul/credits)
 
 ---
